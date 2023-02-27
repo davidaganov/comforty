@@ -1,15 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>{{ props.msg }}</h1>
-  </div>
+  <a href="#">{{ text }}</a>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  msg: string
+  text: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <style scoped lang="scss"></style>
