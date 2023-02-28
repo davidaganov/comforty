@@ -9,7 +9,12 @@ module.exports = {
   },
   plugins: ["prettier"],
   rules: {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto"
+      }
+    ],
     "no-undef": "off",
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",

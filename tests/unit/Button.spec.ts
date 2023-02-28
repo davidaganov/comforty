@@ -1,12 +1,25 @@
 import { shallowMount } from "@vue/test-utils"
 import Button from "@/components/Base/Button.vue"
 
-describe("Button.vue", () => {
-  it("renders props.msg when passed", () => {
-    const text = "new message"
+describe("Button component", () => {
+  it("Render link when text is transmitted to the slot", () => {
     const wrapper = shallowMount(Button, {
-      props: { text }
+      props: { link: "#" },
+      slots: {
+        default: "Test"
+      }
     })
-    expect(wrapper.text()).toMatch(text)
+    expect(wrapper.text()).toMatch("Test")
+    expect(wrapper.find("a").attributes("href")).toBe("#")
+  })
+  it("Render button when text is transmitted to the slot", () => {
+    const wrapper = shallowMount(Button, {
+      props: { type: "button" },
+      slots: {
+        default: "Test"
+      }
+    })
+    expect(wrapper.text()).toMatch("Test")
+    expect(wrapper.find("button").attributes("type")).toBe("button")
   })
 })
