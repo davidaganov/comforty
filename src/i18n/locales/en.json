@@ -4,8 +4,11 @@
     "ru": "Russian"
   },
   "nav": {
-    "top": {
-      "info": "Free shipping on all orders over $50"
+    "list": {
+      "home": "Home",
+      "products": "Products",
+      "reviews": "Reviews",
+      "contact": "Contact"
     }
   },
   "cart": {

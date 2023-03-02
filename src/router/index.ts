@@ -16,19 +16,9 @@ const router = createRouter({
           component: HomeView
         },
         {
-          path: "account",
-          name: "account",
-          component: () => import("../views/Account.vue")
-        },
-        {
-          path: "signin",
-          name: "signin",
-          component: () => import("../views/SignIn.vue")
-        },
-        {
-          path: "signup",
-          name: "signup",
-          component: () => import("../views/SignUp.vue")
+          path: "products",
+          name: "products",
+          component: () => import("../views/ProductsView.vue")
         }
       ]
     }

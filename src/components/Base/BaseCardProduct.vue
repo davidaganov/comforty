@@ -94,7 +94,7 @@ interface Product {
 </script>
 
 <script setup lang="ts">
-import Button from "./Button.vue"
+import Button from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 import IconHeart from "../Icons/IconHeart.vue"

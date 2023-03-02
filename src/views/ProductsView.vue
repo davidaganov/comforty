@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Регистрация</h2>
+    <h2>Продукты</h2>
   </div>
 </template>
 

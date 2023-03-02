@@ -2,15 +2,15 @@ import i18n from "@/i18n"
 import { nextTick } from "vue"
 
 const Translation = {
-  get defaultLocale() {
+  get defaultLocale(): string {
     return import.meta.env.VITE_DEFAULT_LOCALE
   },
 
-  get supportedLocales() {
+  get supportedLocales(): string {
     return import.meta.env.VITE_SUPPORTED_LOCALES.split(",")
   },
 
-  get currentLocale() {
+  get currentLocale(): string {
     return i18n.global.locale.value
   },
 
@@ -18,7 +18,7 @@ const Translation = {
     i18n.global.locale.value = newLocale
   },
 
-  isLocaleSupported(locale: string) {
+  isLocaleSupported(locale: string): boolean {
     return Translation.supportedLocales.includes(locale)
   },
 
