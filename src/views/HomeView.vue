@@ -4,6 +4,15 @@
       <Logo />
     </div>
     <div>
+      <LanguageSwitcher />
+    </div>
+    <div>
+      <p>{{ $t("nav.top.info") }}</p>
+      <p>{{ $t("cart.test", 0) }}</p>
+      <p>{{ $t("cart.test", 1) }}</p>
+      <p>{{ $t("cart.test", 5) }}</p>
+    </div>
+    <div>
       <Button
         link="#"
         :arrow="true"
@@ -25,6 +34,7 @@
 import Logo from "@/components/Form/Logo.vue"
 import Button from "@/components/Base/Button.vue"
 import CardProduct from "@/components/Base/CardProduct.vue"
+import LanguageSwitcher from "@/components/Base/LanguageSwitcher.vue"
 
 const products = [
   {

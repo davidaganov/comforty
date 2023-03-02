@@ -1,0 +1,14 @@
+{
+  "locale": {
+    "en": "English",
+    "ru": "Russian"
+  },
+  "nav": {
+    "top": {
+      "info": "Free shipping on all orders over $50"
+    }
+  },
+  "cart": {
+    "test": "The cart is empty | In the cart {n} product | In the cart {n} products"
+  }
+}
