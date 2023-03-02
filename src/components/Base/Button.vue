@@ -41,16 +41,18 @@
   </button>
 </template>
 
-<script setup lang="ts">
-import IconArrow from "../Icons/IconArrow.vue"
-import IconBase from "../Icons/IconBase.vue"
-
+<script lang="ts">
 interface Props {
   link?: string
   type?: "button" | "submit" | "reset" | undefined
   appearance?: string
   arrow?: boolean
 }
+</script>
+
+<script setup lang="ts">
+import IconArrow from "../Icons/IconArrow.vue"
+import IconBase from "../Icons/IconBase.vue"
 
 withDefaults(defineProps<Props>(), {
   link: undefined,

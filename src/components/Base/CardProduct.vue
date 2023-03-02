@@ -5,7 +5,7 @@
   >
     <div class="product__picture">
       <img
-        :src="require(`@/assets/images/products/${product.image}`)"
+        :src="getImageUrl(product.image)"
         :alt="product.name"
       />
       <span
@@ -71,13 +71,8 @@
   </article>
 </template>
 
-<script setup lang="ts">
-import Button from "./Button.vue"
-import IconBase from "../Icons/IconBase.vue"
-import IconCart from "../Icons/IconCart.vue"
-import IconHeart from "../Icons/IconHeart.vue"
-
-interface Props {
+<script lang="ts">
+interface Product {
   product: {
     id: number
     name: string
@@ -96,8 +91,19 @@ interface Props {
     }
   }
 }
+</script>
 
-defineProps<Props>()
+<script setup lang="ts">
+import Button from "./Button.vue"
+import IconBase from "../Icons/IconBase.vue"
+import IconCart from "../Icons/IconCart.vue"
+import IconHeart from "../Icons/IconHeart.vue"
+
+defineProps<Product>()
+
+const getImageUrl = (name: string) => {
+  return new URL(`../../assets/images/products/${name}`, import.meta.url).href
+}
 </script>
 
 <style scoped lang="scss">
