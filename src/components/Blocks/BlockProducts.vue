@@ -4,11 +4,13 @@
     id="products"
   >
     <div class="products__inner inner">
-      <BaseCardProduct
-        v-for="product in store.getProducts"
-        v-bind="product"
-        :key="product.id"
-      />
+      <div class="products__list">
+        <BaseCardProduct
+          v-for="product in store.getProducts"
+          v-bind="product"
+          :key="product.id"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -21,4 +23,11 @@ import BaseCardProduct from "../Base/BaseCardProduct.vue"
 const store = useStore()
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.products {
+  &__list {
+    display: flex;
+    gap: 1.5rem;
+  }
+}
+</style>

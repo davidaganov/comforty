@@ -45,7 +45,7 @@
 interface Props {
   link?: string
   type?: "button" | "submit" | "reset" | undefined
-  appearance?: string
+  appearance?: "primary" | "gray" | "white" | "ghost"
   arrow?: boolean
 }
 </script>
@@ -98,6 +98,18 @@ withDefaults(defineProps<Props>(), {
     &:focus-visible {
       background-color: var(--color-accent);
       color: var(--color-white);
+    }
+  }
+
+  &--ghost {
+    padding: 1.6rem 2.4rem;
+    font-weight: 500;
+    border: 0.1rem solid #e1e3e5;
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-accent);
+      color: var(--color-white);
+      border-color: var(--color-accent);
     }
   }
 

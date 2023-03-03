@@ -3,15 +3,12 @@
     class="header"
     id="header"
   >
-    <div class="header__inner inner">
-      <BaseLanguageSwitcher />
-      <TheNavbar />
-    </div>
+    <TheNavbar />
+    <div class="header__inner inner"></div>
   </header>
 </template>
 
 <script setup lang="ts">
-import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import TheNavbar from "./TheNavbar.vue"
 </script>
 

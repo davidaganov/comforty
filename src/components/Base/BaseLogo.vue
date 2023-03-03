@@ -1,11 +1,9 @@
-import IconBase from '../Icons/IconBase.vue';
-
 <template>
   <a
     href="/"
     class="logo"
-    title="Go to Home Page"
-    aria-label="Go to Home Page"
+    :title="$t('nav.middle.logo')"
+    :aria-label="$t('nav.middle.logo')"
   >
     <IconBase
       :width="40"

@@ -1,13 +1,32 @@
 {
-  "locale": {
-    "en": "English",
-    "ru": "Russian"
-  },
   "nav": {
-    "list": {
-      "home": "Home",
-      "products": "Products",
-      "reviews": "Reviews",
+    "top": {
+      "info": "Free shipping on all orders over $50",
+      "faq": "Faqs",
+      "help": "Need Help"
+    },
+    "middle": {
+      "logo": "Go to Home Page",
+      "search": {
+        "inputAria": "Search for products",
+        "inputPlaceholder": "Search here...",
+        "buttonAria": "Click for search"
+      },
+      "cart": {
+        "aria": "Open Cart",
+        "text": "Cart"
+      },
+      "favorite:": "Open favorites products",
+      "profile": "Open profile"
+    },
+    "bottom": {
+      "categories": "All Categories",
+      "list": {
+        "home": "Home",
+        "products": "Products",
+        "reviews": "Reviews",
+        "contact": "Contact"
+      },
       "contact": "Contact"
     }
   },
