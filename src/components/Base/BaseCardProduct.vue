@@ -1,21 +1,21 @@
 <template>
   <article
     class="product"
-    :id="`product-${product.id}`"
+    :id="`product-${id}`"
   >
     <div class="product__picture">
       <img
-        :src="getImageUrl(product.image)"
-        :alt="product.name"
+        :src="getImageUrl(image)"
+        :alt="name[Translation.currentLocale]"
       />
       <span
-        v-if="product.attr.newest"
+        v-if="attr.newest"
         class="product__attr product__attr--newest"
       >
         New
       </span>
       <span
-        v-if="product.price.discount && !product.attr.newest"
+        v-if="price.discount && !attr.newest"
         class="product__attr product__attr--sales"
       >
         Sales
@@ -41,16 +41,16 @@
         href="#"
         class="product__title-link"
       >
-        {{ product.name }}
+        {{ name[Translation.currentLocale] }}
       </a>
     </h3>
     <div class="product__price">
-      <span class="product__price-regular">${{ product.price.regular }}</span>
+      <span class="product__price-regular">${{ price.regular }}</span>
       <span
         class="product__price-discount"
-        v-if="product.price.discount"
+        v-if="price.discount"
       >
-        ${{ product.price.discount }}
+        ${{ price.discount }}
       </span>
     </div>
     <Button
@@ -71,29 +71,10 @@
   </article>
 </template>
 
-<script lang="ts">
-interface Product {
-  product: {
-    id: number
-    name: string
-    image: string
-    slug: string
-    category: string
-    attr: {
-      newest: boolean
-      trending: boolean
-      bestsellers: boolean
-      featured: boolean
-    }
-    price: {
-      regular: number
-      discount?: number
-    }
-  }
-}
-</script>
-
 <script setup lang="ts">
+import type { Product } from "@/interfaces"
+import Translation from "@/i18n/translation"
+
 import Button from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
