@@ -67,7 +67,7 @@
     <div class="navbar__bottom">
       <div class="navbar__inner inner">
         <div class="navbar__left">
-          <BaseButtonCategories />
+          <BaseListCategories />
           <nav class="navbar__menu">
             <ul class="navbar__list">
               <li
@@ -112,7 +112,7 @@ import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import FormSearch from "./Form/FormSearch.vue"
 import BaseButton from "./Base/BaseButton.vue"
-import BaseButtonCategories from "./Base/BaseButtonCategories.vue"
+import BaseListCategories from "./Base/BaseListCategories.vue"
 import BaseCart from "./Base/BaseCart.vue"
 import IconBase from "./Icons/IconBase.vue"
 import IconAttention from "./Icons/IconAttention.vue"
@@ -229,6 +229,7 @@ const store = useStore()
 
   &__bottom {
     @media (min-width: 576px) {
+      position: relative;
       padding: 1.4rem 0;
     }
     @media (max-width: 575px) {
@@ -246,6 +247,9 @@ const store = useStore()
     @media (min-width: 576px) {
       display: flex;
       align-items: center;
+    }
+    @media (max-width: 575px) {
+      display: none;
     }
   }
 

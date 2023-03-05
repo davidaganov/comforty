@@ -5,10 +5,17 @@ export interface NavbarItem {
   anchor?: string
 }
 
+export interface Category {
+  id: number
+  name: { [key: string]: string }
+  cover: string
+  link: string
+}
+
 export interface Product {
   id: number
   name: { [key: string]: string }
-  image: string
+  cover: string
   slug: string
   category: string
   attr: {

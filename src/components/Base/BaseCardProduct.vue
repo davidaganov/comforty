@@ -5,7 +5,7 @@
   >
     <div class="product__picture">
       <img
-        :src="getImageUrl(image)"
+        :src="getImageUrl(cover)"
         :alt="name[Translation.currentLocale]"
       />
       <span
@@ -91,10 +91,6 @@ const getImageUrl = (name: string) => {
 .product {
   $parent: &;
   display: grid;
-  @media (min-width: 1021px) {
-    max-width: 31.2rem;
-  }
-
   &__picture {
     grid-area: 1 / 1 / 1 / 3;
     position: relative;
