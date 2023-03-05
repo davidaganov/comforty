@@ -31,24 +31,43 @@
       </div>
     </div>
     <div class="navbar__middle">
-      <div class="navbar__inner inner">
-        <BaseLogo />
-        <FormSearch />
+      <div class="navbar__middle-inner inner">
+        <BaseButton
+          class="navbar__burger"
+          appearance="white"
+        >
+          <IconBase
+            :width="18"
+            :height="15"
+            box="0 0 18 15"
+          >
+            <IconMenu />
+          </IconBase>
+        </BaseButton>
+        <BaseLogo :hiddenText="true" />
+        <FormSearch class="navbar__search" />
+        <div class="navbar__control">
+          <BaseCart />
+          <BaseButton
+            appearance="white"
+            :aria-label="$t('nav.middle.favorite')"
+          >
+            <IconBase
+              box="0 0 22 22"
+              :width="22"
+              :height="22"
+              :stroke="true"
+            >
+              <IconHeart />
+            </IconBase>
+          </BaseButton>
+        </div>
       </div>
     </div>
     <div class="navbar__bottom">
       <div class="navbar__inner inner">
         <div class="navbar__left">
-          <BaseButton appearance="ghost">
-            <IconBase
-              :width="18"
-              :height="15"
-              box="0 0 18 15"
-            >
-              <IconMenu />
-            </IconBase>
-            {{ $t("nav.bottom.categories") }}
-          </BaseButton>
+          <BaseButtonCategories />
           <nav class="navbar__menu">
             <ul class="navbar__list">
               <li
@@ -90,18 +109,22 @@ import { useStore } from "@/stores"
 import Translation from "@/i18n/translation"
 
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
-import IconBase from "./Icons/IconBase.vue"
-import IconAttention from "./Icons/IconAttention.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import FormSearch from "./Form/FormSearch.vue"
 import BaseButton from "./Base/BaseButton.vue"
+import BaseButtonCategories from "./Base/BaseButtonCategories.vue"
+import BaseCart from "./Base/BaseCart.vue"
+import IconBase from "./Icons/IconBase.vue"
+import IconAttention from "./Icons/IconAttention.vue"
 import IconMenu from "./Icons/IconMenu.vue"
+import IconHeart from "./Icons/IconHeart.vue"
 
 const store = useStore()
 </script>
 
 <style scoped lang="scss">
 .navbar {
+  $parent: &;
   &__inner {
     display: flex;
     justify-content: space-between;
@@ -113,86 +136,177 @@ const store = useStore()
     background-color: var(--color-black);
   }
 
-  &__right {
-    display: flex;
-    align-items: center;
-    gap: 2.4rem;
-    a {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.1em 0.3rem;
-      margin-left: -0.3rem;
-      margin-right: -0.3rem;
-      transition: all 0.2s;
-      &:hover {
-        color: var(--color-accent);
-        opacity: 1;
-      }
-      &:focus-visible {
-        background-color: var(--color-accent);
-        opacity: 1;
-      }
-    }
-  }
-
   &__info {
     font: 400 1.3rem/110% var(--main-font);
     text-transform: capitalize;
     color: var(--color-white);
     opacity: 0.7;
+    @media (max-width: 575px) {
+      margin: 0 auto;
+    }
+  }
+
+  &__right {
+    @media (min-width: 576px) {
+      display: flex;
+      align-items: center;
+      gap: 2.4rem;
+      a {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.1em 0.3rem;
+        margin-left: -0.3rem;
+        margin-right: -0.3rem;
+        transition: all 0.2s;
+        &:hover {
+          color: var(--color-accent);
+          opacity: 1;
+        }
+        &:focus-visible {
+          background-color: var(--color-accent);
+          opacity: 1;
+        }
+      }
+    }
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
 
   &__middle {
     padding: 2rem 0;
-    background-color: #f0f2f3;
+    @media (min-width: 576px) {
+      background-color: #f0f2f3;
+    }
+    &-inner {
+      @media (min-width: 576px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+      }
+      @media (max-width: 575px) {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+        gap: 2rem 1rem;
+      }
+    }
+  }
+
+  &__burger {
+    @media (min-width: 576px) {
+      display: none;
+    }
+    @media (max-width: 575px) {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+  }
+
+  &__logo {
+    @media (max-width: 575px) {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+  }
+
+  &__search {
+    @media (min-width: 576px) {
+      max-width: 41.3rem;
+    }
+    @media (max-width: 575px) {
+      grid-area: 2 / 1 / 3 / 5;
+    }
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    @media (max-width: 575px) {
+      grid-area: 1 / 4 / 2 / 5;
+    }
   }
 
   &__bottom {
-    padding: 1.4rem 0;
+    @media (min-width: 576px) {
+      padding: 1.4rem 0;
+    }
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
 
   &__left {
-    display: flex;
-    align-items: center;
-    gap: 3.2rem;
+    @media (min-width: 769px) {
+      gap: 3.2rem;
+    }
+    @media (max-width: 768px) and (min-width: 576px) {
+      gap: 1.5rem;
+    }
+    @media (min-width: 576px) {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__list {
-    display: flex;
-    gap: 3.2rem;
+    @media (min-width: 769px) {
+      gap: 3.2rem;
+    }
+    @media (max-width: 768px) and (min-width: 576px) {
+      gap: 1.5rem;
+    }
+    @media (min-width: 576px) {
+      display: flex;
+    }
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
 
   &__link {
-    font: 500 1.4rem/110% var(--main-font);
-    text-transform: capitalize;
-    color: #636270;
-    transition: all 0.2s;
-    &:hover {
-      color: var(--color-accent-hover);
-    }
-    &:focus-visible {
-      background-color: var(--color-accent-hover);
-      color: var(--color-white);
+    @media (min-width: 576px) {
+      padding: 0 0.3rem;
+      margin-top: 0 -0.3rem;
+      font: 500 1.4rem/110% var(--main-font);
+      text-transform: capitalize;
+      color: #636270;
+      transition: all 0.2s;
+      &:hover {
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 0.2rem;
+      }
+      &:focus-visible {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+      }
     }
   }
 
   &__phone {
-    display: block;
-    font: 400 1.4rem/110% var(--main-font);
-    color: #636270;
-    a {
-      font-weight: 500;
-      color: var(--color-black);
-      transition: all 0.2s;
-      &:hover {
-        color: var(--color-accent-hover);
-        text-decoration: underline;
+    @media (min-width: 1021px) {
+      display: block;
+      font: 400 1.4rem/110% var(--main-font);
+      color: #636270;
+      a {
+        padding: 0 0.3rem;
+        margin-top: 0 -0.3rem;
+        font-weight: 500;
+        color: var(--color-black);
+        transition: all 0.2s;
+        &:hover {
+          color: var(--color-accent-hover);
+          text-decoration: underline;
+        }
+        &:focus-visible {
+          background-color: var(--color-accent);
+          color: var(--color-white);
+        }
       }
-      &:focus-visible {
-        background-color: var(--color-accent-hover);
-        color: var(--color-white);
-      }
+    }
+    @media (max-width: 1020px) {
+      display: none;
     }
   }
 }

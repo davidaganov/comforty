@@ -94,6 +94,7 @@ withDefaults(defineProps<Props>(), {
   &--white,
   &--gray {
     padding: 1.1rem;
+    color: var(--color-black);
     &:hover,
     &:focus-visible {
       background-color: var(--color-accent);
@@ -105,6 +106,7 @@ withDefaults(defineProps<Props>(), {
     padding: 1.6rem 2.4rem;
     font-weight: 500;
     border: 0.1rem solid #e1e3e5;
+    color: var(--color-black);
     &:hover,
     &:focus-visible {
       background-color: var(--color-accent);

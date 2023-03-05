@@ -91,14 +91,21 @@ const getImageUrl = (name: string) => {
 .product {
   $parent: &;
   display: grid;
-  max-width: 31.2rem;
+  @media (min-width: 1021px) {
+    max-width: 31.2rem;
+  }
 
   &__picture {
     grid-area: 1 / 1 / 1 / 3;
     position: relative;
     width: 100%;
-    height: 31.2rem;
     margin-bottom: 1.4rem;
+    @media (min-width: 769px) {
+      height: 31.2rem;
+    }
+    @media (max-width: 768px) {
+      height: 20rem;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -123,6 +130,7 @@ const getImageUrl = (name: string) => {
     top: 2rem;
     cursor: pointer;
   }
+
   &__attr {
     left: 2rem;
     padding: 0.6rem 1rem;
@@ -137,6 +145,7 @@ const getImageUrl = (name: string) => {
       background-color: #01ad5a;
     }
   }
+
   &__favorite {
     right: 2rem;
     padding: 1.1rem;
@@ -152,12 +161,23 @@ const getImageUrl = (name: string) => {
   &__title {
     grid-area: 2 / 1 / 3 / 2;
     &-link {
+      padding: 0 0.3rem;
+      margin-top: 0 -0.3rem;
       font: 400 1.6rem/130% var(--main-font);
       text-transform: capitalize;
       color: var(--color-black);
-      transition: color 0.2s;
+      transition: all 0.2s;
+      word-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       &:hover {
         color: var(--color-accent-hover);
+      }
+      &:focus-visible {
+        background-color: var(--color-accent);
+        color: var(--color-white);
       }
     }
   }
