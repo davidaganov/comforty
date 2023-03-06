@@ -4,7 +4,7 @@
     id="navbar"
   >
     <div class="navbar__top">
-      <div class="navbar__inner inner">
+      <BaseInner class="navbar__inner">
         <p class="navbar__info">{{ $t("nav.top.info") }}</p>
         <div class="navbar__right">
           <BaseLanguageSwitcher />
@@ -28,10 +28,10 @@
             {{ $t("nav.top.help") }}
           </a>
         </div>
-      </div>
+      </BaseInner>
     </div>
     <div class="navbar__middle">
-      <div class="navbar__middle-inner inner">
+      <BaseInner class="navbar__middle-inner">
         <BaseButton
           class="navbar__burger"
           appearance="white"
@@ -62,10 +62,10 @@
             </IconBase>
           </BaseButton>
         </div>
-      </div>
+      </BaseInner>
     </div>
     <div class="navbar__bottom">
-      <div class="navbar__inner inner">
+      <BaseInner class="navbar__inner">
         <div class="navbar__left">
           <BaseListCategories />
           <nav class="navbar__menu">
@@ -94,11 +94,12 @@
           </nav>
         </div>
 
-        <p class="navbar__phone">
-          {{ $t("nav.bottom.contact") }}:
-          <a href="tel:8085550111">(808) 555-0111</a>
-        </p>
-      </div>
+        <a
+          href="tel:8085550111"
+          class="navbar__phone"
+          >{{ $t("nav.bottom.contact") }}: <strong>(808) 555-0111</strong></a
+        >
+      </BaseInner>
     </div>
   </div>
 </template>
@@ -111,7 +112,6 @@ import Translation from "@/i18n/translation"
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import FormSearch from "./Form/FormSearch.vue"
-import BaseButton from "./Base/BaseButton.vue"
 import BaseListCategories from "./Base/BaseListCategories.vue"
 import BaseCart from "./Base/BaseCart.vue"
 import IconBase from "./Icons/IconBase.vue"
@@ -132,8 +132,10 @@ const store = useStore()
   }
 
   &__top {
+    position: relative;
     padding: 1.4rem 0;
     background-color: var(--color-black);
+    z-index: 3;
   }
 
   &__info {
@@ -175,7 +177,9 @@ const store = useStore()
   }
 
   &__middle {
+    position: relative;
     padding: 2rem 0;
+    z-index: 2;
     @media (min-width: 576px) {
       background-color: #f0f2f3;
     }
@@ -271,7 +275,7 @@ const store = useStore()
   &__link {
     @media (min-width: 576px) {
       padding: 0 0.3rem;
-      margin-top: 0 -0.3rem;
+      margin: 0 -0.3rem;
       font: 500 1.4rem/110% var(--main-font);
       text-transform: capitalize;
       color: #636270;
@@ -291,22 +295,27 @@ const store = useStore()
   &__phone {
     @media (min-width: 1021px) {
       display: block;
+      padding: 0 0.3rem;
+      margin: 0 -0.3rem;
       font: 400 1.4rem/110% var(--main-font);
       color: #636270;
-      a {
-        padding: 0 0.3rem;
-        margin-top: 0 -0.3rem;
-        font-weight: 500;
-        color: var(--color-black);
-        transition: all 0.2s;
-        &:hover {
+      &:hover {
+        strong {
           color: var(--color-accent-hover);
           text-decoration: underline;
+          text-underline-offset: 0.2rem;
         }
-        &:focus-visible {
+      }
+      &:focus-visible {
+        strong {
           background-color: var(--color-accent);
           color: var(--color-white);
         }
+      }
+      strong {
+        font-weight: 500;
+        color: var(--color-black);
+        transition: all 0.2s;
       }
     }
     @media (max-width: 1020px) {

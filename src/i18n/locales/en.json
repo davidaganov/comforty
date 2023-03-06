@@ -1,4 +1,10 @@
 {
+  "locale": {
+    "en": "English",
+    "ru": "Russian",
+    "ariaOpenList": "Click to open the choice",
+    "ariaChoose": "Choose a language"
+  },
   "nav": {
     "top": {
       "info": "Free shipping on all orders over $50",
@@ -19,7 +25,10 @@
       "favorite": "Open favorites products"
     },
     "bottom": {
-      "categories": "All Categories",
+      "categories": {
+        "text": "All Categories",
+        "aria": "Click to open the list with all categories"
+      },
       "list": {
         "home": "Home",
         "products": "Products",
@@ -31,5 +40,27 @@
   },
   "cart": {
     "test": "The cart is empty | In the cart {n} product | In the cart {n} products"
+  },
+  "product": {
+    "attr": {
+      "newest": "New",
+      "sales": "Sales"
+    },
+    "aria": {
+      "favorite": "Click to add to favorites",
+      "cart": "Click to add to cart"
+    }
+  },
+  "categories": {
+    "modal": {
+      "title": "All Categories",
+      "closeAria": "Click to close the category selection"
+    },
+    "count": "Empty | Product | Products"
+  },
+  "blocks": {
+    "featured": {
+      "title": "Featured products"
+    }
   }
 }

@@ -5,26 +5,26 @@
   >
     <div class="product__picture">
       <img
-        :src="getImageUrl(cover)"
+        :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
         :alt="name[Translation.currentLocale]"
       />
       <span
         v-if="attr.newest"
         class="product__attr product__attr--newest"
       >
-        New
+        {{ $t("product.attr.newest") }}
       </span>
       <span
         v-if="price.discount && !attr.newest"
         class="product__attr product__attr--sales"
       >
-        Sales
+        {{ $t("product.attr.sales") }}
       </span>
-      <Button
+      <BaseButton
         class="product__favorite"
         type="button"
         appearance="white"
-        aria-label="Add to favorites"
+        :aria-label="$t('product.aria.favorite')"
       >
         <IconBase
           :stroke="true"
@@ -34,7 +34,7 @@
         >
           <IconHeart />
         </IconBase>
-      </Button>
+      </BaseButton>
     </div>
     <h3 class="product__title">
       <a
@@ -53,11 +53,11 @@
         ${{ price.discount }}
       </span>
     </div>
-    <Button
+    <BaseButton
       type="button"
       appearance="gray"
       class="product__cart"
-      aria-label="Add to cart"
+      :aria-label="$t('product.aria.cart')"
     >
       <IconBase
         :width="24"
@@ -67,24 +67,20 @@
       >
         <IconCart />
       </IconBase>
-    </Button>
+    </BaseButton>
   </article>
 </template>
 
 <script setup lang="ts">
 import type { Product } from "@/interfaces"
 import Translation from "@/i18n/translation"
+import { getImageUrl } from "@/utils/getImageUrl"
 
-import Button from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 import IconHeart from "../Icons/IconHeart.vue"
 
 defineProps<Product>()
-
-const getImageUrl = (name: string) => {
-  return new URL(`../../assets/images/products/${name}`, import.meta.url).href
-}
 </script>
 
 <style scoped lang="scss">
@@ -158,8 +154,9 @@ const getImageUrl = (name: string) => {
     grid-area: 2 / 1 / 3 / 2;
     &-link {
       padding: 0 0.3rem;
-      margin-top: 0 -0.3rem;
+      margin: 0 -0.3rem;
       font: 400 1.6rem/130% var(--main-font);
+      text-align: left;
       text-transform: capitalize;
       color: var(--color-black);
       transition: all 0.2s;

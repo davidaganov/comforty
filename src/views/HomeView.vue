@@ -1,11 +1,12 @@
 <template>
   <div>
-    <BlockProducts />
+    <BlockFeatured />
   </div>
 </template>
 
 <script setup lang="ts">
-import BlockProducts from "@/components/Blocks/BlockProducts.vue"
+import BlockFeatured from "@/components/Blocks/BlockFeatured.vue"
+// import BlockProducts from "@/components/Blocks/BlockProducts.vue"
 </script>
 
 <style>

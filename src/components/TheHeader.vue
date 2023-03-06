@@ -4,7 +4,7 @@
     id="header"
   >
     <TheNavbar />
-    <div class="header__inner inner"></div>
+    <BaseInner class="header__inner"></BaseInner>
   </header>
 </template>
 

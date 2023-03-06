@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import BaseButton from "../Base/BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 </script>

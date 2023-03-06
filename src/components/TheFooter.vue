@@ -3,7 +3,9 @@
     class="footer"
     id="footer"
   >
-    <div class="footer__inner inner">Footer</div>
+    <BaseInner class="footer__inner">
+      <div>Footer</div>
+    </BaseInner>
   </footer>
 </template>
 

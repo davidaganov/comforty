@@ -1,6 +1,8 @@
 <template>
   <BaseButton
     appearance="ghost"
+    :aria-label="$t('nav.bottom.categories.aria')"
+    :aria-expanded="open"
     @click="open = !open"
     @keydown.esc="open = false"
   >
@@ -11,37 +13,32 @@
     >
       <IconMenu />
     </IconBase>
-    {{ $t("nav.bottom.categories") }}
+    {{ $t("nav.bottom.categories.text") }}
   </BaseButton>
   <Transition name="categories">
     <div
       class="categories__wrapper"
       v-show="open"
     >
-      <div
-        class="categories__inner inner"
+      <BaseInner
+        class="categories__inner"
         @keydown.esc="open = false"
       >
-        <ul class="categories__list">
-          <li
-            class="categories__item"
-            v-for="{ id, name, cover, link } in store.getCategories"
-            :key="id"
-          >
-            <a
-              class="categories__link"
-              :href="link"
-              :style="{ backgroundImage: `url(${getImageUrl(cover)})` }"
-            >
-              <span class="categories__text">{{ name[Translation.currentLocale] }}</span>
-            </a>
-          </li>
-        </ul>
+        <!-- Title -->
+        <BaseTitle
+          class="categories__title"
+          tag="h2"
+        >
+          {{ $t("categories.modal.title") }}
+        </BaseTitle>
 
+        <!-- Close Button -->
         <BaseButton
           class="categories__close"
           appearance="gray"
+          :aria-label="$t('categories.modal.closeAria')"
           @click="open = false"
+          @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? open = false : null"
         >
           <IconBase
             box="0 0 24 24"
@@ -51,27 +48,35 @@
             <IconClose />
           </IconBase>
         </BaseButton>
-      </div>
+
+        <!-- List categories -->
+        <div class="categories__list">
+          <BaseCardCategorie
+            class="categories__item"
+            :key="category.id"
+            v-for="(category, i) in categories"
+            v-bind="category"
+            @keydown.tab.exact="i === categories.length - 1 ? (open = false) : null"
+          />
+        </div>
+      </BaseInner>
     </div>
   </Transition>
 </template>
 
 <script setup lang="ts">
-import { useStore } from "@/stores"
 import { ref } from "vue"
-import Translation from "@/i18n/translation"
+import { useStore } from "@/stores"
 
-import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconMenu from "../Icons/IconMenu.vue"
 import IconClose from "../Icons/IconClose.vue"
+import BaseCardCategorie from "./BaseCardCategorie.vue"
 
 const open = ref(false)
 const store = useStore()
 
-const getImageUrl = (name: string) => {
-  return new URL(`../../assets/images/categories/${name}`, import.meta.url).href
-}
+const categories = store.getCategories
 </script>
 
 <style scoped lang="scss">
@@ -89,50 +94,44 @@ const getImageUrl = (name: string) => {
   &__wrapper {
     position: absolute;
     width: 100%;
+    padding-top: 2.9rem;
     padding-bottom: 3rem;
-    top: 1.4rem;
+    top: 0;
     left: 0;
     background-color: var(--color-white);
-    box-shadow: 0px 19px 27px 0px rgba(39, 35, 67, 0.24);
+    box-shadow: 0px 19px 30px 0px rgba(39, 35, 67, 0.12);
     z-index: 1;
   }
 
   &__inner {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem 1.5rem;
+  }
+
+  &__title {
+    grid-area: 1 / 1 / 2 / 3;
+    align-self: center;
   }
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    grid-area: 2 / 1 / 3 / 3;
+    gap: 1.5rem;
     width: 100%;
+    @media (min-width: 1201px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    @media (max-width: 1200px) and (min-width: 1021px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 1020px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  &__item {
-    aspect-ratio: 1 / 1;
-  }
-
-  &__link {
-    position: relative;
-    display: block;
-    height: 100%;
-    background-size: cover;
-    background-position: center center;
-    border-radius: 0.7rem 0.7rem 0 0;
-  }
-
-  &__text {
-    position: absolute;
-    padding: 1rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(39, 35, 67, 0.5);
-    font: 500 1.6rem/100% var(--main-font);
-    color: var(--color-white);
-    border-radius: 0 0 0.7rem 0.7rem;
+  &__close {
+    grid-area: 1 / 2 / 2 / 3;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     class="products"
     id="products"
   >
-    <div class="products__inner inner">
+    <BaseInner class="products__inner">
       <div class="products__list">
         <BaseCardProduct
           v-for="product in store.getProducts"
@@ -11,7 +11,7 @@
           :key="product.id"
         />
       </div>
-    </div>
+    </BaseInner>
   </section>
 </template>
 

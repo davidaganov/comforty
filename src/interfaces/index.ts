@@ -8,6 +8,7 @@ export interface NavbarItem {
 export interface Category {
   id: number
   name: { [key: string]: string }
+  productsCount: number
   cover: string
   link: string
 }

@@ -7,6 +7,8 @@
       type="button"
       class="select__selected"
       :class="{ open: open }"
+      :aria-label="$t('locale.ariaOpenList')"
+      :aria-expanded="open"
       @click="open = !open"
     >
       {{ Translation.currentLocale }}
@@ -21,13 +23,18 @@
     </button>
     <div
       class="select__items"
+      role="listbox"
       :class="{ selectHide: !open }"
     >
       <button
-        v-for="sLocale in supportedLocales"
         type="button"
+        :id="`lang-${sLocale}`"
+        role="option"
         :key="sLocale"
+        :aria-selected="sLocale === Translation.currentLocale"
+        :aria-label="`${$t('locale.ariaChoose')} ${$t(`locale.${sLocale}`)}`"
         @click="switchLanguage(sLocale), (open = false)"
+        v-for="sLocale in supportedLocales"
       >
         {{ sLocale }}
       </button>

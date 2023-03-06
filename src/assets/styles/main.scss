@@ -1,4 +1,5 @@
 @import "./__reset", "./__variables";
+@import "./libs/carousel.scss";
 
 html, body {
   height: 100%;
@@ -8,19 +9,4 @@ html, body {
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
-}
-
-.inner {
-  width: 100%;
-  max-width: 132rem;
-  margin-left: auto;
-  margin-right: auto;
-  @media (max-width: 1460px) and (min-width: 375px) {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-  @media (max-width: 374px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
 }
