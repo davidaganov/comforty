@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import type { NavbarItem, Category, Product, Company } from "@/interfaces"
+import type { NavbarItem, Category, Product, Company, Review } from "@/interfaces"
 
 export const useStore = defineStore("shop", {
   state: () => ({
@@ -171,12 +171,55 @@ export const useStore = defineStore("shop", {
       { id: 5, name: "Burnt Toast", logo: "logo-5.jpg" },
       { id: 6, name: "PandaDoc", logo: "logo-6.jpg" },
       { id: 7, name: "MOZ", logo: "logo-7.jpg" }
-    ] as Company[]
+    ] as Company[],
+    reviews: [
+      {
+        id: 1,
+        text: {
+          en: "I recently purchased this product and I am blown away by how effective it is. Not only does it meet all of my expectations, but it also exceeded them. The quality of the product is outstanding and the customer service was exceptional. I would highly recommend this product to anyone looking for a reliable and high-performing solution. It's definitely worth the investment!",
+          ru: "Я недавно приобрела этот продукт, и я поражена тем, насколько он эффективен. Это не только оправдало все мои ожидания, но и превзошло их. Качество продукта выдающееся, а обслуживание клиентов было исключительным. Я бы настоятельно рекомендовал этот продукт всем, кто ищет надежное и высокопроизводительное решение. Это определенно стоит вложений!"
+        },
+        avatar: "avatar-1.jpg",
+        name: { en: "Kristin Watson", ru: "Кристина Ватсон" },
+        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
+      },
+      {
+        id: 2,
+        text: {
+          en: "I've been using this product for a few weeks now and I am really impressed with the results. It's made a noticeable difference in my daily routine and I love how easy it is to use. The quality is top-notch and the price is very reasonable for what you get. Plus, the customer service team was extremely helpful when I had a question about the product. Overall, I would definitely recommend this to anyone looking for a high-quality solution.",
+          ru: "Я пользуюсь этим продуктом уже несколько недель, и результаты меня действительно впечатлили. Это заметно изменило мой распорядок дня, и мне нравится, насколько он прост в использовании. Качество на высшем уровне, а цена очень разумная за то, что вы получаете. Кроме того, команда обслуживания клиентов была чрезвычайно любезна, когда у меня возник вопрос о продукте. В целом, я бы определенно рекомендовал это всем, кто ищет высококачественное решение."
+        },
+        avatar: "avatar-2.jpg",
+        name: { en: "Esther Howard", ru: "Эстер Говард" },
+        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
+      },
+      {
+        id: 3,
+        text: {
+          en: "I was skeptical about this product at first, but after trying it out for a few days, I am completely sold. The quality is amazing and it works like a charm. I also appreciate the thoughtful design and attention to detail that went into making this product. The customer service was also excellent and answered all of my questions promptly. I would definitely recommend this product to anyone looking for a reliable and effective solution.",
+          ru: "Сначала я скептически отнесся к этому продукту, но, попробовав его в течение нескольких дней, я полностью продан. Качество потрясающее, и это работает как заклинание. Я также ценю продуманный дизайн и внимание к деталям, которые были использованы при создании этого продукта. Обслуживание клиентов также было превосходным и быстро отвечало на все мои вопросы. Я бы определенно порекомендовал этот продукт всем, кто ищет надежное и эффективное решение."
+        },
+        avatar: "avatar-1.jpg",
+        name: { en: "Charlotte Mitchell", ru: "Шарлотта Митчелл" },
+        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
+      },
+      {
+        id: 4,
+        text: {
+          en: "I've been using this product for a while now and it has become an essential part of my daily routine. It's incredibly easy to use and has made a huge difference in my life. The quality is exceptional and it's clear that a lot of thought went into designing this product. The customer service team was also very helpful and answered all of my questions promptly. Overall, I would highly recommend this product to anyone looking for a high-quality solution.",
+          ru: "Я пользуюсь этим продуктом уже некоторое время, и он стал неотъемлемой частью моей повседневной жизни. Он невероятно прост в использовании и оказал огромное влияние на мою жизнь. Качество исключительное, и ясно, что при разработке этого продукта было вложено много мыслей. Команда обслуживания клиентов также была очень предупредительна и быстро ответила на все мои вопросы. В целом, я бы настоятельно рекомендовал этот продукт всем, кто ищет высококачественное решение."
+        },
+        avatar: "avatar-2.jpg",
+        name: { en: "Oliver Reynolds", ru: "Оливер Рейнольдс" },
+        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
+      }
+    ] as Review[]
   }),
   getters: {
     getNavbar: (state) => state.navbar,
     getCategories: (state) => state.categories,
     getProducts: (state) => state.products,
-    getCompanies: (state) => state.companies
+    getCompanies: (state) => state.companies,
+    getReviews: (state) => state.reviews
   }
 })

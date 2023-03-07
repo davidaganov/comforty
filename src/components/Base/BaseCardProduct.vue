@@ -5,6 +5,8 @@
   >
     <div class="product__picture">
       <img
+        width="311"
+        height="312"
         :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
         :alt="name[Translation.currentLocale]"
       />

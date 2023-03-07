@@ -36,3 +36,11 @@ export interface Company {
   name: string
   logo: string
 }
+
+export interface Review {
+  id: number
+  text: { [key: string]: string }
+  avatar: string
+  name: { [key: string]: string }
+  job: { [key: string]: string }
+}

@@ -15,6 +15,8 @@
         >
           <img
             class="companies__logo"
+            width="129"
+            height="133"
             :alt="name"
             :src="getImageUrl({ fileName: logo, folder: 'images/companies' })"
           />
