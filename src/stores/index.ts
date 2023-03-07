@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import type { NavbarItem, Category, Product } from "@/interfaces"
+import type { NavbarItem, Category, Product, Company } from "@/interfaces"
 
 export const useStore = defineStore("shop", {
   state: () => ({
@@ -162,11 +162,21 @@ export const useStore = defineStore("shop", {
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
         price: { regular: 8 }
       }
-    ] as Product[]
+    ] as Product[],
+    companies: [
+      { id: 1, name: "Zapier", logo: "logo-1.jpg" },
+      { id: 2, name: "Pipedrive", logo: "logo-2.jpg" },
+      { id: 3, name: "CIB Bank", logo: "logo-3.jpg" },
+      { id: 4, name: "Company", logo: "logo-4.jpg" },
+      { id: 5, name: "Burnt Toast", logo: "logo-5.jpg" },
+      { id: 6, name: "PandaDoc", logo: "logo-6.jpg" },
+      { id: 7, name: "MOZ", logo: "logo-7.jpg" }
+    ] as Company[]
   }),
   getters: {
     getNavbar: (state) => state.navbar,
     getCategories: (state) => state.categories,
-    getProducts: (state) => state.products
+    getProducts: (state) => state.products,
+    getCompanies: (state) => state.companies
   }
 })

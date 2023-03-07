@@ -71,7 +71,7 @@
           <nav class="navbar__menu">
             <ul class="navbar__list">
               <li
-                v-for="{ id, name, anchor, link } in store.getNavbar"
+                v-for="{ id, name, anchor, link } in list"
                 :key="id"
                 class="navbar__item"
               >
@@ -120,6 +120,7 @@ import IconMenu from "./Icons/IconMenu.vue"
 import IconHeart from "./Icons/IconHeart.vue"
 
 const store = useStore()
+const list = store.getNavbar
 </script>
 
 <style scoped lang="scss">

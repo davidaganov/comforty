@@ -30,3 +30,9 @@ export interface Product {
     discount?: number
   }
 }
+
+export interface Company {
+  id: number
+  name: string
+  logo: string
+}
