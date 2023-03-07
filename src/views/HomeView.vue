@@ -1,18 +1,19 @@
 <template>
   <div>
-    <BlockFeatured />
+    <BlockProductsCarousel
+      name="featured"
+      :products="products"
+    />
+    <BlockProductsCarousel
+      name="recently"
+      :products="products"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import BlockFeatured from "@/components/Blocks/BlockFeatured.vue"
-// import BlockProducts from "@/components/Blocks/BlockProducts.vue"
-</script>
+import BlockProductsCarousel from "@/components/Blocks/BlockProductsCarousel.vue"
+import { useStore } from "@/stores"
 
-<style>
-.products {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-</style>
+const products = useStore().getProducts
+</script>

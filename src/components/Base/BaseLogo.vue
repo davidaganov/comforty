@@ -30,7 +30,6 @@ defineProps<{ hiddenText: boolean }>()
   align-items: center;
   padding: 0.3rem;
   margin: -0.3rem;
-
   border-radius: 0.5rem;
   &:focus-visible {
     box-shadow: 0 0 0 0.2rem var(--color-accent);
@@ -40,8 +39,18 @@ defineProps<{ hiddenText: boolean }>()
     color: var(--color-accent);
   }
   &__text {
-    font: 500 2.6rem/120% var(--main-font);
-    color: var(--color-black);
+    @media (min-width: 576px) {
+      font: 500 2.6rem/120% var(--main-font);
+    }
+    @media (max-width: 575px) and (min-width: 376px) {
+      font: 500 2rem/120% var(--main-font);
+    }
+    @media (min-width: 376px) {
+      color: var(--color-black);
+    }
+    @media (max-width: 375px) {
+      display: none;
+    }
   }
 }
 </style>

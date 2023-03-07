@@ -1,29 +1,31 @@
 <template>
   <section
-    class="featured"
-    id="featured"
+    class="block"
+    :id="name"
   >
-    <BaseInner class="featured__inner">
-      <BaseTitle class="featured__title">
-        {{ $t("blocks.featured.title") }}
+    <BaseInner class="block__inner">
+      <BaseTitle class="block__title">
+        {{ $t(`blocks.${name}.title`) }}
       </BaseTitle>
 
       <BaseCarouselControl
-        class="featured__control"
+        class="block__control"
         :carousel="refCarousel"
       />
 
       <Carousel
-        class="featured__carousel"
+        class="block__carousel"
         ref="refCarousel"
         :settings="settings"
+        :breakpoints="breakpoints"
+        :aria-label="$t(`blocks.${name}.carouselAria`)"
       >
         <Slide
           v-for="product in products"
           :key="product.id"
         >
           <BaseCardProduct
-            class="featured__product"
+            class="block__product"
             v-bind="product"
           />
         </Slide>
@@ -32,25 +34,47 @@
   </section>
 </template>
 
+<script lang="ts">
+import type { Product } from "@/interfaces"
+
+interface Props {
+  name: string
+  products: Product[]
+}
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue"
 import { Carousel, Slide } from "vue3-carousel"
-import { useStore } from "@/stores"
 
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-const store = useStore()
-const products = store.getProducts
+defineProps<Props>()
+
 const refCarousel = ref()
+
 const settings = {
-  itemsToShow: 4,
+  itemsToShow: 1.86,
   snapAlign: "start"
+}
+
+const breakpoints = {
+  500: {
+    itemsToShow: 1.94
+  },
+  769: {
+    itemsToShow: 2.94
+  },
+
+  1021: {
+    itemsToShow: 3.94
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.featured {
+.block {
   margin: 3rem 0;
 
   &__inner {

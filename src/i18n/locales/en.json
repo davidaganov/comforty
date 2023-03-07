@@ -38,9 +38,6 @@
       "contact": "Contact"
     }
   },
-  "cart": {
-    "test": "The cart is empty | In the cart {n} product | In the cart {n} products"
-  },
   "product": {
     "attr": {
       "newest": "New",
@@ -60,7 +57,16 @@
   },
   "blocks": {
     "featured": {
-      "title": "Featured products"
+      "title": "Featured products",
+      "carouselAria": "Gallery of featured products"
+    },
+    "recently": {
+      "title": "Recently Added",
+      "carouselAria": "Gallery of recently added products"
     }
+  },
+  "carousel": {
+    "prevAria": "Navigate to previous slide",
+    "nextAria": "Navigate to next slide"
   }
 }

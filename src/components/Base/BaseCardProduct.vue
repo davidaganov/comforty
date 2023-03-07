@@ -35,11 +35,15 @@
           <IconHeart />
         </IconBase>
       </BaseButton>
+      <a
+        class="product__link"
+        :href="`/${slug}`"
+      />
     </div>
     <h3 class="product__title">
       <a
-        href="#"
         class="product__title-link"
+        :href="`/${slug}`"
       >
         {{ name[Translation.currentLocale] }}
       </a>
@@ -86,18 +90,29 @@ defineProps<Product>()
 <style scoped lang="scss">
 .product {
   $parent: &;
-  display: grid;
+  @media (min-width: 769px) {
+    display: grid;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   &__picture {
-    grid-area: 1 / 1 / 1 / 3;
     position: relative;
     width: 100%;
     margin-bottom: 1.4rem;
     @media (min-width: 769px) {
+      grid-area: 1 / 1 / 1 / 3;
       height: 31.2rem;
+      &:not(&:hover) {
+        #{$parent}__favorite {
+          opacity: 0;
+        }
+      }
     }
     @media (max-width: 768px) {
       height: 20rem;
     }
+
     img {
       width: 100%;
       height: 100%;
@@ -105,22 +120,16 @@ defineProps<Product>()
       object-position: center;
       border-radius: 0.6rem;
     }
-
-    &:not(&:hover) {
-      #{$parent}__favorite {
-        opacity: 0;
-      }
-    }
   }
 
   &__attr,
   &__favorite {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     top: 2rem;
-    cursor: pointer;
+    z-index: 2;
   }
 
   &__attr {
@@ -145,41 +154,58 @@ defineProps<Product>()
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 0.8rem;
     transition: all 0.1s;
+    cursor: pointer;
     &:focus-visible {
       opacity: 1 !important;
     }
   }
 
+  &__link {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
   &__title {
-    grid-area: 2 / 1 / 3 / 2;
+    text-align: left;
     &-link {
       padding: 0 0.3rem;
       margin: 0 -0.3rem;
-      font: 400 1.6rem/130% var(--main-font);
-      text-align: left;
       text-transform: capitalize;
       color: var(--color-black);
       transition: all 0.2s;
-      word-wrap: anywhere;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      &:hover {
-        color: var(--color-accent-hover);
-      }
       &:focus-visible {
         background-color: var(--color-accent);
         color: var(--color-white);
+      }
+      @media (min-width: 769px) {
+        grid-area: 2 / 1 / 3 / 2;
+        font: 400 1.6rem/130% var(--main-font);
+        word-wrap: anywhere;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        &:hover {
+          color: var(--color-accent-hover);
+        }
+      }
+      @media (max-width: 768px) {
+        font: 400 1.8rem/130% var(--main-font);
       }
     }
   }
 
   &__price {
-    grid-area: 3 / 1 / 4 / 2;
     display: flex;
     align-items: center;
     margin-top: 1rem;
+    @media (min-width: 769px) {
+      grid-area: 3 / 1 / 4 / 2;
+    }
     &-regular {
       font: 600 1.8rem/110% var(--main-font);
       color: var(--color-black);
@@ -193,9 +219,14 @@ defineProps<Product>()
   }
 
   &__cart {
-    grid-area: 2 / 2 / 4 / 3;
-    justify-self: flex-end;
-    align-self: center;
+    @media (min-width: 769px) {
+      grid-area: 2 / 2 / 4 / 3;
+      justify-self: flex-end;
+      align-self: center;
+    }
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 </style>

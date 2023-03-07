@@ -2,8 +2,10 @@
   <div class="control">
     <button
       type="button"
-      :class="slide === 0 ? 'disabled' : ''"
-      class="control__prev"
+      class="control__arrow control__prev"
+      :class="currentSlide === minSlide ? 'disabled' : ''"
+      :tabindex="currentSlide === minSlide ? '-1' : '0'"
+      :aria-label="$t('carousel.prevAria')"
       @click="prev"
     >
       <IconBase
@@ -16,8 +18,10 @@
     </button>
     <button
       type="button"
-      class="control__next"
-      :class="slide === maxSlide ? 'disabled' : ''"
+      class="control__arrow control__next"
+      :class="currentSlide === maxSlide ? 'disabled' : ''"
+      :tabindex="currentSlide === maxSlide ? '-1' : '0'"
+      :aria-label="$t('carousel.nextAria')"
       @click="next"
     >
       <IconBase
@@ -32,23 +36,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import IconArrow from "../Icons/IconArrow.vue"
+import { ref, watchEffect } from "vue"
 import IconBase from "../Icons/IconBase.vue"
+import IconArrow from "../Icons/IconArrow.vue"
 
 const props = defineProps<{ carousel: any }>()
-const slide = ref(0)
-const maxSlide = ref(1)
+const currentSlide = ref<number>(0)
+const minSlide = ref<number>(0)
+const maxSlide = ref<number>(1)
 
-const next = () => {
-  props.carousel.next()
-  slide.value = props.carousel.data.currentSlide.value
-}
+const next = () => props.carousel.next()
+const prev = () => props.carousel.prev()
 
-const prev = () => {
-  props.carousel.prev()
-  slide.value = props.carousel.data.currentSlide.value
-}
+watchEffect(() => {
+  if (props.carousel) {
+    currentSlide.value = props.carousel.data.currentSlide.value
+    maxSlide.value = props.carousel.data.maxSlide.value
+  }
+})
 </script>
 
 <style scoped lang="scss">
@@ -56,8 +61,7 @@ const prev = () => {
   display: flex;
   align-items: center;
   gap: 1.8rem;
-  &__prev,
-  &__next {
+  &__arrow {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,10 +71,16 @@ const prev = () => {
     background-color: var(--color-gray);
     transition: all 0.2s;
     cursor: pointer;
-    &:hover,
-    &:focus-visible {
-      background-color: var(--color-accent-hover);
-      color: var(--color-white);
+    &:not(&.disabled) {
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-accent-hover);
+        color: var(--color-white);
+      }
+    }
+    &.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
   }
 
