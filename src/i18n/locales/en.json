@@ -50,7 +50,7 @@
   },
   "categories": {
     "modal": {
-      "title": "All Categories",
+      "title": "All categories",
       "closeAria": "Click to close the category selection"
     },
     "count": "Empty | Product | Products"
@@ -60,12 +60,18 @@
       "title": "Featured products",
       "carouselAria": "Gallery of featured products"
     },
+    "categories": {
+      "title": "Top categories"
+    },
+    "products": {
+      "title": "Our products"
+    },
     "reviews": {
       "title": "What client says about us",
       "carouselAria": "Gallery of reviews"
     },
     "recently": {
-      "title": "Recently Added",
+      "title": "Recently added",
       "carouselAria": "Gallery of recently added products"
     }
   },

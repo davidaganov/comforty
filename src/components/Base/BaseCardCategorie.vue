@@ -34,6 +34,7 @@ defineProps<Category>()
 .card {
   position: relative;
   display: block;
+  width: 100%;
   height: 100%;
   aspect-ratio: 1 / 1;
   background-size: cover;
@@ -46,6 +47,7 @@ defineProps<Category>()
     left: 0;
     right: 0;
     bottom: 0;
+    text-align: left;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 0 0 1rem 1rem;
   }
