@@ -47,13 +47,13 @@ defineProps<{ reviews: Review[] }>()
 const refCarousel = ref()
 
 const settings = {
-  itemsToShow: 1,
+  itemsToShow: 0.98,
   snapAlign: "start"
 }
 
 const breakpoints = {
-  769: {
-    itemsToShow: 2
+  1021: {
+    itemsToShow: 1.97
   }
 }
 </script>
@@ -61,7 +61,7 @@ const breakpoints = {
 <style scoped lang="scss">
 .reviews {
   margin: 8rem 0;
-  padding: 8rem;
+  padding: 8rem 0;
   background-color: var(--color-gray);
 
   &__inner {
