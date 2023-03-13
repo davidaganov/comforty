@@ -8,7 +8,7 @@
         width="311"
         height="312"
         :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
-        :alt="name[Translation.currentLocale]"
+        :alt="title[Translation.currentLocale]"
       />
       <span
         v-if="attr.newest"
@@ -47,7 +47,7 @@
         class="product__title-link"
         :href="`/${slug}`"
       >
-        {{ name[Translation.currentLocale] }}
+        {{ title[Translation.currentLocale] }}
       </a>
     </h3>
     <div class="product__price">
@@ -77,16 +77,35 @@
   </article>
 </template>
 
+<script lang="ts">
+interface Props {
+  id: number
+  title: { [key: string]: string }
+  cover: string
+  slug: string
+  category: string
+  attr: {
+    newest: boolean
+    trending: boolean
+    bestsellers: boolean
+    featured: boolean
+  }
+  price: {
+    regular: number
+    discount?: number | null
+  }
+}
+</script>
+
 <script setup lang="ts">
-import type { Product } from "@/interfaces"
-import Translation from "@/i18n/translation"
-import { getImageUrl } from "@/utils/getImageUrl"
+import Translation from "../../i18n/translation"
+import { getImageUrl } from "../../utils/getImageUrl"
 
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 import IconHeart from "../Icons/IconHeart.vue"
 
-defineProps<Product>()
+defineProps<Props>()
 </script>
 
 <style scoped lang="scss">

@@ -51,7 +51,7 @@
 
         <!-- List categories -->
         <div class="categories__list">
-          <BaseCardCategorie
+          <BaseCardCategory
             class="categories__item"
             :key="category.id"
             v-for="(category, i) in categories"
@@ -66,12 +66,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { useStore } from "@/stores"
+import { useStore } from "../../stores"
 
 import IconBase from "../Icons/IconBase.vue"
 import IconMenu from "../Icons/IconMenu.vue"
 import IconClose from "../Icons/IconClose.vue"
-import BaseCardCategorie from "./BaseCardCategorie.vue"
+import BaseCardCategory from "./BaseCardCategory.vue"
 
 const open = ref(false)
 const store = useStore()

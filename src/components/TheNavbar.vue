@@ -71,7 +71,7 @@
           <nav class="navbar__menu">
             <ul class="navbar__list">
               <li
-                v-for="{ id, name, anchor, link } in list"
+                v-for="{ id, title, anchor, link } in list"
                 :key="id"
                 class="navbar__item"
               >
@@ -80,14 +80,14 @@
                   :to="Translation.i18nRoute({ name: link })"
                   class="navbar__link"
                 >
-                  {{ name[Translation.currentLocale] }}
+                  {{ title[Translation.currentLocale] }}
                 </RouterLink>
                 <a
                   v-if="anchor"
                   :href="anchor"
                   class="navbar__link"
                 >
-                  {{ name[Translation.currentLocale] }}
+                  {{ title[Translation.currentLocale] }}
                 </a>
               </li>
             </ul>
@@ -106,8 +106,8 @@
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
-import { useStore } from "@/stores"
-import Translation from "@/i18n/translation"
+import { useStore } from "../stores"
+import Translation from "../i18n/translation"
 
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"

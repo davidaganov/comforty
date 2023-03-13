@@ -18,10 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import IconBase from "@/components/Icons/IconBase.vue"
+import IconBase from "../../components/Icons/IconBase.vue"
 import IconLogo from "../Icons/IconLogo.vue"
-
-defineProps<{ hiddenText: boolean }>()
 </script>
 
 <style scoped lang="scss">

@@ -28,11 +28,15 @@
 
 <script setup lang="ts">
 import { Carousel, Slide } from "vue3-carousel"
+import { getImageUrl } from "../../utils/getImageUrl"
 
-import type { Company } from "@/interfaces"
-import { getImageUrl } from "@/utils/getImageUrl"
-
-defineProps<{ companies: Company[] }>()
+defineProps<{
+  companies: {
+    id: number
+    name: string
+    logo: string
+  }[]
+}>()
 
 const settings = {
   itemsToShow: 3,

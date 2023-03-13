@@ -7,7 +7,7 @@
   >
     <div class="card__bottom">
       <span class="card__text">
-        {{ name[Translation.currentLocale] }}
+        {{ title[Translation.currentLocale] }}
       </span>
       <span class="card__products">
         {{ productsCount ? productsCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "" }}
@@ -17,17 +17,22 @@
     <a
       class="card__link"
       :href="link"
-      :aria-label="name[Translation.currentLocale]"
+      :aria-label="title[Translation.currentLocale]"
     />
   </article>
 </template>
 
 <script setup lang="ts">
-import type { Category } from "@/interfaces"
-import Translation from "@/i18n/translation"
-import { getImageUrl } from "@/utils/getImageUrl"
+import Translation from "../../i18n/translation"
+import { getImageUrl } from "../../utils/getImageUrl"
 
-defineProps<Category>()
+defineProps<{
+  id: number
+  title: { [key: string]: string }
+  productsCount: number
+  cover: string
+  link: string
+}>()
 </script>
 
 <style scoped lang="scss">

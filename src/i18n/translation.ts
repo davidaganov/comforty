@@ -1,4 +1,4 @@
-import i18n from "@/i18n"
+import i18n from "../i18n"
 import { nextTick } from "vue"
 
 const Translation = {
@@ -68,7 +68,7 @@ const Translation = {
 
   async loadLocalMessages(locale: string) {
     if (!i18n.global.availableLocales.includes(locale)) {
-      const messages = await import(`@/i18n/locales/${locale}.json`)
+      const messages = await import(`./locales/${locale}.json`)
       i18n.global.setLocaleMessage(locale, messages.default)
     }
 

@@ -1,13 +1,13 @@
 export interface NavbarItem {
   id: number
-  name: { [key: string]: string }
+  title: { [key: string]: string }
   link?: string
   anchor?: string
 }
 
 export interface Category {
   id: number
-  name: { [key: string]: string }
+  title: { [key: string]: string }
   productsCount: number
   cover: string
   link: string
@@ -15,7 +15,7 @@ export interface Category {
 
 export interface Product {
   id: number
-  name: { [key: string]: string }
+  title: { [key: string]: string }
   cover: string
   slug: string
   category: string
@@ -27,7 +27,7 @@ export interface Product {
   }
   price: {
     regular: number
-    discount?: number
+    discount?: number | null
   }
 }
 
@@ -41,6 +41,6 @@ export interface Review {
   id: number
   text: { [key: string]: string }
   avatar: string
-  name: { [key: string]: string }
+  userName: { [key: string]: string }
   job: { [key: string]: string }
 }

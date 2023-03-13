@@ -12,52 +12,55 @@
         class="categories__control"
         :carousel="refCarousel"
       />
-    </BaseInner>
 
-    <Carousel
-      class="categories__carousel"
-      ref="refCarousel"
-      :settings="settings"
-      :breakpoints="breakpoints"
-      :aria-label="$t('blocks.categories.carouselAria')"
-    >
-      <Slide
-        v-for="category in categories"
-        :key="category.id"
+      <Carousel
+        class="categories__carousel"
+        ref="refCarousel"
+        :settings="settings"
+        :breakpoints="breakpoints"
+        :aria-label="$t('blocks.categories.carouselAria')"
       >
-        <BaseCardCategorie
-          class="categories__item"
-          v-bind="category"
-        />
-      </Slide>
-    </Carousel>
+        <Slide
+          v-for="category in categories"
+          :key="category.id"
+        >
+          <BaseCardCategory
+            class="categories__item"
+            v-bind="category"
+          />
+        </Slide>
+      </Carousel>
+    </BaseInner>
   </section>
 </template>
 
 <script setup lang="ts">
-import type { Category } from "@/interfaces"
 import { ref } from "vue"
 import { Carousel, Slide } from "vue3-carousel"
 
-import BaseCardCategorie from "../Base/BaseCardCategorie.vue"
+import BaseCardCategory from "../Base/BaseCardCategory.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ categories: Category[] }>()
+defineProps<{
+  categories: {
+    id: number
+    title: { [key: string]: string }
+    productsCount: number
+    cover: string
+    link: string
+  }[]
+}>()
 
 const refCarousel = ref()
 
 const settings = {
-  itemsToShow: 2,
+  itemsToShow: 1.94,
   snapAlign: "center"
 }
 
 const breakpoints = {
   769: {
-    itemsToShow: 3
-  },
-
-  1021: {
-    itemsToShow: 5
+    itemsToShow: 2.94
   }
 }
 </script>
@@ -65,27 +68,26 @@ const breakpoints = {
 <style scoped lang="scss">
 .categories {
   margin: 8rem 0;
+
   &__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4rem 2rem;
   }
 
+  &__title {
+    grid-area: 1 / 1 / 2 / 2;
+    align-self: center;
+  }
+  &__control {
+    grid-area: 1 / 3 / 2 / 4;
+  }
   &__carousel {
-    margin-top: 4rem;
+    grid-area: 2 / 1 / 3 / 4;
   }
 
   &__item {
     margin-right: 2.4rem;
-  }
-}
-
-.carousel {
-  &__slide {
-    transition: opacity 0.2s;
-    &:not(&--prev, &--next, &--active) {
-      opacity: 0.5;
-    }
   }
 }
 </style>

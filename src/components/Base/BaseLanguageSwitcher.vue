@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import { useRouter } from "vue-router"
-import Translation from "@/i18n/translation"
+import Translation from "../../i18n/translation"
 
 export default {
   data() {

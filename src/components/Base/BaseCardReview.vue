@@ -14,7 +14,7 @@
           alt=""
           :src="getImageUrl({ fileName: avatar, folder: 'images/users' })"
         />
-        <p class="review__name">{{ name[Translation.currentLocale] }}</p>
+        <p class="review__name">{{ userName[Translation.currentLocale] }}</p>
         <p class="review__job">{{ job[Translation.currentLocale] }}</p>
       </div>
       <IconBase
@@ -30,14 +30,19 @@
 </template>
 
 <script setup lang="ts">
-import type { Review } from "@/interfaces"
-import Translation from "@/i18n/translation"
-import { getImageUrl } from "@/utils/getImageUrl"
+import Translation from "../../i18n/translation"
+import { getImageUrl } from "../../utils/getImageUrl"
 
 import IconBase from "../Icons/IconBase.vue"
 import IconQuotes from "../Icons/IconQuotes.vue"
 
-defineProps<Review>()
+defineProps<{
+  id: number
+  text: { [key: string]: string }
+  avatar: string
+  userName: { [key: string]: string }
+  job: { [key: string]: string }
+}>()
 </script>
 
 <style scoped lang="scss">

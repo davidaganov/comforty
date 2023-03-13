@@ -35,14 +35,21 @@
 </template>
 
 <script setup lang="ts">
-import type { Review } from "@/interfaces"
 import { ref } from "vue"
 import { Carousel, Slide } from "vue3-carousel"
 
 import BaseCardReview from "../Base/BaseCardReview.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ reviews: Review[] }>()
+defineProps<{
+  reviews: {
+    id: number
+    text: { [key: string]: string }
+    avatar: string
+    userName: { [key: string]: string }
+    job: { [key: string]: string }
+  }[]
+}>()
 
 const refCarousel = ref()
 

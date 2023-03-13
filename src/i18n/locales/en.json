@@ -61,10 +61,12 @@
       "carouselAria": "Gallery of featured products"
     },
     "categories": {
-      "title": "Top categories"
+      "title": "Top categories",
+      "carouselAria": "Gallery of top categories"
     },
     "products": {
-      "title": "Our products"
+      "title": "Our products",
+      "carouselAria": "Gallery of our products"
     },
     "reviews": {
       "title": "What client says about us",

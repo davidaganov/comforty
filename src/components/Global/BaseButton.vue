@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-interface Props {
+export interface Props {
   link?: string
   type?: "button" | "submit" | "reset" | undefined
   appearance?: "primary" | "gray" | "white" | "ghost"
@@ -56,7 +56,7 @@ import IconBase from "../Icons/IconBase.vue"
 
 withDefaults(defineProps<Props>(), {
   link: undefined,
-  type: undefined,
+  type: "button",
   appearance: "primary",
   arrow: false
 })

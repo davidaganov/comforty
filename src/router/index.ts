@@ -1,4 +1,4 @@
-import Translation from "@/i18n/translation"
+import Translation from "../i18n/translation"
 import { createRouter, createWebHistory, RouterView } from "vue-router"
 import HomeView from "../views/HomeView.vue"
 

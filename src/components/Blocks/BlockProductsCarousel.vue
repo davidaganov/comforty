@@ -35,11 +35,25 @@
 </template>
 
 <script lang="ts">
-import type { Product } from "@/interfaces"
-
 interface Props {
   name: string
-  products: Product[]
+  products: {
+    id: number
+    name: { [key: string]: string } | string
+    cover: string
+    slug: string
+    category: string
+    attr: {
+      newest: boolean
+      trending: boolean
+      bestsellers: boolean
+      featured: boolean
+    }
+    price: {
+      regular: number
+      discount?: number | null
+    }
+  }[]
 }
 </script>
 

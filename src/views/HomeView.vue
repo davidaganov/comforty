@@ -19,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import BlockCompanies from "@/components/Blocks/BlockCompanies.vue"
-import BlockProductsCarousel from "@/components/Blocks/BlockProductsCarousel.vue"
-import BlockCategories from "@/components/Blocks/BlockCategories.vue"
-import BlockProducts from "@/components/Blocks/BlockProducts.vue"
-import BlockReviews from "@/components/Blocks/BlockReviews.vue"
-import { useStore } from "@/stores"
+import BlockCompanies from "../components/Blocks/BlockCompanies.vue"
+import BlockProductsCarousel from "../components/Blocks/BlockProductsCarousel.vue"
+import BlockCategories from "../components/Blocks/BlockCategories.vue"
+import BlockProducts from "../components/Blocks/BlockProducts.vue"
+import BlockReviews from "../components/Blocks/BlockReviews.vue"
+import { useStore } from "../stores"
 
 const categories = useStore().getCategories
 const products = useStore().getProducts.slice(0, 8)
