@@ -9,9 +9,7 @@ export default {
 const Template: StoryFn<typeof BaseCardReview> = (args, { argTypes }) => ({
   components: { BaseCardReview },
   props: Object.keys(argTypes),
-  template: `
-    <BaseCardReview v-bind="$props" />
-  `
+  template: "<BaseCardReview v-bind='$props' />"
 })
 
 export const Review = Template.bind({})

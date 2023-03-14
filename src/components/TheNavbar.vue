@@ -97,8 +97,10 @@
         <a
           href="tel:8085550111"
           class="navbar__phone"
-          >{{ $t("nav.bottom.contact") }}: <strong>(808) 555-0111</strong></a
         >
+          {{ $t("nav.bottom.contact") }}:
+          <strong>(808) 555-0111</strong>
+        </a>
       </BaseInner>
     </div>
   </div>

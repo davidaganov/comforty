@@ -68,20 +68,16 @@ defineProps<{ name: string; products: Props[] }>()
 const refCarousel = ref()
 
 const settings = {
-  itemsToShow: 1.86,
+  itemsToShow: 2,
   snapAlign: "start"
 }
 
 const breakpoints = {
-  500: {
-    itemsToShow: 1.94
-  },
   769: {
-    itemsToShow: 2.94
+    itemsToShow: 3
   },
-
   1021: {
-    itemsToShow: 3.94
+    itemsToShow: 4
   }
 }
 </script>
@@ -108,7 +104,7 @@ const breakpoints = {
   }
 
   &__product {
-    padding-right: 2.4rem;
+    padding: 0 1.2rem;
   }
 }
 </style>

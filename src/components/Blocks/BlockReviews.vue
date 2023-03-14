@@ -21,8 +21,9 @@
         :aria-label="$t(`blocks.reviews.carouselAria`)"
       >
         <Slide
-          v-for="review in reviews"
+          class="reviews__slide"
           :key="review.id"
+          v-for="review in reviews"
         >
           <BaseCardReview
             class="reviews__item"
@@ -58,19 +59,23 @@ defineProps<{ reviews: Props[] }>()
 const refCarousel = ref()
 
 const settings = {
-  itemsToShow: 0.98,
+  itemsToShow: 1,
+  wrapAround: true,
+  autoplay: 2000,
+  transition: 800,
   snapAlign: "start"
 }
 
 const breakpoints = {
   1021: {
-    itemsToShow: 1.97
+    itemsToShow: 2
   }
 }
 </script>
 
 <style scoped lang="scss">
 .reviews {
+  $parent: &;
   margin: 8rem 0;
   padding: 8rem 0;
   background-color: var(--color-gray);
@@ -95,7 +100,7 @@ const breakpoints = {
   }
 
   &__item {
-    padding-right: 2.4rem;
+    padding: 0 1.2rem;
   }
 }
 </style>

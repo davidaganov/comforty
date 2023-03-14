@@ -3,8 +3,8 @@
     <button
       type="button"
       class="control__arrow control__prev"
-      :class="currentSlide === minSlide ? 'disabled' : ''"
-      :tabindex="currentSlide === minSlide ? '-1' : '0'"
+      :class="currentSlide === minSlide && !wrapAround ? 'disabled' : ''"
+      :tabindex="currentSlide === minSlide && !wrapAround ? '-1' : '0'"
       :aria-label="$t('carousel.prevAria')"
       @click="prev"
     >
@@ -19,8 +19,8 @@
     <button
       type="button"
       class="control__arrow control__next"
-      :class="currentSlide === maxSlide ? 'disabled' : ''"
-      :tabindex="currentSlide === maxSlide ? '-1' : '0'"
+      :class="currentSlide === maxSlide && !wrapAround ? 'disabled' : ''"
+      :tabindex="currentSlide === maxSlide && !wrapAround ? '-1' : '0'"
       :aria-label="$t('carousel.nextAria')"
       @click="next"
     >
@@ -40,16 +40,18 @@ import { ref, watchEffect } from "vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconArrow from "../Icons/IconArrow.vue"
 
-const props = defineProps<{ carousel: any }>()
+const props = defineProps<{ carousel?: any }>()
+const wrapAround = ref<boolean>(false)
 const currentSlide = ref<number>(0)
 const minSlide = ref<number>(0)
 const maxSlide = ref<number>(1)
 
-const next = () => props.carousel.next()
-const prev = () => props.carousel.prev()
+const next = () => (props.carousel ? props.carousel.next() : null)
+const prev = () => (props.carousel ? props.carousel.prev() : null)
 
 watchEffect(() => {
   if (props.carousel) {
+    wrapAround.value = props.carousel.data.config.wrapAround
     currentSlide.value = props.carousel.data.currentSlide.value
     maxSlide.value = props.carousel.data.maxSlide.value
   }

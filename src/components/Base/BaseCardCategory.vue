@@ -48,7 +48,7 @@ defineProps<Props>()
   aspect-ratio: 1 / 1;
   background-size: cover;
   background-position: center center;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
 
   &__bottom {
     position: absolute;

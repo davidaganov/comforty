@@ -80,11 +80,13 @@ const switchLanguage = async (newLocale: string) => {
 .select {
   position: relative;
   outline: none;
+  max-width: 8rem;
   &__selected {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0 0.3rem;
+    margin: 0 auto;
     font: 400 1.3rem/130% var(--main-font);
     color: var(--color-white);
     text-transform: capitalize;

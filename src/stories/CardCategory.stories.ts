@@ -9,9 +9,7 @@ export default {
 const Template: StoryFn<typeof BaseCardCategory> = (args, { argTypes }) => ({
   components: { BaseCardCategory },
   props: Object.keys(argTypes),
-  template: `
-    <BaseCardCategory v-bind="$props" />
-  `
+  template: "<BaseCardCategory v-bind='$props' />"
 })
 
 export const Category = Template.bind({})

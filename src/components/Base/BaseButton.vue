@@ -106,6 +106,7 @@ withDefaults(defineProps<Props>(), {
     padding: 1.6rem 2.4rem;
     font-weight: 500;
     border: 0.1rem solid #e1e3e5;
+    background-color: var(--color-white);
     color: var(--color-black);
     &:hover,
     &:focus-visible {

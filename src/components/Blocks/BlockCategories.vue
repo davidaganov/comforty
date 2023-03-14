@@ -58,13 +58,17 @@ defineProps<{ categories: Props[] }>()
 const refCarousel = ref()
 
 const settings = {
-  itemsToShow: 1.94,
+  itemsToShow: 1,
+  wrapAround: true,
   snapAlign: "center"
 }
 
 const breakpoints = {
+  500: {
+    itemsToShow: 2
+  },
   769: {
-    itemsToShow: 2.94
+    itemsToShow: 3
   }
 }
 </script>
@@ -91,7 +95,7 @@ const breakpoints = {
   }
 
   &__item {
-    margin-right: 2.4rem;
+    margin: 0 1.2rem;
   }
 }
 </style>
