@@ -26,17 +26,21 @@
   </section>
 </template>
 
+<script lang="ts">
+interface Props {
+  id: number
+  name: string
+  logo: string
+}
+</script>
+
 <script setup lang="ts">
 import { Carousel, Slide } from "vue3-carousel"
 import { getImageUrl } from "../../utils/getImageUrl"
 
-defineProps<{
-  companies: {
-    id: number
-    name: string
-    logo: string
-  }[]
-}>()
+import BaseInner from "../Base/BaseInner.vue"
+
+defineProps<{ companies: Props[] }>()
 
 const settings = {
   itemsToShow: 3,

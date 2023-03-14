@@ -9,6 +9,10 @@
   </footer>
 </template>
 
+<script setup lang="ts">
+import BaseInner from "./Base/BaseInner.vue"
+</script>
+
 <style scoped lang="scss">
 .footer {
   margin-top: 10rem;

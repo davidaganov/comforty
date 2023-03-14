@@ -21,7 +21,7 @@
   </svg>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 interface Props {
   iconName?: string
   iconColor?: string
@@ -30,7 +30,9 @@ interface Props {
   width?: number
   height?: number
 }
+</script>
 
+<script setup lang="ts">
 withDefaults(defineProps<Props>(), {
   iconColor: "currentColor",
   stroke: false,

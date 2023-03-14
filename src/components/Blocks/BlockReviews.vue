@@ -34,22 +34,26 @@
   </section>
 </template>
 
+<script lang="ts">
+interface Props {
+  id: number
+  text: { [key: string]: string }
+  avatar: string
+  userName: { [key: string]: string }
+  job: { [key: string]: string }
+}
+</script>
+
 <script setup lang="ts">
 import { ref } from "vue"
 import { Carousel, Slide } from "vue3-carousel"
 
+import BaseInner from "../Base/BaseInner.vue"
+import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardReview from "../Base/BaseCardReview.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{
-  reviews: {
-    id: number
-    text: { [key: string]: string }
-    avatar: string
-    userName: { [key: string]: string }
-    job: { [key: string]: string }
-  }[]
-}>()
+defineProps<{ reviews: Props[] }>()
 
 const refCarousel = ref()
 

@@ -36,24 +36,21 @@
 
 <script lang="ts">
 interface Props {
-  name: string
-  products: {
-    id: number
-    name: { [key: string]: string } | string
-    cover: string
-    slug: string
-    category: string
-    attr: {
-      newest: boolean
-      trending: boolean
-      bestsellers: boolean
-      featured: boolean
-    }
-    price: {
-      regular: number
-      discount?: number | null
-    }
-  }[]
+  id: number
+  title: { [key: string]: string }
+  cover: string
+  slug: string
+  category: string
+  attr: {
+    newest: boolean
+    trending: boolean
+    bestsellers: boolean
+    featured: boolean
+  }
+  price: {
+    regular: number
+    discount?: number | null
+  }
 }
 </script>
 
@@ -61,10 +58,12 @@ interface Props {
 import { ref } from "vue"
 import { Carousel, Slide } from "vue3-carousel"
 
+import BaseInner from "../Base/BaseInner.vue"
+import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<Props>()
+defineProps<{ name: string; products: Props[] }>()
 
 const refCarousel = ref()
 

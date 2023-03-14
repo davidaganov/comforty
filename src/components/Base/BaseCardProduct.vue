@@ -101,6 +101,7 @@ interface Props {
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
 
+import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 import IconHeart from "../Icons/IconHeart.vue"

@@ -109,6 +109,8 @@ import { RouterLink } from "vue-router"
 import { useStore } from "../stores"
 import Translation from "../i18n/translation"
 
+import BaseInner from "./Base/BaseInner.vue"
+import BaseButton from "./Base/BaseButton.vue"
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import FormSearch from "./Form/FormSearch.vue"

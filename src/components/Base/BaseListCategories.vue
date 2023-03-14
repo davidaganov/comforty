@@ -68,6 +68,9 @@
 import { ref } from "vue"
 import { useStore } from "../../stores"
 
+import BaseInner from "./BaseInner.vue"
+import BaseTitle from "./BaseTitle.vue"
+import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconMenu from "../Icons/IconMenu.vue"
 import IconClose from "../Icons/IconClose.vue"

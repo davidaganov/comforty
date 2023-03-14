@@ -22,17 +22,21 @@
   </article>
 </template>
 
-<script setup lang="ts">
-import Translation from "../../i18n/translation"
-import { getImageUrl } from "../../utils/getImageUrl"
-
-defineProps<{
+<script lang="ts">
+interface Props {
   id: number
   title: { [key: string]: string }
   productsCount: number
   cover: string
   link: string
-}>()
+}
+</script>
+
+<script setup lang="ts">
+import Translation from "../../i18n/translation"
+import { getImageUrl } from "../../utils/getImageUrl"
+
+defineProps<Props>()
 </script>
 
 <style scoped lang="scss">

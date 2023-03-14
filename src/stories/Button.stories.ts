@@ -1,4 +1,4 @@
-import BaseButton from "../components/Global/BaseButton.vue"
+import BaseButton from "../components/Base/BaseButton.vue"
 import type { Meta, StoryFn } from "@storybook/vue3"
 
 export default {

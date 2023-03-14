@@ -17,28 +17,32 @@
   </section>
 </template>
 
+<script lang="ts">
+interface Props {
+  id: number
+  title: { [key: string]: string }
+  cover: string
+  slug: string
+  category: string
+  attr: {
+    newest: boolean
+    trending: boolean
+    bestsellers: boolean
+    featured: boolean
+  }
+  price: {
+    regular: number
+    discount?: number | null
+  }
+}
+</script>
+
 <script setup lang="ts">
+import BaseInner from "../Base/BaseInner.vue"
+import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 
-defineProps<{
-  products: {
-    id: number
-    name: { [key: string]: string } | string
-    cover: string
-    slug: string
-    category: string
-    attr: {
-      newest: boolean
-      trending: boolean
-      bestsellers: boolean
-      featured: boolean
-    }
-    price: {
-      regular: number
-      discount?: number | null
-    }
-  }[]
-}>()
+defineProps<{ products: Props[] }>()
 </script>
 
 <style scoped lang="scss">

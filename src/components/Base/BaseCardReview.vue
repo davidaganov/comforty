@@ -29,6 +29,16 @@
   </article>
 </template>
 
+<script lang="ts">
+interface Props {
+  id: number
+  text: { [key: string]: string }
+  avatar: string
+  userName: { [key: string]: string }
+  job: { [key: string]: string }
+}
+</script>
+
 <script setup lang="ts">
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
@@ -36,13 +46,7 @@ import { getImageUrl } from "../../utils/getImageUrl"
 import IconBase from "../Icons/IconBase.vue"
 import IconQuotes from "../Icons/IconQuotes.vue"
 
-defineProps<{
-  id: number
-  text: { [key: string]: string }
-  avatar: string
-  userName: { [key: string]: string }
-  job: { [key: string]: string }
-}>()
+defineProps<Props>()
 </script>
 
 <style scoped lang="scss">

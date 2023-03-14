@@ -1,4 +1,4 @@
-import BaseTitle from "../components/Global/BaseTitle.vue"
+import BaseTitle from "../components/Base/BaseTitle.vue"
 import type { Meta, StoryFn } from "@storybook/vue3"
 
 export default {
