@@ -1,33 +1,35 @@
 <template>
-  <ul>
+  <ul class="social">
     <li
+      class="social__item"
       :key="id"
       v-for="{ id, title, icon, link } in socialList"
     >
-      <BaseButton
-        :link="link"
-        :aria-label="title"
+      <a
+        class="social__link"
+        :href="link"
+        :aria-label="`${$t('social.aria')} ${title}`"
       >
         <IconBase
-          :width="24"
-          :height="24"
-          box="0 0 24 24"
+          class="social__icon"
+          box="0 0 16 16"
+          :width="16"
+          :height="16"
         >
-          {{ icon }}
+          <component :is="icon" />
         </IconBase>
-      </BaseButton>
+      </a>
     </li>
   </ul>
 </template>
 
 <script setup lang="ts">
-import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
-import IconFacebook from "../Icons/IconFacebook.vue"
 import IconTwitter from "../Icons/IconTwitter.vue"
 import IconInstagram from "../Icons/IconInstagram.vue"
 import IconPinterest from "../Icons/IconPinterest.vue"
 import IconYoutube from "../Icons/IconYoutube.vue"
+import IconFacebook from "../Icons/IconFacebook.vue"
 
 const socialList = [
   {
@@ -68,5 +70,26 @@ const socialList = [
   display: flex;
   align-items: center;
   gap: 0.4rem;
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 3.8rem;
+    border: 0.1rem solid transparent;
+    color: #636270;
+    transition: all 0.2s;
+    &:hover {
+      color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+    }
+    &:focus-visible {
+      color: var(--color-white);
+      background-color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+    }
+  }
 }
 </style>
