@@ -75,10 +75,21 @@
     "recently": {
       "title": "Недавно добавленные",
       "carouselAria": "Галерея с недавно добавленными продуктами"
+    },
+    "footer": {
+      "description": "Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.<br>Cras egestas purus"
     }
   },
   "carousel": {
     "prevAria": "Перейти к предыдущему слайду",
     "nextAria": "Перейти к следующему слайду"
+  },
+  "social": {
+    "aria": "Перейти в наш"
+  },
+  "newsletter": {
+    "inputAria": "Введите Ваш email",
+    "inputPlaceholder": "Ваш email",
+    "buttonText": "Подписаться"
   }
 }

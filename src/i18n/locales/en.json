@@ -75,10 +75,21 @@
     "recently": {
       "title": "Recently added",
       "carouselAria": "Gallery of recently added products"
+    },
+    "footer": {
+      "description": "Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.<br>Cras egestas purus"
     }
   },
   "carousel": {
     "prevAria": "Navigate to previous slide",
     "nextAria": "Navigate to next slide"
+  },
+  "social": {
+    "aria": "Go to our"
+  },
+  "newsletter": {
+    "inputAria": "Enter your email",
+    "inputPlaceholder": "Your email",
+    "buttonText": "Subscribe"
   }
 }

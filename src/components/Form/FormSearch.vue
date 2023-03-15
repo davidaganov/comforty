@@ -50,6 +50,7 @@ import IconSearch from "../Icons/IconSearch.vue"
   @media (max-width: 575px) {
     background-color: #f0f2f3;
   }
+
   &__input {
     display: block;
     width: 100%;
@@ -77,6 +78,7 @@ import IconSearch from "../Icons/IconSearch.vue"
       display: none;
     }
   }
+
   &__btn {
     height: 100%;
     padding: 0 1.6rem;
