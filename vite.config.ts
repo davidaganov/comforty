@@ -17,7 +17,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: "dist",
-    assetsDir: "landing-comforty/"
-  }
+    outDir: "dist"
+  },
+  base: "/landing-comforty/"
 })
