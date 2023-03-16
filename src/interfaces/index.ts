@@ -1,10 +1,3 @@
-export interface NavbarItem {
-  id: number
-  title: { [key: string]: string }
-  link?: string
-  anchor?: string
-}
-
 export interface Category {
   id: number
   title: { [key: string]: string }

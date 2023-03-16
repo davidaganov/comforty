@@ -71,23 +71,23 @@
           <nav class="navbar__menu">
             <ul class="navbar__list">
               <li
-                v-for="{ id, title, anchor, link } in list"
-                :key="id"
                 class="navbar__item"
+                :key="id"
+                v-for="{ id, title, anchor, link } in $tm('nav.bottom.list')"
               >
                 <RouterLink
-                  v-if="link"
-                  :to="Translation.i18nRoute({ name: link })"
                   class="navbar__link"
+                  :to="Translation.i18nRoute({ name: link })"
+                  v-if="link"
                 >
-                  {{ title[Translation.currentLocale] }}
+                  {{ title }}
                 </RouterLink>
                 <a
-                  v-if="anchor"
-                  :href="anchor"
                   class="navbar__link"
+                  :href="anchor"
+                  v-if="anchor"
                 >
-                  {{ title[Translation.currentLocale] }}
+                  {{ title }}
                 </a>
               </li>
             </ul>
@@ -108,7 +108,6 @@
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
-import { useStore } from "../stores"
 import Translation from "../i18n/translation"
 
 import BaseInner from "./Base/BaseInner.vue"
@@ -122,9 +121,6 @@ import IconBase from "./Icons/IconBase.vue"
 import IconAttention from "./Icons/IconAttention.vue"
 import IconMenu from "./Icons/IconMenu.vue"
 import IconHeart from "./Icons/IconHeart.vue"
-
-const store = useStore()
-const list = store.getNavbar
 </script>
 
 <style scoped lang="scss">

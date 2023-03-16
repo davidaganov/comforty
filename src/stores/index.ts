@@ -1,14 +1,8 @@
 import { defineStore } from "pinia"
-import type { NavbarItem, Category, Product, Company, Review } from "../interfaces"
+import type { Category, Product, Company, Review } from "../interfaces"
 
 export const useStore = defineStore("shop", {
   state: () => ({
-    navbar: [
-      { id: 1, title: { en: "Home", ru: "Главная" }, link: "home" },
-      { id: 3, title: { en: "Products", ru: "Продукты" }, link: "products" },
-      { id: 4, title: { en: "Reviews", ru: "Отзывы" }, anchor: "#reviews" },
-      { id: 5, title: { en: "Contact", ru: "Контакты" }, anchor: "#footer" }
-    ] as NavbarItem[],
     categories: [
       {
         id: 1,
@@ -59,7 +53,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #1", ru: "Продукт #1" },
         cover: "pic-1.jpg",
         slug: "product-1",
-        category: "products",
+        category: "sofa",
         attr: { newest: true, trending: false, bestsellers: false, featured: true },
         price: { regular: 15, discount: 10 }
       },
@@ -68,7 +62,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #2", ru: "Продукт #2" },
         cover: "pic-1.jpg",
         slug: "product-2",
-        category: "products",
+        category: "woodenchair",
         attr: { newest: true, trending: false, bestsellers: false, featured: true },
         price: { regular: 15 }
       },
@@ -77,7 +71,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #3", ru: "Продукт #3" },
         cover: "pic-1.jpg",
         slug: "product-3",
-        category: "products",
+        category: "woodenchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
         price: { regular: 15, discount: 17 }
       },
@@ -86,7 +80,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #4", ru: "Продукт #4" },
         cover: "pic-1.jpg",
         slug: "product-4",
-        category: "products",
+        category: "wingchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
         price: { regular: 15 }
       },
@@ -95,7 +89,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #5", ru: "Продукт #5" },
         cover: "pic-1.jpg",
         slug: "product-5",
-        category: "products",
+        category: "deskchair",
         attr: { newest: true, trending: false, bestsellers: true, featured: false },
         price: { regular: 25, discount: 10 }
       },
@@ -104,7 +98,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #6", ru: "Продукт #6" },
         cover: "pic-1.jpg",
         slug: "product-6",
-        category: "products",
+        category: "parkbench",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
         price: { regular: 10, discount: 2 }
       },
@@ -113,7 +107,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #7", ru: "Продукт #7" },
         cover: "pic-1.jpg",
         slug: "product-7",
-        category: "products",
+        category: "armchair",
         attr: { newest: false, trending: true, bestsellers: true, featured: false },
         price: { regular: 30, discount: 7 }
       },
@@ -122,7 +116,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #8", ru: "Продукт #8" },
         cover: "pic-1.jpg",
         slug: "product-8",
-        category: "products",
+        category: "wingchair",
         attr: { newest: false, trending: true, bestsellers: false, featured: true },
         price: { regular: 20 }
       },
@@ -131,7 +125,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #9", ru: "Продукт #9" },
         cover: "pic-1.jpg",
         slug: "product-9",
-        category: "products",
+        category: "armchair",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
         price: { regular: 12 }
       },
@@ -140,7 +134,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #10", ru: "Продукт #10" },
         cover: "pic-1.jpg",
         slug: "product-10",
-        category: "products",
+        category: "parkbench",
         attr: { newest: false, trending: false, bestsellers: true, featured: false },
         price: { regular: 18 }
       },
@@ -149,7 +143,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #11", ru: "Продукт #11" },
         cover: "pic-1.jpg",
         slug: "product-11",
-        category: "products",
+        category: "armchair",
         attr: { newest: false, trending: true, bestsellers: false, featured: true },
         price: { regular: 28, discount: 9 }
       },
@@ -158,7 +152,7 @@ export const useStore = defineStore("shop", {
         title: { en: "Product #12", ru: "Продукт #12" },
         cover: "pic-1.jpg",
         slug: "product-12",
-        category: "products",
+        category: "sofa",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
         price: { regular: 8 }
       }
@@ -216,7 +210,6 @@ export const useStore = defineStore("shop", {
     ] as Review[]
   }),
   getters: {
-    getNavbar: (state) => state.navbar,
     getCategories: (state) => state.categories,
     getProducts: (state) => state.products,
     getCompanies: (state) => state.companies,

@@ -82,12 +82,16 @@ withDefaults(defineProps<Props>(), {
   &--primary {
     background-color: var(--color-accent);
     color: var(--color-white);
-    &:hover,
     &:focus-visible {
       background-color: var(--color-accent-hover);
     }
     &:not(#{$parent}--arrow) {
       padding: 1.7rem 2.4rem;
+    }
+    @media (min-width: 576px) {
+      &:hover {
+        background-color: var(--color-accent-hover);
+      }
     }
   }
 
@@ -95,10 +99,15 @@ withDefaults(defineProps<Props>(), {
   &--gray {
     padding: 1.1rem;
     color: var(--color-black);
-    &:hover,
     &:focus-visible {
       background-color: var(--color-accent);
       color: var(--color-white);
+    }
+    @media (min-width: 576px) {
+      &:hover {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+      }
     }
   }
 
@@ -108,11 +117,17 @@ withDefaults(defineProps<Props>(), {
     border: 0.1rem solid #e1e3e5;
     background-color: var(--color-white);
     color: var(--color-black);
-    &:hover,
     &:focus-visible {
       background-color: var(--color-accent);
       color: var(--color-white);
       border-color: var(--color-accent);
+    }
+    @media (min-width: 576px) {
+      &:hover {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+        border-color: var(--color-accent);
+      }
     }
   }
 

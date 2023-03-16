@@ -29,12 +29,12 @@
         "text": "All Categories",
         "aria": "Click to open the list with all categories"
       },
-      "list": {
-        "home": "Home",
-        "products": "Products",
-        "reviews": "Reviews",
-        "contact": "Contact"
-      },
+      "list": [
+        { "link": "home", "title": "Home" },
+        { "link": "products", "title": "Products" },
+        { "anchor": "#reviews", "title": "Reviews" },
+        { "anchor": "#footer", "title": "Contact" }
+      ],
       "contact": "Contact"
     }
   },

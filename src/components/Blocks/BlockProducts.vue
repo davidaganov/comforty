@@ -4,7 +4,9 @@
     id="products"
   >
     <BaseInner class="products__inner">
-      <BaseTitle class="products__title">{{ $t("blocks.products.title") }}</BaseTitle>
+      <BaseTitle class="products__title">
+        {{ $t("blocks.products.title") }}
+      </BaseTitle>
       <div class="products__list">
         <BaseCardProduct
           class="products__item"

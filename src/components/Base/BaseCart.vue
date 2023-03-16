@@ -28,11 +28,18 @@ import IconCart from "../Icons/IconCart.vue"
   $parent: &;
   position: relative;
   gap: 0;
-  &:hover,
   &:focus-visible {
     #{$parent}__counter {
       background-color: white;
       color: var(--color-accent);
+    }
+  }
+  @media (min-width: 769px) {
+    &:hover {
+      #{$parent}__counter {
+        background-color: white;
+        color: var(--color-accent);
+      }
     }
   }
   &__text {

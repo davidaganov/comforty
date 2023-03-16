@@ -29,12 +29,12 @@
         "text": "Все категории",
         "aria": "Нажмите чтобы раскрыть список со всеми категориями"
       },
-      "list": {
-        "home": "Главная",
-        "products": "Продукты",
-        "reviews": "Отзывы",
-        "contact": "Контакты"
-      },
+      "list": [
+        { "link": "home", "title": "Главная" },
+        { "link": "products", "title": "Продукты" },
+        { "anchor": "#reviews", "title": "Отзывы" },
+        { "anchor": "#footer", "title": "Контакты" }
+      ],
       "contact": "Контакты"
     }
   },
