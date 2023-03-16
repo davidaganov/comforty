@@ -1,17 +1,28 @@
 {
   "name": "comforty",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "private": false,
+  "homepage": "./",
+  "repository": "https://github.com/davidaganov/landing-comforty",
+  "license": "MIT",
+  "author": {
+    "name": "David Aganov",
+    "email": "davidaganov21@gmail.com"
+  },
+  "keywords": [
+    "vue",
+    "storybook"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "vite build",
     "preview": "vite preview",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "@intlify/unplugin-vue-i18n": "^0.8.2",
@@ -40,6 +51,7 @@
     "eslint": "^8.34.0",
     "eslint-plugin-storybook": "^0.6.11",
     "eslint-plugin-vue": "^9.9.0",
+    "gh-pages": "^5.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.4",
     "sass": "^1.58.3",
