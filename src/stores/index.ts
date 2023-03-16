@@ -12,45 +12,45 @@ export const useStore = defineStore("shop", {
     categories: [
       {
         id: 1,
-        title: { en: "Wing Chair", ru: "Кресла" },
+        title: { en: "Wing Chair", ru: "Кресла с подголовником" },
         productsCount: 1204,
         cover: "cat-1.jpg",
-        link: "wing"
+        link: "wingchair"
       },
       {
         id: 2,
         title: { en: "Wooden Chair", ru: "Деревянные стулья" },
         productsCount: 1,
         cover: "cat-1.jpg",
-        link: "wooden"
+        link: "woodenchair"
       },
       {
         id: 3,
         title: { en: "Desk Chair", ru: "Офисные кресла" },
         productsCount: 1,
         cover: "cat-1.jpg",
-        link: "desk"
+        link: "deskchair"
       },
       {
         id: 4,
         title: { en: "Park Bench", ru: "Скамейки" },
         productsCount: 1,
         cover: "cat-1.jpg",
-        link: "park"
+        link: "parkbench"
       },
       {
         id: 5,
-        title: { en: "Test 1", ru: "Тест 1" },
+        title: { en: "Armchair", ru: "Кресла" },
         productsCount: 1,
         cover: "cat-1.jpg",
-        link: "test-1"
+        link: "armchair"
       },
       {
-        id: 6,
-        title: { en: "Test 2", ru: "Тест 2" },
+        id: 4,
+        title: { en: "Sofa", ru: "Диваны" },
         productsCount: 1,
         cover: "cat-1.jpg",
-        link: "test-2"
+        link: "sofa"
       }
     ] as Category[],
     products: [

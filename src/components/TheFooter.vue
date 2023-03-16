@@ -9,12 +9,49 @@
         <p
           class="footer__description"
           v-html="$t('blocks.footer.description')"
-        ></p>
+        />
         <BaseSocial class="footer__social" />
       </div>
-      <div class="footer__middle"></div>
+
+      <div class="footer__info">
+        <h3 class="footer__title">{{ $t("blocks.footer.categoriesTitle") }}</h3>
+        <ul class="footer__list">
+          <li
+            class="footer__item"
+            :key="item.link"
+            v-for="item in $tm('blocks.footer.list.categories')"
+          >
+            <a
+              class="footer__link"
+              :href="`/categories/${item.link}`"
+            >
+              {{ item.title }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__info">
+        <h3 class="footer__title">{{ $t("blocks.footer.supportTitle") }}</h3>
+        <ul class="footer__list">
+          <li
+            class="footer__item"
+            :key="item.link"
+            v-for="item in $tm('blocks.footer.list.support')"
+          >
+            <a
+              class="footer__link"
+              :href="`${item.link}`"
+            >
+              {{ item.title }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <div class="footer__right">
+        <h3 class="footer__title">{{ $t("blocks.footer.newsletterTitle") }}</h3>
         <FormNewsletter class="footer__newsletter" />
+        <p class="footer__subtitle">{{ $t("blocks.footer.newsletterSubtitle") }}</p>
       </div>
     </BaseInner>
   </footer>
@@ -32,26 +69,99 @@ import FormNewsletter from "./Form/FormNewsletter.vue"
   margin-top: 10rem;
   border-top: 0.1rem solid #e1e3e6;
   &__inner {
-    display: flex;
-    justify-content: space-between;
-    padding: 8rem 0 6rem;
+    display: grid;
+    width: 100%;
+    @media (min-width: 1201px) {
+      grid-template-columns: repeat(4, auto);
+      gap: 1.5rem;
+      justify-content: space-between;
+    }
+    @media (max-width: 1200px) and (min-width: 576px) {
+      grid-template-columns: repeat(2, auto);
+      gap: 3rem 1.5rem;
+    }
+    @media (min-width: 769px) {
+      padding-top: 8rem;
+      padding-bottom: 6rem;
+    }
+    @media (max-width: 768px) {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    @media (max-width: 575px) {
+      gap: 3rem;
+    }
   }
 
   &__left {
     display: grid;
     gap: 2.4rem;
-  }
-
-  &__middle {
+    @media (min-width: 576px) {
+      grid-area: 1 / 1 / 2 / 2;
+    }
   }
 
   &__right {
+    @media (min-width: 576px) {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    @media (max-width: 575px) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+    font: 500 1.4rem/110% var(--main-font);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9a9caa;
   }
 
   &__description {
-    max-width: 35rem;
     font: 400 1.6rem/150% var(--main-font);
-    color: #272343;
+    color: var(--color-black);
+    opacity: 0.6;
+    @media (min-width: 1201px) {
+      max-width: 35rem;
+    }
+    @media (max-width: 1200px) and (min-width: 576px) {
+      max-width: 90%;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    @media (min-width: 1201px) {
+      max-width: 17.5rem;
+    }
+  }
+
+  &__link {
+    padding: 0 0.2rem;
+    margin: 0 -0.2rem;
+    font: 400 1.6rem/140% var(--main-font);
+    color: var(--color-black);
+    &:focus-visible {
+      background-color: var(--color-accent);
+      color: var(--color-white);
+    }
+    @media (min-width: 576px) {
+      transition: all 0.2s;
+      &:hover {
+        text-decoration: underline;
+        color: var(--color-accent-hover);
+      }
+    }
+  }
+
+  &__subtitle {
+    max-width: 42.4rem;
+    margin-top: 1.5rem;
+    font: 400 1.5rem/150% var(--main-font);
+    color: var(--color-black);
     opacity: 0.6;
   }
 }

@@ -77,7 +77,27 @@
       "carouselAria": "Галерея с недавно добавленными продуктами"
     },
     "footer": {
-      "description": "Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.<br>Cras egestas purus"
+      "description": "Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.<br>Cras egestas purus",
+      "categoriesTitle": "Категории",
+      "supportTitle": "Поддержка",
+      "newsletterTitle": "Новости",
+      "newsletterSubtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt erat enim.",
+      "list": {
+        "categories": [
+          { "link": "sofa", "title": "Диваны" },
+          { "link": "armchair", "title": "Кресла" },
+          { "link": "windchair", "title": "Кресла с подголовником" },
+          { "link": "deskchair", "title": "Офисные кресла" },
+          { "link": "woodenchair", "title": "Деревянные стулья" },
+          { "link": "parkbench", "title": "Скамейки" }
+        ],
+        "support": [
+          { "link": "#", "title": "Помощь & Поддержка" },
+          { "link": "#", "title": "Правила & Условия" },
+          { "link": "#", "title": "Политика Конфиденциальности" },
+          { "link": "#", "title": "Помощь" }
+        ]
+      }
     }
   },
   "carousel": {

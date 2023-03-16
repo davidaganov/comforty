@@ -77,7 +77,27 @@
       "carouselAria": "Gallery of recently added products"
     },
     "footer": {
-      "description": "Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.<br>Cras egestas purus"
+      "description": "Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum.<br>Cras egestas purus",
+      "categoriesTitle": "Categories",
+      "supportTitle": "Support",
+      "newsletterTitle": "Newsletter",
+      "newsletterSubtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt erat enim.",
+      "list": {
+        "categories": [
+          { "link": "sofa", "title": "Sofa" },
+          { "link": "armchair", "title": "Armchair" },
+          { "link": "windchair", "title": "Wind Chair" },
+          { "link": "deskchair", "title": "Desk Chair" },
+          { "link": "woodenchair", "title": "Wooden Chair" },
+          { "link": "parkbench", "title": "Park Bench" }
+        ],
+        "support": [
+          { "link": "#", "title": "Help & Support" },
+          { "link": "#", "title": "Tearms & Conditions" },
+          { "link": "#", "title": "Privacy Policy" },
+          { "link": "#", "title": "Help" }
+        ]
+      }
     }
   },
   "carousel": {

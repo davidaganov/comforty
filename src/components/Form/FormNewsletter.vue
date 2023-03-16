@@ -19,14 +19,26 @@
     <BaseButton
       type="submit"
       class="newsletter__btn"
+      :aria-label="$t('newsletter.buttonText')"
     >
-      {{ $t("newsletter.buttonText") }}
+      <span class="newsletter__btn-text">{{ $t("newsletter.buttonText") }}</span>
+      <span class="newsletter__btn-icon">
+        <IconBase
+          :width="24"
+          :height="24"
+          box="0 0 24 24"
+        >
+          <IconArrow />
+        </IconBase>
+      </span>
     </BaseButton>
   </form>
 </template>
 
 <script setup lang="ts">
 import BaseButton from "../Base/BaseButton.vue"
+import IconArrow from "../Icons/IconArrow.vue"
+import IconBase from "../Icons/IconBase.vue"
 </script>
 
 <style scoped lang="scss">
@@ -35,6 +47,7 @@ import BaseButton from "../Base/BaseButton.vue"
   gap: 1.2rem;
   max-height: 4.6rem;
   &__input {
+    width: 100%;
     padding: 1.5rem 2rem;
     border: 0.1rem solid #e1e3e6;
     border-radius: 0.8rem;
@@ -49,6 +62,23 @@ import BaseButton from "../Base/BaseButton.vue"
     }
     &::placeholder {
       color: #9a9caa;
+    }
+  }
+
+  &__btn {
+    @media (max-width: 768px) {
+      padding: 1rem 1.5rem !important;
+    }
+    &-text {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    &-icon {
+      margin-top: 0.3rem;
+      @media (min-width: 769px) {
+        display: none;
+      }
     }
   }
 }

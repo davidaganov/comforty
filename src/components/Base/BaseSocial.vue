@@ -70,6 +70,10 @@ const socialList = [
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  @media (max-width: 575px) {
+    justify-content: space-between;
+    width: 80%;
+  }
 
   &__link {
     display: flex;
@@ -80,15 +84,20 @@ const socialList = [
     border-radius: 3.8rem;
     border: 0.1rem solid transparent;
     color: #636270;
-    transition: all 0.2s;
-    &:hover {
-      color: var(--color-accent-hover);
-      border-color: var(--color-accent-hover);
-    }
     &:focus-visible {
       color: var(--color-white);
       background-color: var(--color-accent-hover);
       border-color: var(--color-accent-hover);
+    }
+    @media (min-width: 576px) {
+      transition: all 0.2s;
+      &:hover {
+        color: var(--color-accent-hover);
+        border-color: var(--color-accent-hover);
+      }
+    }
+    @media (max-width: 575px) {
+      transform: scale(1.5);
     }
   }
 }
