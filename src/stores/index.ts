@@ -1,6 +1,8 @@
 import { defineStore } from "pinia"
 import type { Category, Product, Company, Review } from "../interfaces"
 
+type State = "cart" | "favorites"
+
 export const useStore = defineStore("shop", {
   state: () => ({
     categories: [
@@ -207,12 +209,47 @@ export const useStore = defineStore("shop", {
         userName: { en: "Oliver Reynolds", ru: "Оливер Рейнольдс" },
         job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
       }
-    ] as Review[]
+    ] as Review[],
+
+    cart: [] as Product[],
+    favorites: [] as Product[]
   }),
+
   getters: {
     getCategories: (state) => state.categories,
     getProducts: (state) => state.products,
     getCompanies: (state) => state.companies,
-    getReviews: (state) => state.reviews
+    getReviews: (state) => state.reviews,
+    getCart: (state) => state.cart,
+    getFavorites: (state) => state.favorites
+  },
+
+  actions: {
+    // Checked product in cart or favorites
+    isProduct(productId: number, state: State): boolean {
+      return this[state].some((list) => list.id === productId)
+    },
+
+    // Added to cart or favorites
+    addProduct(product: Product, state: State): void {
+      this[state].push(product)
+    },
+
+    // Removed from cart or favorites
+    deleteProduct(productId: number, state: State): void {
+      this[state] = this[state].filter((list) => list.id !== productId)
+    },
+
+    // Toggle product in cart or favorites
+    toggleProduct(product: Product, state: State): void {
+      this.isProduct(product.id, state)
+        ? this.deleteProduct(product.id, state)
+        : this.addProduct(product, state)
+    },
+
+    // Get current product
+    getProduct(slug: string) {
+      return this.products.find((product) => product.slug === slug)
+    }
   }
 })

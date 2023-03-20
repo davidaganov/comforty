@@ -45,7 +45,11 @@
     },
     "aria": {
       "favorite": "Click to add to favorites",
-      "cart": "Click to add to cart"
+      "cart": "Click to add to cart",
+      "add": "Add to cart",
+      "remove": "Remove from cart",
+      "like": "Like this product",
+      "dislike": "Dislike this product"
     }
   },
   "categories": {

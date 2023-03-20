@@ -26,7 +26,10 @@
         class="product__favorite"
         type="button"
         appearance="white"
+        :class="isProduct(id, 'favorites') ? 'product__favorite--active' : ''"
+        :title="isProduct(id, 'favorites') ? $t('product.aria.dislike') : $t('product.aria.like')"
         :aria-label="$t('product.aria.favorite')"
+        @click="() => toggleProduct(product, 'favorites')"
       >
         <IconBase
           :stroke="true"
@@ -37,18 +40,18 @@
           <IconHeart />
         </IconBase>
       </BaseButton>
-      <a
+      <RouterLink
         class="product__link"
-        :href="`/${slug}`"
+        :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
       />
     </div>
     <h3 class="product__title">
-      <a
+      <RouterLink
         class="product__title-link"
-        :href="`/${slug}`"
+        :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
       >
         {{ title[Translation.currentLocale] }}
-      </a>
+      </RouterLink>
     </h3>
     <div class="product__price">
       <span class="product__price-regular">${{ price.regular }}</span>
@@ -63,7 +66,10 @@
       type="button"
       appearance="gray"
       class="product__cart"
+      :class="isProduct(id, 'cart') ? 'product__cart--active' : ''"
+      :title="isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
       :aria-label="$t('product.aria.cart')"
+      @click="() => toggleProduct(product, 'cart')"
     >
       <IconBase
         :width="24"
@@ -98,15 +104,18 @@ interface Props {
 </script>
 
 <script setup lang="ts">
+import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
+import { useStore } from "../../stores"
 
 import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 import IconHeart from "../Icons/IconHeart.vue"
 
-defineProps<Props>()
+const product = defineProps<Props>()
+const { isProduct, toggleProduct } = useStore()
 </script>
 
 <style scoped lang="scss">
@@ -180,6 +189,14 @@ defineProps<Props>()
     &:focus-visible {
       opacity: 1 !important;
     }
+    &--active {
+      color: var(--color-white);
+      background-color: tomato;
+      opacity: 1 !important;
+      &:hover {
+        background-color: #d95138;
+      }
+    }
   }
 
   &__link {
@@ -241,6 +258,13 @@ defineProps<Props>()
   }
 
   &__cart {
+    &--active {
+      color: var(--color-white);
+      background-color: var(--color-accent);
+      &:hover {
+        background-color: var(--color-accent-hover);
+      }
+    }
     @media (min-width: 769px) {
       grid-area: 2 / 2 / 4 / 3;
       justify-self: flex-end;
