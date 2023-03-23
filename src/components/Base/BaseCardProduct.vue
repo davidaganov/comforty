@@ -121,18 +121,13 @@ const { isProduct, toggleProduct } = useStore()
 <style scoped lang="scss">
 .product {
   $parent: &;
-  @media (min-width: 769px) {
-    display: grid;
-  }
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  display: grid;
   &__picture {
+    grid-area: 1 / 1 / 1 / 3;
     position: relative;
     width: 100%;
     margin-bottom: 1.4rem;
     @media (min-width: 769px) {
-      grid-area: 1 / 1 / 1 / 3;
       height: 31.2rem;
       &:not(&:hover) {
         #{$parent}__favorite {
@@ -211,6 +206,7 @@ const { isProduct, toggleProduct } = useStore()
   &__title {
     text-align: left;
     &-link {
+      grid-area: 2 / 1 / 3 / 2;
       padding: 0 0.3rem;
       margin: 0 -0.3rem;
       text-transform: capitalize;
@@ -221,7 +217,6 @@ const { isProduct, toggleProduct } = useStore()
         color: var(--color-white);
       }
       @media (min-width: 769px) {
-        grid-area: 2 / 1 / 3 / 2;
         font: 400 1.6rem/130% var(--main-font);
         word-wrap: anywhere;
         display: -webkit-box;
@@ -242,9 +237,7 @@ const { isProduct, toggleProduct } = useStore()
     display: flex;
     align-items: center;
     margin-top: 1rem;
-    @media (min-width: 769px) {
-      grid-area: 3 / 1 / 4 / 2;
-    }
+    grid-area: 3 / 1 / 4 / 2;
     &-regular {
       font: 600 1.8rem/110% var(--main-font);
       color: var(--color-black);
@@ -258,20 +251,15 @@ const { isProduct, toggleProduct } = useStore()
   }
 
   &__cart {
+    grid-area: 2 / 2 / 4 / 3;
+    justify-self: flex-end;
+    align-self: center;
     &--active {
       color: var(--color-white);
       background-color: var(--color-accent);
       &:hover {
         background-color: var(--color-accent-hover);
       }
-    }
-    @media (min-width: 769px) {
-      grid-area: 2 / 2 / 4 / 3;
-      justify-self: flex-end;
-      align-self: center;
-    }
-    @media (max-width: 768px) {
-      display: none;
     }
   }
 }
