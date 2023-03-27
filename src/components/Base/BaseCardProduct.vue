@@ -22,24 +22,10 @@
       >
         {{ $t("product.attr.sales") }}
       </span>
-      <BaseButton
+      <BaseAddedFavorite
         class="product__favorite"
-        type="button"
-        appearance="white"
-        :class="isProduct(id, 'favorites') ? 'product__favorite--active' : ''"
-        :title="isProduct(id, 'favorites') ? $t('product.aria.dislike') : $t('product.aria.like')"
-        :aria-label="$t('product.aria.favorite')"
-        @click="() => toggleProduct(product, 'favorites')"
-      >
-        <IconBase
-          :stroke="true"
-          :width="22"
-          :height="22"
-          box="0 0 22 22"
-        >
-          <IconHeart />
-        </IconBase>
-      </BaseButton>
+        v-bind="product"
+      />
       <RouterLink
         class="product__link"
         :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
@@ -62,24 +48,10 @@
         ${{ price.discount }}
       </span>
     </div>
-    <BaseButton
-      type="button"
-      appearance="gray"
+    <BaseAddedCart
       class="product__cart"
-      :class="isProduct(id, 'cart') ? 'product__cart--active' : ''"
-      :title="isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
-      :aria-label="$t('product.aria.cart')"
-      @click="() => toggleProduct(product, 'cart')"
-    >
-      <IconBase
-        :width="24"
-        :height="24"
-        box="0 0 24 24"
-        :stroke="true"
-      >
-        <IconCart />
-      </IconBase>
-    </BaseButton>
+      v-bind="product"
+    />
   </article>
 </template>
 
@@ -88,6 +60,8 @@ interface Props {
   id: number
   title: { [key: string]: string }
   cover: string
+  gallery: string[]
+  description: { [key: string]: string }
   slug: string
   category: string
   attr: {
@@ -107,15 +81,11 @@ interface Props {
 import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
-import { useStore } from "../../stores"
 
-import BaseButton from "./BaseButton.vue"
-import IconBase from "../Icons/IconBase.vue"
-import IconCart from "../Icons/IconCart.vue"
-import IconHeart from "../Icons/IconHeart.vue"
+import BaseAddedCart from "./BaseAddedCart.vue"
+import BaseAddedFavorite from "./BaseAddedFavorite.vue"
 
 const product = defineProps<Props>()
-const { isProduct, toggleProduct } = useStore()
 </script>
 
 <style scoped lang="scss">
@@ -170,27 +140,6 @@ const { isProduct, toggleProduct } = useStore()
     }
     &--newest {
       background-color: #01ad5a;
-    }
-  }
-
-  &__favorite {
-    right: 2rem;
-    padding: 1.1rem;
-    color: var(--color-black);
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 0.8rem;
-    transition: all 0.1s;
-    cursor: pointer;
-    &:focus-visible {
-      opacity: 1 !important;
-    }
-    &--active {
-      color: var(--color-white);
-      background-color: tomato;
-      opacity: 1 !important;
-      &:hover {
-        background-color: #d95138;
-      }
     }
   }
 
@@ -254,13 +203,6 @@ const { isProduct, toggleProduct } = useStore()
     grid-area: 2 / 2 / 4 / 3;
     justify-self: flex-end;
     align-self: center;
-    &--active {
-      color: var(--color-white);
-      background-color: var(--color-accent);
-      &:hover {
-        background-color: var(--color-accent-hover);
-      }
-    }
   }
 }
 </style>

@@ -54,6 +54,11 @@ export const useStore = defineStore("shop", {
         id: 1,
         title: { en: "Product #1", ru: "Продукт #1" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Modern and sleek chair with a durable metal frame and cushioned seat for added comfort.",
+          ru: "Современный и элегантный стул с прочной металлической рамой и мягким сиденьем для дополнительного комфорта."
+        },
         slug: "product-1",
         category: "sofa",
         attr: { newest: true, trending: false, bestsellers: false, featured: true },
@@ -63,6 +68,11 @@ export const useStore = defineStore("shop", {
         id: 2,
         title: { en: "Product #2", ru: "Продукт #2" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Ergonomic chair with adjustable height and backrest, perfect for long hours of sitting.",
+          ru: "Эргономичный стул с регулируемой высотой и спинкой, идеальный для длительного сидения."
+        },
         slug: "product-2",
         category: "woodenchair",
         attr: { newest: true, trending: false, bestsellers: false, featured: true },
@@ -72,6 +82,11 @@ export const useStore = defineStore("shop", {
         id: 3,
         title: { en: "Product #3", ru: "Продукт #3" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Stylish and compact chair, ideal for small spaces or as a dining chair.",
+          ru: "Стильный и компактный стул, идеально подходящий для маленьких пространств или как обеденный стул."
+        },
         slug: "product-3",
         category: "woodenchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
@@ -81,6 +96,11 @@ export const useStore = defineStore("shop", {
         id: 4,
         title: { en: "Product #4", ru: "Продукт #4" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Comfortable and sturdy chair with a wooden frame and upholstered seat.",
+          ru: "Удобный и прочный стул с деревянной рамой и обитым сиденьем."
+        },
         slug: "product-4",
         category: "wingchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
@@ -90,6 +110,11 @@ export const useStore = defineStore("shop", {
         id: 5,
         title: { en: "Product #5", ru: "Продукт #5" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Vintage-inspired chair with a distressed finish, perfect for adding character to your space.",
+          ru: "Стул в стиле винтаж с потертой отделкой, идеально подходящий для придания характера вашему пространству."
+        },
         slug: "product-5",
         category: "deskchair",
         attr: { newest: true, trending: false, bestsellers: true, featured: false },
@@ -99,6 +124,11 @@ export const useStore = defineStore("shop", {
         id: 6,
         title: { en: "Product #6", ru: "Продукт #6" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Stackable and lightweight chair, easy to store and move around.",
+          ru: "Стул, легкий и складной, легко хранить и перемещать."
+        },
         slug: "product-6",
         category: "parkbench",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
@@ -108,6 +138,11 @@ export const useStore = defineStore("shop", {
         id: 7,
         title: { en: "Product #7", ru: "Продукт #7" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Adjustable swivel chair with a breathable mesh backrest, ideal for office use.",
+          ru: "Регулируемый стул-кресло с дышащей сетчатой спинкой, идеально подходящий для использования в офисе."
+        },
         slug: "product-7",
         category: "armchair",
         attr: { newest: false, trending: true, bestsellers: true, featured: false },
@@ -117,6 +152,11 @@ export const useStore = defineStore("shop", {
         id: 8,
         title: { en: "Product #8", ru: "Продукт #8" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Minimalist chair with clean lines and a simple design, suitable for any decor style.",
+          ru: "Минималистический стул с чистыми линиями и простым дизайном, подходящий для любого стиля декора."
+        },
         slug: "product-8",
         category: "wingchair",
         attr: { newest: false, trending: true, bestsellers: false, featured: true },
@@ -126,6 +166,11 @@ export const useStore = defineStore("shop", {
         id: 9,
         title: { en: "Product #9", ru: "Продукт #9" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Luxurious chair with a soft velvet upholstery and gold-plated metal legs.",
+          ru: "Роскошный стул с мягкой бархатной обивкой и золотистыми металлическими ножками."
+        },
         slug: "product-9",
         category: "armchair",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
@@ -135,6 +180,11 @@ export const useStore = defineStore("shop", {
         id: 10,
         title: { en: "Product #10", ru: "Продукт #10" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Rustic wooden chair with a sturdy frame and a distressed finish, perfect for farmhouse-style interiors.",
+          ru: "Стул из массива дерева с прочной рамой и потертой отделкой, идеально подходящий для интерьеров в стиле фермхаус."
+        },
         slug: "product-10",
         category: "parkbench",
         attr: { newest: false, trending: false, bestsellers: true, featured: false },
@@ -144,6 +194,11 @@ export const useStore = defineStore("shop", {
         id: 11,
         title: { en: "Product #11", ru: "Продукт #11" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Versatile chair that can be used as a dining chair, desk chair, or accent chair in any room.",
+          ru: "Универсальный стул, который можно использовать как обеденный стул, стул для рабочего стола или акцентный стул в любой комнате."
+        },
         slug: "product-11",
         category: "armchair",
         attr: { newest: false, trending: true, bestsellers: false, featured: true },
@@ -153,6 +208,11 @@ export const useStore = defineStore("shop", {
         id: 12,
         title: { en: "Product #12", ru: "Продукт #12" },
         cover: "pic-1.jpg",
+        gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+        description: {
+          en: "Modern and comfortable armchair with a padded seat and backrest, perfect for relaxing.",
+          ru: "Современное и комфортабельное кресло с мягким сиденьем и спинкой, идеально подходящее для отдыха."
+        },
         slug: "product-12",
         category: "sofa",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },

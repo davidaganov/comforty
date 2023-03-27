@@ -24,6 +24,8 @@ interface Props {
   id: number
   title: { [key: string]: string }
   cover: string
+  gallery: string[]
+  description: { [key: string]: string }
   slug: string
   category: string
   attr: {

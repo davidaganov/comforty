@@ -17,6 +17,8 @@ ProductDefault.args = {
   id: 1,
   title: { en: "Product #1", ru: "Продукт #1" },
   cover: "pic-1.jpg",
+  gallery: ["pic-1.jpg", "pic-1.jpg", "pic-1.jpg", "pic-1.jpg"],
+  description: { en: "Test description", ru: "Тестовое описание" },
   slug: "product-1",
   category: "products",
   attr: { newest: false, trending: false, bestsellers: false, featured: false },

@@ -22,8 +22,10 @@ import { useStore } from "../../stores"
 import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
+import { storeToRefs } from "pinia"
 
-const { getCart } = useStore()
+const store = useStore()
+const { getCart } = storeToRefs(store)
 </script>
 
 <style scoped lang="scss">
