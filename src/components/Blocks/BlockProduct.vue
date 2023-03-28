@@ -3,45 +3,22 @@
     class="product"
     :id="`product-${slug}`"
   >
-    <BaseInner>
-      <div class="product__gallery">
-        <div class="product__gallery-small">
-          <Carousel :settings="smallCarouselSettings">
-            <Slide
-              :key="img"
-              v-for="img in gallery"
-            >
-              <img
-                class="product__thumbnail"
-                width="150"
-                height="150"
-                :src="getImageUrl({ fileName: img, folder: 'images/products' })"
-                :alt="title[Translation.currentLocale]"
-              />
-            </Slide>
-          </Carousel>
-        </div>
-        <div class="product__gallery-big">
-          <Carousel :settings="bigCarouselSettings">
-            <Slide
-              :key="img"
-              v-for="img in gallery"
-            >
-              <img
-                class="product__picture"
-                width="300"
-                height="300"
-                :src="getImageUrl({ fileName: img, folder: 'images/products' })"
-                :alt="title[Translation.currentLocale]"
-              />
-            </Slide>
-          </Carousel>
-        </div>
-      </div>
+    <BaseInner class="product__inner">
+      <BaseGallery
+        :title="title"
+        :gallery="gallery"
+      />
+
       <div class="product__info">
         <h2 class="product__title">{{ title[Translation.currentLocale] }}</h2>
-        <p class="product__description">{{ description[Translation.currentLocale] }}</p>
+
+        <p class="product__description">
+          Описание:<br />
+          {{ description[Translation.currentLocale] }}
+        </p>
+
         <div class="product__price">
+          <span class="product__price-title">Цена:</span>
           <span class="product__price-regular">${{ price.regular }}</span>
           <span
             class="product__price-discount"
@@ -50,14 +27,19 @@
             ${{ price.discount }}
           </span>
         </div>
-        <BaseAddedCart
-          class="product__cart"
-          v-bind="product"
-        />
-        <BaseAddedFavorite
-          class="product__favorite"
-          v-bind="product"
-        />
+
+        <div class="product__buttons">
+          <BaseAddedCart
+            class="product__cart"
+            :id="product.id"
+          >
+            Добавить в корзину
+          </BaseAddedCart>
+          <BaseAddedFavorite
+            class="product__favorite"
+            :id="product.id"
+          />
+        </div>
       </div>
     </BaseInner>
   </section>
@@ -86,58 +68,74 @@ export interface Props {
 </script>
 
 <script setup lang="ts">
-// import { ref } from "vue"
-import { Carousel, Slide } from "vue3-carousel"
-import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
 import BaseInner from "../Base/BaseInner.vue"
+import BaseGallery from "../Base/BaseGallery.vue"
 import BaseAddedCart from "../Base/BaseAddedCart.vue"
 import BaseAddedFavorite from "../Base/BaseAddedFavorite.vue"
 
 const product = defineProps<Props>()
-
-// const refCarouselBig = ref()
-
-const bigCarouselSettings = {
-  itemsToShow: 1,
-  snapAlign: "start"
-}
-const smallCarouselSettings = {
-  itemsToShow: 3,
-  snapAlign: "start"
-}
 </script>
 
 <style scoped lang="scss">
 .product {
-  &__gallery {
-    position: relative;
+  margin: 4rem 0;
+  &__inner {
     display: flex;
-    max-height: 30rem;
-    &-small {
-      max-width: 30rem;
-      /* height: 100%; */
-      /* max-width: 45rem; */
-      /* transform: rotate(90deg); */
+    gap: 2rem;
+  }
+
+  &__title {
+    text-transform: capitalize;
+    color: var(--color-black);
+    @media (min-width: 769px) {
+      font: 600 2.8rem/110% var(--main-font);
     }
-    &-big {
-      width: 30rem;
+    @media (max-width: 768px) {
+      font: 600 2rem/110% var(--main-font);
     }
   }
 
-  &__thumbnail {
-    width: 9rem;
-    height: 9rem;
-    margin: 0 0.5rem;
-    object-fit: cover;
-    object-position: center;
+  &__description {
+    margin-top: 2rem;
+    font: 400 1.6rem/150% var(--main-font);
+    color: var(--color-black);
+    opacity: 0.6;
+    @media (min-width: 1201px) {
+      max-width: 35rem;
+    }
+    @media (max-width: 1200px) and (min-width: 576px) {
+      max-width: 90%;
+    }
   }
-  &__picture {
-    width: 30rem;
-    height: 30rem;
-    object-fit: cover;
-    object-position: center;
+
+  &__price {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    &-title {
+      margin-right: 1rem;
+      font: 600 1.8rem/110% var(--main-font);
+      color: var(--color-black);
+    }
+    &-regular {
+      font: 600 1.8rem/110% var(--main-font);
+      color: var(--color-black);
+    }
+    &-discount {
+      margin-left: 0.4rem;
+      font: 400 1.4rem/110% var(--main-font);
+      color: #9a9caa;
+      text-decoration-line: line-through;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 4rem;
   }
 }
 </style>

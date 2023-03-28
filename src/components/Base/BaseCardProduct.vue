@@ -24,7 +24,7 @@
       </span>
       <BaseAddedFavorite
         class="product__favorite"
-        v-bind="product"
+        :id="product.id"
       />
       <RouterLink
         class="product__link"
@@ -50,7 +50,7 @@
     </div>
     <BaseAddedCart
       class="product__cart"
-      v-bind="product"
+      :id="product.id"
     />
   </article>
 </template>
@@ -79,8 +79,8 @@ interface Props {
 
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
-import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
+import Translation from "../../i18n/translation"
 
 import BaseAddedCart from "./BaseAddedCart.vue"
 import BaseAddedFavorite from "./BaseAddedFavorite.vue"

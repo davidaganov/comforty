@@ -1,5 +1,5 @@
 <template>
-  <!-- <BlockCompanies :companies="companies" /> -->
+  <BlockCompanies :companies="companies" />
 
   <BlockProductsCarousel
     name="featured"

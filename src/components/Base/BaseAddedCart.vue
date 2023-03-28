@@ -3,11 +3,12 @@
     type="button"
     class="cart"
     appearance="gray"
-    :class="isProduct(id, 'cart') ? 'cart--active' : ''"
-    :title="isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
+    :class="store.isProduct(id, 'cart') ? 'cart--active' : ''"
+    :title="store.isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
     :aria-label="$t('product.aria.cart')"
-    @click="() => toggleProduct(product, 'cart')"
+    @click="() => store.toggleProduct(id, 'cart')"
   >
+    <slot />
     <IconBase
       :width="24"
       :height="24"
@@ -19,28 +20,6 @@
   </BaseButton>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: { [key: string]: string }
-  cover: string
-  gallery: string[]
-  description: { [key: string]: string }
-  slug: string
-  category: string
-  attr: {
-    newest: boolean
-    trending: boolean
-    bestsellers: boolean
-    featured: boolean
-  }
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
 import { useStore } from "../../stores"
 
@@ -48,8 +27,8 @@ import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 
-const product = defineProps<Props>()
-const { isProduct, toggleProduct } = useStore()
+defineProps<{ id: number }>()
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

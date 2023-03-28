@@ -3,10 +3,10 @@
     type="button"
     class="favorite"
     appearance="white"
-    :class="isProduct(id, 'favorites') ? 'favorite--active' : ''"
-    :title="isProduct(id, 'favorites') ? $t('product.aria.dislike') : $t('product.aria.like')"
+    :class="store.isProduct(id, 'favorites') ? 'favorite--active' : ''"
+    :title="store.isProduct(id, 'favorites') ? $t('product.aria.dislike') : $t('product.aria.like')"
     :aria-label="$t('product.aria.favorite')"
-    @click="() => toggleProduct(product, 'favorites')"
+    @click="() => store.toggleProduct(id, 'favorites')"
   >
     <IconBase
       :stroke="true"
@@ -19,28 +19,6 @@
   </BaseButton>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: { [key: string]: string }
-  cover: string
-  gallery: string[]
-  description: { [key: string]: string }
-  slug: string
-  category: string
-  attr: {
-    newest: boolean
-    trending: boolean
-    bestsellers: boolean
-    featured: boolean
-  }
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
 import { useStore } from "../../stores"
 
@@ -48,8 +26,8 @@ import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconHeart from "../Icons/IconHeart.vue"
 
-const product = defineProps<Props>()
-const { isProduct, toggleProduct } = useStore()
+defineProps<{ id: number }>()
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

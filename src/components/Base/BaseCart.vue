@@ -13,7 +13,7 @@
       <IconCart />
     </IconBase>
     <span class="cart__text">{{ $t("nav.middle.cart.text") }}</span>
-    <span class="cart__counter">{{ getCart.length }}</span>
+    <span class="cart__counter">{{ store.getCart.length }}</span>
   </BaseButton>
 </template>
 
@@ -22,10 +22,8 @@ import { useStore } from "../../stores"
 import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
-import { storeToRefs } from "pinia"
 
 const store = useStore()
-const { getCart } = storeToRefs(store)
 </script>
 
 <style scoped lang="scss">

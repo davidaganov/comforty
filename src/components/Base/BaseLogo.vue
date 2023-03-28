@@ -1,7 +1,7 @@
 <template>
-  <a
-    href="/"
+  <RouterLink
     class="logo"
+    :to="Translation.i18nRoute({ name: home })"
     :title="$t('nav.middle.logo')"
     :aria-label="$t('nav.middle.logo')"
   >
@@ -14,12 +14,15 @@
       <IconLogo />
     </IconBase>
     <span class="logo__text">Comforty</span>
-  </a>
+  </RouterLink>
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from "vue-router"
+import Translation from "../../i18n/translation"
 import IconBase from "../../components/Icons/IconBase.vue"
 import IconLogo from "../Icons/IconLogo.vue"
+const home = "home"
 </script>
 
 <style scoped lang="scss">
