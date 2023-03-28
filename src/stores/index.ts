@@ -3,6 +3,13 @@ import type { Category, Product, Company, Review } from "../interfaces"
 
 type State = "cart" | "favorites"
 
+// export const useStore = defineStore("cart", {
+//   state: () => {(
+//     cart: [] as Product[]
+//   )},
+//   persist: true
+// })
+
 export const useStore = defineStore("shop", {
   state: () => ({
     categories: [
@@ -291,25 +298,33 @@ export const useStore = defineStore("shop", {
     },
 
     // Added to cart or favorites
-    addProduct(product: Product, state: State): void {
-      this[state].push(product)
+    addProduct(productId: number, state: State): void {
+      console.log("added: ", productId)
+      const product = this.products.filter((list) => list.id === productId)
+      this[state].push(product[0])
     },
 
     // Removed from cart or favorites
     deleteProduct(productId: number, state: State): void {
+      console.log("remove: ", productId)
       this[state] = this[state].filter((list) => list.id !== productId)
     },
 
     // Toggle product in cart or favorites
-    toggleProduct(product: Product, state: State): void {
-      this.isProduct(product.id, state)
-        ? this.deleteProduct(product.id, state)
-        : this.addProduct(product, state)
+    toggleProduct(productId: number, state: State): void {
+      console.log("toggle: ", productId)
+      this.isProduct(productId, state)
+        ? this.deleteProduct(productId, state)
+        : this.addProduct(productId, state)
     },
 
     // Get current product
     getProduct(slug: string) {
       return this.products.find((product) => product.slug === slug)
     }
+  },
+
+  persist: {
+    paths: ["cart", "favorites"]
   }
 })
