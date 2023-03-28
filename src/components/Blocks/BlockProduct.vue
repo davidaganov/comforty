@@ -31,12 +31,14 @@
         <div class="product__buttons">
           <BaseAddedCart
             class="product__cart"
+            appearance="ghost"
             :id="product.id"
           >
             Добавить в корзину
           </BaseAddedCart>
           <BaseAddedFavorite
             class="product__favorite"
+            appearance="ghost"
             :id="product.id"
           />
         </div>

@@ -11,7 +11,8 @@
       </span>
       <span class="card__products">
         {{ productsCount ? productsCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "" }}
-        {{ $t("categories.count", productsCount ? productsCount : 0) }}
+        <!-- {{ $t("categories.count", productsCount ? productsCount : 0) }} -->
+        {{ $t("categories.title") }}
       </span>
     </div>
     <a

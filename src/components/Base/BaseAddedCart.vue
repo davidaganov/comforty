@@ -2,7 +2,7 @@
   <BaseButton
     type="button"
     class="cart"
-    appearance="gray"
+    :appearance="appearance ? appearance : 'gray'"
     :class="store.isProduct(id, 'cart') ? 'cart--active' : ''"
     :title="store.isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
     :aria-label="$t('product.aria.cart')"
@@ -27,7 +27,7 @@ import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 
-defineProps<{ id: number }>()
+defineProps<{ id: number; appearance?: "primary" | "gray" | "white" | "ghost" | undefined }>()
 const store = useStore()
 </script>
 
