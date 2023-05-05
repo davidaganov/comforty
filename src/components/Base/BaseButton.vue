@@ -19,6 +19,26 @@
       </IconBase>
     </span>
   </a>
+  <RouterLink
+    class="btn"
+    :to="to"
+    :class="`btn--${appearance} ${arrow ? 'btn--arrow' : ''}`"
+    v-else-if="to"
+  >
+    <slot></slot>
+    <span
+      v-if="arrow"
+      class="btn__arrow"
+    >
+      <IconBase
+        :width="24"
+        :height="24"
+        box="0 0 24 24"
+      >
+        <IconArrow />
+      </IconBase>
+    </span>
+  </RouterLink>
   <button
     class="btn"
     :class="`btn--${appearance} ${arrow ? 'btn--arrow' : ''}`"
@@ -44,6 +64,7 @@
 <script lang="ts">
 export interface Props {
   link?: string
+  to?: string | { name: string; params?: any }
   type?: "button" | "submit" | "reset" | undefined
   appearance?: "primary" | "gray" | "white" | "ghost"
   arrow?: boolean
@@ -51,6 +72,7 @@ export interface Props {
 </script>
 
 <script setup lang="ts">
+import { RouterLink } from "vue-router"
 import IconArrow from "../Icons/IconArrow.vue"
 import IconBase from "../Icons/IconBase.vue"
 
