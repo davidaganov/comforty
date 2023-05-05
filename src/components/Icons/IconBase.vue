@@ -36,7 +36,6 @@ interface Props {
 withDefaults(defineProps<Props>(), {
   iconColor: "currentColor",
   stroke: false,
-  box: "0 0 18 18",
   width: 18,
   height: 18
 })
