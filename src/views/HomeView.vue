@@ -1,4 +1,6 @@
 <template>
+  <BlockPromo :products="promoProducts" />
+
   <BlockCompanies :companies="companies" />
 
   <BlockProductsCarousel
@@ -19,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import BlockPromo from "../components/Blocks/BlockPromo.vue"
 import BlockCompanies from "../components/Blocks/BlockCompanies.vue"
 import BlockProductsCarousel from "../components/Blocks/BlockProductsCarousel.vue"
 import BlockCategories from "../components/Blocks/BlockCategories.vue"
@@ -26,6 +29,7 @@ import BlockProducts from "../components/Blocks/BlockProducts.vue"
 import BlockReviews from "../components/Blocks/BlockReviews.vue"
 import { useStore } from "../stores"
 
+const promoProducts = useStore().getPromoProducts
 const categories = useStore().getCategories
 const products = useStore().getProducts.slice(0, 8)
 const companies = useStore().getCompanies

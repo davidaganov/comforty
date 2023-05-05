@@ -103,7 +103,7 @@ const categories = store.getCategories
     left: 0;
     background-color: var(--color-white);
     box-shadow: 0px 19px 30px 0px rgba(39, 35, 67, 0.12);
-    z-index: 1;
+    z-index: 2;
   }
 
   &__inner {

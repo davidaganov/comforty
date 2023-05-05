@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import type { Category, Product, Company, Review } from "../interfaces"
+import type { Category, PromoProduct, Product, Company, Review } from "../interfaces"
 
 type State = "cart" | "favorites"
 
@@ -56,6 +56,41 @@ export const useStore = defineStore("shop", {
         link: "sofa"
       }
     ] as Category[],
+    promoProducts: [
+      {
+        id: 1,
+        title: {
+          en: "Best furniture collection for your interior",
+          ru: "Лучшая коллекция мебели для вашего интерьера"
+        },
+        subtitle: { en: "Welcome to Comforty", ru: "Добро пожаловать в Comforty" },
+        img: "pic-1.png",
+        slug: "product-1",
+        discount: 54
+      },
+      {
+        id: 2,
+        title: {
+          en: "Modern furniture for your office space",
+          ru: "Современная мебель для вашего офиса"
+        },
+        subtitle: { en: "Welcome to Comforty", ru: "Добро пожаловать в Comforty" },
+        img: "pic-1.png",
+        slug: "product-2",
+        discount: 35
+      },
+      {
+        id: 3,
+        title: {
+          en: "Luxurious furniture for stylish relaxation",
+          ru: "Роскошная мебель для стильного отдыха"
+        },
+        subtitle: { en: "Welcome to Comforty", ru: "Добро пожаловать в Comforty" },
+        img: "pic-1.png",
+        slug: "product-3",
+        discount: 20
+      }
+    ] as PromoProduct[],
     products: [
       {
         id: 1,
@@ -284,6 +319,7 @@ export const useStore = defineStore("shop", {
 
   getters: {
     getCategories: (state) => state.categories,
+    getPromoProducts: (state) => state.promoProducts,
     getProducts: (state) => state.products,
     getCompanies: (state) => state.companies,
     getReviews: (state) => state.reviews,

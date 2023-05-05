@@ -6,6 +6,15 @@ export interface Category {
   link: string
 }
 
+export interface PromoProduct {
+  id: number
+  title: { [key: string]: string }
+  subtitle: { [key: string]: string }
+  img: string
+  slug: string
+  discount: number
+}
+
 export interface Product {
   id: number
   title: { [key: string]: string }

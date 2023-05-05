@@ -61,6 +61,29 @@
     "count": "Empty | Product | Products"
   },
   "blocks": {
+    "promo": {
+      "discount": "Discount",
+      "link": "Shop now",
+      "carouselAria": "Gallery of promo products",
+      "about": {
+        "discount": {
+          "title": "Discount",
+          "description": "Every week new sales"
+        },
+        "delivery": {
+          "title": "Free delivery",
+          "description": "100% Free for all orders"
+        },
+        "support": {
+          "title": "Great support",
+          "description": "We care your experiences"
+        },
+        "payment": {
+          "title": "Secure payment",
+          "description": "100% Secure Payment Method"
+        }
+      }
+    },
     "featured": {
       "title": "Featured products",
       "carouselAria": "Gallery of featured products"
