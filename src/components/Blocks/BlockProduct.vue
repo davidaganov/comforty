@@ -5,6 +5,7 @@
   >
     <BaseInner class="product__inner">
       <BaseGallery
+        class="product__gallery"
         :title="title"
         :gallery="gallery"
       />
@@ -86,6 +87,9 @@ const product = defineProps<Props>()
   &__inner {
     display: flex;
     gap: 2rem;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
 
   &__title {

@@ -6,8 +6,8 @@
         ref="gallery"
         :slides-per-view="1"
         :effect="'fade'"
-        :zoom="true"
         :thumbs="{ swiper: thumbnailsSwiper }"
+        :allowTouchMove="false"
         :modules="modules"
       >
         <SwiperSlide
@@ -61,13 +61,12 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
-import { EffectFade, Thumbs, FreeMode, Zoom } from "swiper"
+import { EffectFade, Thumbs, FreeMode } from "swiper"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
 defineProps<{ gallery: string[]; title: { [key: string]: string } }>()
 
-// const promoSwiper = ref()
 const thumbnailsSwiper = ref()
 const currentSlide = ref<number>(0)
 
@@ -85,7 +84,7 @@ const slideTo = (index: number) => {
   currentSlide.value = index
 }
 
-const modules = [EffectFade, Thumbs, FreeMode, Zoom]
+const modules = [EffectFade, Thumbs, FreeMode]
 </script>
 
 <style scoped lang="scss">
