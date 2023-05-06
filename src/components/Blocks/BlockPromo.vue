@@ -41,6 +41,10 @@
             :slides-per-view="1"
             :space-between="50"
             :effect="'fade'"
+            :autoplay="{
+              delay: 2000,
+              disableOnInteraction: false
+            }"
             :speed="400"
             :navigation="{ prevEl: '.promo__prev', nextEl: '.promo__next' }"
             :pagination="{ el: '.promo__pagination', clickable: true, type: 'custom' }"
@@ -79,7 +83,7 @@ interface Props {
 <script setup lang="ts">
 import { ref } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
-import { EffectFade, Navigation } from "swiper"
+import { EffectFade, Navigation, Autoplay } from "swiper"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseCardPromo from "../Base/BaseCardPromo.vue"
@@ -100,7 +104,7 @@ const changeCurrentSlide = () => {
   currentSlide.value = promoSwiper.value.realIndex
 }
 
-const modules = [EffectFade, Navigation]
+const modules = [EffectFade, Navigation, Autoplay]
 </script>
 
 <style scoped lang="scss">
