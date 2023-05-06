@@ -41,37 +41,96 @@ const aboutList = [
 
 <style scoped lang="scss">
 .about {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  gap: 3.3rem;
-  width: 100%;
-  height: 15rem;
-  padding: 5rem 7rem;
-  left: 0;
-  right: 0;
-  bottom: -7.5rem;
-  background-color: var(--color-white);
-  border-radius: 1.2rem;
-  box-shadow: 0px 2.4rem 10rem rgba(22, 25, 50, 0.07);
+  @media (min-width: 1201px) {
+    height: 15rem;
+    padding: 1rem 7rem;
+    bottom: -7.5rem;
+    border-radius: 1.2rem;
+  }
+  @media (max-width: 1200px) and (min-width: 1021px) {
+    border-radius: 0 0 1.2rem 1.2rem;
+  }
+  @media (max-width: 1200px) and (min-width: 769px) {
+    height: 10rem;
+    padding: 1rem 3rem;
+    bottom: -5rem;
+  }
+  @media (min-width: 769px) {
+    grid-template-columns: repeat(4, auto);
+  }
+  @media (max-width: 768px) and (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    height: 16.9rem;
+    padding: 2rem;
+    bottom: -10rem;
+  }
+  @media (min-width: 576px) {
+    position: absolute;
+    display: grid;
+    align-items: center;
+    gap: 3.3rem;
+    width: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-white);
+    box-shadow: 0px 2.4rem 10rem rgba(22, 25, 50, 0.07);
+    z-index: 1;
+  }
+  @media (max-width: 575px) {
+    display: none;
+  }
 
   &__item {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
+    @media (min-width: 576px) {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
+
   &__icon {
-    min-width: min-content;
-    color: var(--color-black);
+    @media (max-width: 768px) {
+      min-width: 6.4rem;
+      transform: scale(0.8);
+    }
+    @media (min-width: 576px) {
+      color: var(--color-black);
+      min-width: min-content;
+    }
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
+
   &__title {
-    margin-bottom: 0.6rem;
-    font: 500 1.8rem/110% var(--main-font);
-    color: var(--color-black);
+    @media (min-width: 1401px) {
+      margin-bottom: 0.6rem;
+    }
+    @media (min-width: 1021px) {
+      font: 500 1.8rem/110% var(--main-font);
+    }
+    @media (max-width: 1020px) {
+      font: 500 1.6rem/110% var(--main-font);
+    }
+    @media (min-width: 576px) {
+      color: var(--color-black);
+    }
+    @media (max-width: 575px) {
+      display: none;
+    }
   }
+
   &__description {
-    font: 400 1.5rem/110% var(--main-font);
-    color: #9a9caa;
+    @media (min-width: 1201px) {
+      font: 400 1.5rem/110% var(--main-font);
+      color: #9a9caa;
+    }
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 }
 </style>
