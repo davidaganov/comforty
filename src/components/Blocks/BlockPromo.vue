@@ -35,20 +35,20 @@
         </div>
 
         <BaseInner class="promo__inner">
-          <swiper
+          <Swiper
             ref="promoSwiper"
             :loop="true"
             :slides-per-view="1"
             :space-between="50"
             :effect="'fade'"
-            :speed="600"
+            :speed="400"
             :navigation="{ prevEl: '.promo__prev', nextEl: '.promo__next' }"
             :pagination="{ el: '.promo__pagination', clickable: true, type: 'custom' }"
             :modules="modules"
             @swiper="onSwiper"
             @slideChange="changeCurrentSlide"
           >
-            <swiper-slide
+            <SwiperSlide
               :key="product.id"
               v-for="product in products"
             >
@@ -56,8 +56,8 @@
                 :active="currentSlide === product.id - 1"
                 v-bind="product"
               />
-            </swiper-slide>
-          </swiper>
+            </SwiperSlide>
+          </Swiper>
           <BaseAbout />
         </BaseInner>
       </div>
@@ -80,8 +80,6 @@ interface Props {
 import { ref } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { EffectFade, Navigation } from "swiper"
-import "swiper/css"
-import "swiper/css/effect-fade"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseCardPromo from "../Base/BaseCardPromo.vue"

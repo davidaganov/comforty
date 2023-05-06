@@ -106,7 +106,7 @@ const aboutList = [
   }
 
   &__title {
-    @media (min-width: 1401px) {
+    @media (min-width: 1201px) {
       margin-bottom: 0.6rem;
     }
     @media (min-width: 1021px) {

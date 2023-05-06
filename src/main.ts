@@ -7,6 +7,8 @@ import App from "./App.vue"
 import router from "./router"
 
 import "./assets/styles/main.scss"
+import "swiper/css"
+import "swiper/css/effect-fade"
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

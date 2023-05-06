@@ -9,28 +9,33 @@
       </BaseTitle>
 
       <BaseCarouselControl
-        class="reviews__control"
-        :carousel="refCarousel"
+        class="block__control"
+        prevEl="reviews__prev"
+        nextEl="reviews__next"
       />
-
-      <Carousel
-        class="reviews__carousel"
-        ref="refCarousel"
-        :settings="settings"
-        :breakpoints="breakpoints"
-        :aria-label="$t(`blocks.reviews.carouselAria`)"
-      >
-        <Slide
-          class="reviews__slide"
-          :key="review.id"
-          v-for="review in reviews"
+      <div class="reviews__carousel">
+        <Swiper
+          :slides-per-view="1"
+          :space-between="12"
+          :loop="true"
+          :autoplay="{
+            delay: 2000,
+            disableOnInteraction: false
+          }"
+          :speed="500"
+          :breakpoints="{ 1021: { slidesPerView: 2 } }"
+          :navigation="{ prevEl: '.reviews__prev', nextEl: '.reviews__next' }"
+          :modules="modules"
+          :aria-label="$t(`blocks.reviews.carouselAria`)"
         >
-          <BaseCardReview
-            class="reviews__item"
-            v-bind="review"
-          />
-        </Slide>
-      </Carousel>
+          <SwiperSlide
+            :key="review.id"
+            v-for="review in reviews"
+          >
+            <BaseCardReview v-bind="review" />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </BaseInner>
   </section>
 </template>
@@ -46,8 +51,8 @@ interface Props {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { Carousel, Slide } from "vue3-carousel"
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Navigation, Autoplay } from "swiper"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
@@ -56,21 +61,7 @@ import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
 defineProps<{ reviews: Props[] }>()
 
-const refCarousel = ref()
-
-const settings = {
-  itemsToShow: 1,
-  wrapAround: true,
-  autoplay: 2000,
-  transition: 800,
-  snapAlign: "start"
-}
-
-const breakpoints = {
-  1021: {
-    itemsToShow: 2
-  }
-}
+const modules = [Navigation, Autoplay]
 </script>
 
 <style scoped lang="scss">
@@ -97,10 +88,6 @@ const breakpoints = {
 
   &__carousel {
     grid-area: 2 / 1 / 3 / 4;
-  }
-
-  &__item {
-    padding: 0 1.2rem;
   }
 }
 </style>

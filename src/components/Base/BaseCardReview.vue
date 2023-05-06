@@ -72,9 +72,10 @@ defineProps<Props>()
     color: #636270;
     border-left: 0.1rem solid var(--color-accent);
     @media (min-width: 1021px) {
+      height: 100%;
       word-wrap: anywhere;
       display: -webkit-box;
-      -webkit-line-clamp: 6;
+      -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }

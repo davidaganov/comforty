@@ -3,10 +3,8 @@
     <button
       type="button"
       class="control__arrow control__prev"
-      :class="currentSlide === minSlide && !wrapAround ? 'disabled' : ''"
-      :tabindex="currentSlide === minSlide && !wrapAround ? '-1' : '0'"
+      :class="prevEl"
       :aria-label="$t('carousel.prevAria')"
-      @click="prev"
     >
       <IconBase
         :width="24"
@@ -19,10 +17,8 @@
     <button
       type="button"
       class="control__arrow control__next"
-      :class="currentSlide === maxSlide && !wrapAround ? 'disabled' : ''"
-      :tabindex="currentSlide === maxSlide && !wrapAround ? '-1' : '0'"
+      :class="nextEl"
       :aria-label="$t('carousel.nextAria')"
-      @click="next"
     >
       <IconBase
         :width="24"
@@ -36,26 +32,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from "vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconArrow from "../Icons/IconArrow.vue"
 
-const props = defineProps<{ carousel?: any }>()
-const wrapAround = ref<boolean>(false)
-const currentSlide = ref<number>(0)
-const minSlide = ref<number>(0)
-const maxSlide = ref<number>(1)
-
-const next = () => (props.carousel ? props.carousel.next() : null)
-const prev = () => (props.carousel ? props.carousel.prev() : null)
-
-watchEffect(() => {
-  if (props.carousel) {
-    wrapAround.value = props.carousel.data.config.wrapAround
-    currentSlide.value = props.carousel.data.currentSlide.value
-    maxSlide.value = props.carousel.data.maxSlide.value
-  }
-})
+defineProps<{ prevEl: string; nextEl: string }>()
 </script>
 
 <style scoped lang="scss">
@@ -73,15 +53,14 @@ watchEffect(() => {
     background-color: var(--color-gray);
     transition: all 0.2s;
     cursor: pointer;
-    &:not(&.disabled) {
+    &:not(&.swiper-button-disabled) {
       &:hover,
       &:focus-visible {
         background-color: var(--color-accent-hover);
         color: var(--color-white);
       }
     }
-    &.disabled {
-      opacity: 0.4;
+    &.swiper-button-disabled {
       cursor: not-allowed;
     }
   }

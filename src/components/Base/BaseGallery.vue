@@ -1,12 +1,16 @@
 <template>
   <div class="gallery">
     <div class="gallery__big">
-      <Carousel
+      <Swiper
         id="gallery"
-        :settings="bigCarouselSettings"
-        v-model="currentSlide"
+        ref="gallery"
+        :slides-per-view="1"
+        :effect="'fade'"
+        :zoom="true"
+        :thumbs="{ swiper: thumbnailsSwiper }"
+        :modules="modules"
       >
-        <Slide
+        <SwiperSlide
           :key="img"
           v-for="img in gallery"
         >
@@ -19,19 +23,24 @@
               :alt="title[Translation.currentLocale]"
             />
           </div>
-        </Slide>
-      </Carousel>
+        </SwiperSlide>
+      </Swiper>
     </div>
     <div class="gallery__small">
-      <Carousel
+      <Swiper
         id="thumbnails"
-        ref="carousel"
-        :settings="smallCarouselSettings"
-        v-model="currentSlide"
+        ref="thumbnailsSwiper"
+        :slides-per-view="3"
+        :freeMode="true"
+        :watch-slides-progress="true"
+        @swiper="onSwiperThumbnails"
+        @slideChange="changeCurrentSlide"
+        :modules="modules"
       >
-        <Slide
+        <SwiperSlide
           :key="img"
           v-for="(img, index) in gallery"
+          @click="slideTo(index)"
         >
           <div class="gallery__small-slide">
             <img
@@ -41,38 +50,42 @@
               :class="{ 'gallery__thumbnail--active': index === currentSlide }"
               :src="getImageUrl({ fileName: img, folder: 'images/products' })"
               :alt="title[Translation.currentLocale]"
-              @click="slideTo(index)"
             />
           </div>
-        </Slide>
-      </Carousel>
+        </SwiperSlide>
+      </Swiper>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue"
-import { Carousel, Slide } from "vue3-carousel"
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { EffectFade, Thumbs, FreeMode, Zoom } from "swiper"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
 defineProps<{ gallery: string[]; title: { [key: string]: string } }>()
 
-const currentSlide = ref(0)
-const carousel = ref()
+// const promoSwiper = ref()
+const thumbnailsSwiper = ref()
+const currentSlide = ref<number>(0)
+
+const onSwiperThumbnails = (swiper: any) => {
+  thumbnailsSwiper.value = swiper
+}
+
+const changeCurrentSlide = () => {
+  if (thumbnailsSwiper.value.realIndex) {
+    currentSlide.value = thumbnailsSwiper.value.realIndex
+  }
+}
 
 const slideTo = (index: number) => {
   currentSlide.value = index
 }
 
-const bigCarouselSettings = {
-  itemsToShow: 1,
-  snapAlign: "start"
-}
-const smallCarouselSettings = {
-  itemsToShow: 3,
-  snapAlign: "start"
-}
+const modules = [EffectFade, Thumbs, FreeMode, Zoom]
 </script>
 
 <style scoped lang="scss">
@@ -103,6 +116,7 @@ const smallCarouselSettings = {
     object-fit: cover;
     object-position: center;
     border-radius: 0.5rem;
+    cursor: pointer;
     &--active {
       box-shadow: 0 0 0 0.2rem var(--color-accent);
     }

@@ -9,27 +9,31 @@
       </BaseTitle>
 
       <BaseCarouselControl
-        class="categories__control"
-        :carousel="refCarousel"
+        class="block__control"
+        prevEl="categories__prev"
+        nextEl="categories__next"
       />
 
-      <Carousel
-        class="categories__carousel"
-        ref="refCarousel"
-        :settings="settings"
-        :breakpoints="breakpoints"
-        :aria-label="$t('blocks.categories.carouselAria')"
-      >
-        <Slide
-          v-for="category in categories"
-          :key="category.id"
+      <div class="categories__carousel">
+        <Swiper
+          :slides-per-view="1"
+          :space-between="12"
+          :breakpoints="{ 500: { slidesPerView: 2 }, 769: { slidesPerView: 3 } }"
+          :navigation="{ prevEl: '.categories__prev', nextEl: '.categories__next' }"
+          :modules="modules"
+          :aria-label="$t('blocks.categories.carouselAria')"
         >
-          <BaseCardCategory
-            class="categories__item"
-            v-bind="category"
-          />
-        </Slide>
-      </Carousel>
+          <SwiperSlide
+            :key="category.id"
+            v-for="category in categories"
+          >
+            <BaseCardCategory
+              class="categories__item"
+              v-bind="category"
+            />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </BaseInner>
   </section>
 </template>
@@ -45,8 +49,8 @@ interface Props {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { Carousel, Slide } from "vue3-carousel"
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Navigation } from "swiper"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
@@ -55,22 +59,7 @@ import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
 defineProps<{ categories: Props[] }>()
 
-const refCarousel = ref()
-
-const settings = {
-  itemsToShow: 1,
-  wrapAround: true,
-  snapAlign: "center"
-}
-
-const breakpoints = {
-  500: {
-    itemsToShow: 2
-  },
-  769: {
-    itemsToShow: 3
-  }
-}
+const modules = [Navigation]
 </script>
 
 <style scoped lang="scss">
@@ -87,15 +76,13 @@ const breakpoints = {
     grid-area: 1 / 1 / 2 / 2;
     align-self: center;
   }
+
   &__control {
     grid-area: 1 / 3 / 2 / 4;
   }
+
   &__carousel {
     grid-area: 2 / 1 / 3 / 4;
-  }
-
-  &__item {
-    margin: 0 1.2rem;
   }
 }
 </style>

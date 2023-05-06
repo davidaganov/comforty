@@ -10,26 +10,27 @@
 
       <BaseCarouselControl
         class="block__control"
-        :carousel="refCarousel"
+        :prevEl="`${name}__prev`"
+        :nextEl="`${name}__next`"
       />
 
-      <Carousel
-        class="block__carousel"
-        ref="refCarousel"
-        :settings="settings"
-        :breakpoints="breakpoints"
-        :aria-label="$t(`blocks.${name}.carouselAria`)"
-      >
-        <Slide
-          v-for="product in products"
-          :key="product.id"
+      <div class="block__carousel">
+        <Swiper
+          :slides-per-view="2"
+          :space-between="12"
+          :breakpoints="{ 769: { slidesPerView: 3 }, 1021: { slidesPerView: 4 } }"
+          :navigation="{ prevEl: `.${name}__prev`, nextEl: `.${name}__next` }"
+          :modules="modules"
+          :aria-label="$t(`blocks.${name}.carouselAria`)"
         >
-          <BaseCardProduct
-            class="block__product"
-            v-bind="product"
-          />
-        </Slide>
-      </Carousel>
+          <SwiperSlide
+            :key="product.id"
+            v-for="product in products"
+          >
+            <BaseCardProduct v-bind="product" />
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </BaseInner>
   </section>
 </template>
@@ -57,8 +58,8 @@ interface Props {
 </script>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { Carousel, Slide } from "vue3-carousel"
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Navigation } from "swiper"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
@@ -67,21 +68,7 @@ import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
 defineProps<{ name: string; products: Props[] }>()
 
-const refCarousel = ref()
-
-const settings = {
-  itemsToShow: 2,
-  snapAlign: "start"
-}
-
-const breakpoints = {
-  769: {
-    itemsToShow: 3
-  },
-  1021: {
-    itemsToShow: 4
-  }
-}
+const modules = [Navigation]
 </script>
 
 <style scoped lang="scss">
@@ -98,15 +85,13 @@ const breakpoints = {
     grid-area: 1 / 1 / 2 / 2;
     align-self: center;
   }
+
   &__control {
     grid-area: 1 / 3 / 2 / 4;
   }
+
   &__carousel {
     grid-area: 2 / 1 / 3 / 4;
-  }
-
-  &__product {
-    padding: 0 1.2rem;
   }
 }
 </style>

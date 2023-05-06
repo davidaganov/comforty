@@ -4,12 +4,19 @@
     id="companies"
   >
     <BaseInner class="companies__inner">
-      <Carousel
-        :settings="settings"
-        :breakpoints="breakpoints"
+      <Swiper
+        :loop="true"
+        :slides-per-view="3"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false
+        }"
+        :speed="500"
+        :space-between="20"
+        :breakpoints="{ 576: { slidesPerView: 5 }, 1021: { slidesPerView: 7 } }"
+        :modules="modules"
       >
-        <Slide
-          class="companies__item"
+        <SwiperSlide
           v-for="{ id, name, logo } in companies"
           :key="id"
         >
@@ -20,8 +27,8 @@
             :alt="name"
             :src="getImageUrl({ fileName: logo, folder: 'images/companies' })"
           />
-        </Slide>
-      </Carousel>
+        </SwiperSlide>
+      </Swiper>
     </BaseInner>
   </section>
 </template>
@@ -35,30 +42,15 @@ interface Props {
 </script>
 
 <script setup lang="ts">
-import { Carousel, Slide } from "vue3-carousel"
+import { Swiper, SwiperSlide } from "swiper/vue"
+import { Autoplay } from "swiper"
 import { getImageUrl } from "../../utils/getImageUrl"
 
 import BaseInner from "../Base/BaseInner.vue"
 
 defineProps<{ companies: Props[] }>()
 
-const settings = {
-  itemsToShow: 3,
-  wrapAround: true,
-  autoplay: 2000,
-  transition: 800,
-  snapAlign: "start"
-}
-
-const breakpoints = {
-  576: {
-    itemsToShow: 5
-  },
-
-  1021: {
-    itemsToShow: 7
-  }
-}
+const modules = [Autoplay]
 </script>
 
 <style scoped lang="scss">
