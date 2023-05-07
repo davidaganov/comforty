@@ -44,7 +44,7 @@ interface Props {
   title: { [key: string]: string }
   productsCount: number
   cover: string
-  link: string
+  slug: string
 }
 </script>
 

@@ -42,23 +42,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { ref } from "vue"
 import { useRouter } from "vue-router"
 import Translation from "../../i18n/translation"
 
-export default {
-  data() {
-    return {
-      open: false
-    }
-  }
-}
-</script>
-
-<script setup lang="ts">
 import IconBase from "../Icons/IconBase.vue"
 import IconChevron from "../Icons/IconChevron.vue"
 
+const open = ref(false)
 const supportedLocales = Translation.supportedLocales
 const router = useRouter()
 

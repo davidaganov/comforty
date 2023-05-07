@@ -115,7 +115,7 @@ import FormNewsletter from "./Form/FormNewsletter.vue"
     font: 500 1.4rem/110% var(--main-font);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #9a9caa;
+    color: var(--color-dark-gray);
   }
 
   &__description {

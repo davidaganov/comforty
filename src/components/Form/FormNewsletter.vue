@@ -61,7 +61,7 @@ import IconBase from "../Icons/IconBase.vue"
       border-color: var(--color-accent);
     }
     &::placeholder {
-      color: #9a9caa;
+      color: var(--color-dark-gray);
     }
   }
 

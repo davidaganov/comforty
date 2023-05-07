@@ -133,7 +133,7 @@ defineProps<Props>()
     grid-area: 2 / 2 / 3 / 3;
     text-transform: capitalize;
 
-    color: #9a9caa;
+    color: var(--color-dark-gray);
     @media (min-width: 769px) {
       font: 400 1.6rem/140% var(--main-font);
     }

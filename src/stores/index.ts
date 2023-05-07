@@ -18,42 +18,42 @@ export const useStore = defineStore("shop", {
         title: { en: "Wing Chair", ru: "Кресла с подголовником" },
         productsCount: 1204,
         cover: "cat-1.jpg",
-        link: "wingchair"
+        slug: "wingchair"
       },
       {
         id: 2,
         title: { en: "Wooden Chair", ru: "Деревянные стулья" },
         productsCount: 1,
         cover: "cat-2.jpg",
-        link: "woodenchair"
+        slug: "woodenchair"
       },
       {
         id: 3,
         title: { en: "Desk Chair", ru: "Офисные кресла" },
         productsCount: 1,
         cover: "cat-3.jpg",
-        link: "deskchair"
+        slug: "deskchair"
       },
       {
         id: 4,
         title: { en: "Park Bench", ru: "Скамейки" },
         productsCount: 1,
         cover: "cat-2.jpg",
-        link: "parkbench"
+        slug: "parkbench"
       },
       {
         id: 5,
         title: { en: "Armchair", ru: "Кресла" },
         productsCount: 1,
         cover: "cat-1.jpg",
-        link: "armchair"
+        slug: "armchair"
       },
       {
-        id: 4,
+        id: 6,
         title: { en: "Sofa", ru: "Диваны" },
         productsCount: 1,
         cover: "cat-3.jpg",
-        link: "sofa"
+        slug: "sofa"
       }
     ] as Category[],
     promoProducts: [

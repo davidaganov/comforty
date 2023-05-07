@@ -126,7 +126,7 @@ const aboutList = [
   &__description {
     @media (min-width: 1201px) {
       font: 400 1.5rem/110% var(--main-font);
-      color: #9a9caa;
+      color: var(--color-dark-gray);
     }
     @media (max-width: 1200px) {
       display: none;

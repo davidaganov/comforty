@@ -68,7 +68,7 @@ import IconSearch from "../Icons/IconSearch.vue"
       box-shadow: 0 0 0 0.2rem var(--color-accent);
     }
     &::placeholder {
-      color: #9a9caa;
+      color: var(--color-dark-gray);
       transition: all 0.2s;
     }
     &[type="search"]::-webkit-search-decoration,

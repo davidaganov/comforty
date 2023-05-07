@@ -11,13 +11,12 @@
       </span>
       <span class="card__products">
         {{ productsCount ? productsCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "" }}
-        <!-- {{ $t("categories.count", productsCount ? productsCount : 0) }} -->
         {{ $t("categories.title") }}
       </span>
     </div>
     <a
       class="card__link"
-      :href="link"
+      :href="slug"
       :aria-label="title[Translation.currentLocale]"
     />
   </article>
@@ -29,7 +28,7 @@ interface Props {
   title: { [key: string]: string }
   productsCount: number
   cover: string
-  link: string
+  slug: string
 }
 </script>
 

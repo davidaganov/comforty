@@ -3,7 +3,7 @@ export interface Category {
   title: { [key: string]: string }
   productsCount: number
   cover: string
-  link: string
+  slug: string
 }
 
 export interface PromoProduct {

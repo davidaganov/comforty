@@ -189,7 +189,7 @@ const product = defineProps<Props>()
     &-discount {
       margin-left: 0.4rem;
       font: 400 1.4rem/110% var(--main-font);
-      color: #9a9caa;
+      color: var(--color-dark-gray);
       text-decoration-line: line-through;
     }
   }
