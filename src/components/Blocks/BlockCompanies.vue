@@ -7,11 +7,13 @@
       <Swiper
         :loop="true"
         :slides-per-view="3"
+        :allowTouchMove="false"
         :autoplay="{
-          delay: 2500,
+          delay: 5,
           disableOnInteraction: false
         }"
-        :speed="500"
+        :centered-slides="true"
+        :speed="4000"
         :space-between="20"
         :breakpoints="{ 576: { slidesPerView: 5 }, 1021: { slidesPerView: 7 } }"
         :modules="modules"

@@ -18,7 +18,7 @@
           :slides-per-view="1"
           :space-between="12"
           :loop="true"
-          :autoplay="{
+          :autopalay="{
             delay: 2000,
             disableOnInteraction: false
           }"

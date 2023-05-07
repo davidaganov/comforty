@@ -56,26 +56,34 @@ defineProps<Props>()
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
     padding: 4rem;
     text-align: left;
     border-radius: 1.2rem;
     background-color: var(--color-white);
-    @media (min-width: 1021px) {
-      height: 100%;
-      max-height: 34.5rem;
+    @media (min-width: 1401px) {
+      height: 28rem;
+    }
+    @media (max-width: 1400px) and (min-width: 1021px) {
+      height: 32rem;
     }
   }
+
   &__text {
     position: relative;
-    margin-bottom: auto;
     padding-left: 2.4rem;
     color: #636270;
     border-left: 0.1rem solid var(--color-accent);
+    @media (min-width: 1401px) {
+      -webkit-line-clamp: 4;
+    }
+    @media (max-width: 1400px) and (min-width: 1021px) {
+      -webkit-line-clamp: 5;
+    }
     @media (min-width: 1021px) {
-      height: 100%;
       word-wrap: anywhere;
       display: -webkit-box;
-      -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -92,7 +100,7 @@ defineProps<Props>()
     grid-template-columns: auto auto 1fr;
     align-items: flex-start;
     gap: 0.2rem 1.2rem;
-    margin-top: 2.5rem;
+    margin-top: auto;
     z-index: 1;
   }
 
