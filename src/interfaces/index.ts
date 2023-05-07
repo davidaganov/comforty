@@ -23,16 +23,17 @@ export interface Product {
   description: { [key: string]: string }
   slug: string
   category: string
-  attr: {
-    newest: boolean
-    trending: boolean
-    bestsellers: boolean
-    featured: boolean
-  }
+  attr: { [key: string]: boolean }
   price: {
     regular: number
     discount?: number | null
   }
+}
+
+export interface SortingTag {
+  id: number
+  slug: string
+  tag: { [key: string]: string }
 }
 
 export interface Company {

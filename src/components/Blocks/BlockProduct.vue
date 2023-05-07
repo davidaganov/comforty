@@ -57,12 +57,7 @@ export interface Props {
   description: { [key: string]: string }
   slug: string
   category: string
-  attr: {
-    newest: boolean
-    trending: boolean
-    bestsellers: boolean
-    featured: boolean
-  }
+  attr: { [key: string]: boolean }
   price: {
     regular: number
     discount?: number | null

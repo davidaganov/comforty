@@ -5,18 +5,18 @@
 
   <BlockProductsCarousel
     name="featured"
-    :products="products"
+    :products="featuredProducts"
   />
 
   <BlockCategories :categories="categories" />
 
-  <BlockProducts :products="products" />
+  <BlockProducts />
 
   <BlockReviews :reviews="reviews" />
 
   <BlockProductsCarousel
     name="recently"
-    :products="products"
+    :products="newestProducts"
   />
 </template>
 
@@ -29,9 +29,13 @@ import BlockProducts from "../components/Blocks/BlockProducts.vue"
 import BlockReviews from "../components/Blocks/BlockReviews.vue"
 import { useStore } from "../stores"
 
-const promoProducts = useStore().getPromoProducts
-const categories = useStore().getCategories
-const products = useStore().getProducts.slice(0, 8)
-const companies = useStore().getCompanies
-const reviews = useStore().getReviews
+const { getPromoProducts, getCategories, getCompanies, getReviews, getSortingProducts } = useStore()
+
+const promoProducts = getPromoProducts
+const categories = getCategories
+const companies = getCompanies
+const reviews = getReviews
+
+const featuredProducts = getSortingProducts("featured")
+const newestProducts = getSortingProducts("newest")
 </script>

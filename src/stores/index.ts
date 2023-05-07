@@ -1,5 +1,5 @@
 import { defineStore } from "pinia"
-import type { Category, PromoProduct, Product, Company, Review } from "../interfaces"
+import type { Category, PromoProduct, Product, Company, Review, SortingTag } from "../interfaces"
 
 type State = "cart" | "favorites"
 
@@ -103,7 +103,7 @@ export const useStore = defineStore("shop", {
         },
         slug: "product-1",
         category: "sofa",
-        attr: { newest: true, trending: false, bestsellers: false, featured: true },
+        attr: { newest: true, trending: false, bestsellers: false, featured: false },
         price: { regular: 15, discount: 10 }
       },
       {
@@ -117,7 +117,7 @@ export const useStore = defineStore("shop", {
         },
         slug: "product-2",
         category: "woodenchair",
-        attr: { newest: true, trending: false, bestsellers: false, featured: true },
+        attr: { newest: false, trending: false, bestsellers: false, featured: true },
         price: { regular: 15 }
       },
       {
@@ -261,6 +261,13 @@ export const useStore = defineStore("shop", {
         price: { regular: 8 }
       }
     ] as Product[],
+    sortingTags: [
+      { id: 1, slug: "all", tag: { en: "All", ru: "Все" } },
+      { id: 2, slug: "newest", tag: { en: "Newest", ru: "Новинки" } },
+      { id: 3, slug: "trending", tag: { en: "Trending", ru: "Трендинг" } },
+      { id: 4, slug: "bestsellers", tag: { en: "Best sellers", ru: "Бестселлеры" } },
+      { id: 5, slug: "featured", tag: { en: "Featured", ru: "Рекомендуемые" } }
+    ] as SortingTag[],
     companies: [
       { id: 1, name: "Zapier", logo: "logo-1.png" },
       { id: 2, name: "Pipedrive", logo: "logo-2.png" },
@@ -314,17 +321,20 @@ export const useStore = defineStore("shop", {
     ] as Review[],
 
     cart: [] as Product[],
-    favorites: [] as Product[]
+    favorites: [] as Product[],
+    selectedSortingTag: "all"
   }),
 
   getters: {
     getCategories: (state) => state.categories,
     getPromoProducts: (state) => state.promoProducts,
     getProducts: (state) => state.products,
+    getSortingTags: (state) => state.sortingTags,
     getCompanies: (state) => state.companies,
     getReviews: (state) => state.reviews,
     getCart: (state) => state.cart,
-    getFavorites: (state) => state.favorites
+    getFavorites: (state) => state.favorites,
+    getSelectedSortingTag: (state) => state.selectedSortingTag
   },
 
   actions: {
@@ -357,6 +367,28 @@ export const useStore = defineStore("shop", {
     // Get current product
     getProduct(slug: string) {
       return this.products.find((product) => product.slug === slug)
+    },
+
+    // Set current sorting tag
+    setSelectedSortingTag(tag: string) {
+      this.selectedSortingTag = tag
+    },
+
+    // Checked sorting tag
+    isSelectedSortingTag(tag: string) {
+      return this.selectedSortingTag === tag
+    },
+
+    // Get current sorting products
+    getSortingProducts(tag?: string): Product[] {
+      const selectedTag = tag || this.selectedSortingTag
+
+      const filteredProducts = this.products.filter((product) => {
+        if (selectedTag === "all") return this.products
+        else return product.attr[selectedTag]
+      })
+
+      return filteredProducts
     }
   },
 

@@ -7,10 +7,13 @@
       <BaseTitle class="products__title">
         {{ $t("blocks.products.title") }}
       </BaseTitle>
+
+      <BaseSorting />
+
       <div class="products__list">
         <BaseCardProduct
           class="products__item"
-          v-for="product in products"
+          v-for="product in products.slice(0, 8)"
           v-bind="product"
           :key="product.id"
         />
@@ -19,34 +22,24 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: { [key: string]: string }
-  cover: string
-  gallery: string[]
-  description: { [key: string]: string }
-  slug: string
-  category: string
-  attr: {
-    newest: boolean
-    trending: boolean
-    bestsellers: boolean
-    featured: boolean
-  }
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
+import { ref, watch } from "vue"
+import { useStore } from "../../stores"
+import { storeToRefs } from "pinia"
+
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
+import BaseSorting from "../Base/BaseSorting.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 
-defineProps<{ products: Props[] }>()
+const store = useStore()
+const { getSelectedSortingTag } = storeToRefs(store)
+
+const products = ref(store.getSortingProducts())
+
+watch(getSelectedSortingTag, () => {
+  products.value = store.getSortingProducts(getSelectedSortingTag.value)
+})
 </script>
 
 <style scoped lang="scss">
