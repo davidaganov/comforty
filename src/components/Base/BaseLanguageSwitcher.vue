@@ -6,7 +6,7 @@
     <button
       type="button"
       class="select__selected"
-      :class="{ open: open }"
+      :class="{ 'select__selected--open': open }"
       :aria-label="$t('locale.ariaOpenList')"
       :aria-expanded="open"
       @click="open = !open"
@@ -93,13 +93,18 @@ const switchLanguage = async (newLocale: string) => {
       background-color: var(--color-accent);
       opacity: 1;
     }
+
+    &--open {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
   }
+
   &__items {
     position: absolute;
-    font: 400 1.3rem/130% var(--main-font);
     background-color: var(--color-black);
     border: 0.1rem solid var(--color-accent);
-    color: var(--color-white);
     top: 2rem;
     left: 0;
     right: 0;
@@ -108,7 +113,7 @@ const switchLanguage = async (newLocale: string) => {
       display: block;
       padding: 0.3rem 0;
       width: 100%;
-      font: 400 1.3rem/130% var(--main-font);
+      font: 400 1.5rem/130% var(--main-font);
       color: var(--color-white);
       text-transform: capitalize;
       cursor: pointer;

@@ -128,8 +128,26 @@
       }
     }
   },
-  "sorting": {
-    "label": "Sorting products"
+  "page": {
+    "products": {
+      "category": {
+        "title": "All categories"
+      },
+      "sorting": {
+        "label": "Sorting",
+        "aria": "Open sorting dropdown"
+      },
+      "filter": {
+        "title": "Filters",
+        "categories": "Categories",
+        "price": "Price",
+        "ariaLabel": "Sort by category",
+        "ariaList": "List categories",
+        "ariaOpen": "Open a modal window with product filters",
+        "ariaClose": "Close a modal window with product filters"
+      },
+      "notFound": "Nothing was found on the specified filters :("
+    }
   },
   "carousel": {
     "prevAria": "Navigate to previous slide",

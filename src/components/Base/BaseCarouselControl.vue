@@ -50,7 +50,7 @@ defineProps<{ prevEl: string; nextEl: string }>()
     width: 4.4rem;
     height: 4.4rem;
     border-radius: 5rem;
-    background-color: var(--color-gray);
+    background-color: var(--color-light-gray);
     transition: all 0.2s;
     cursor: pointer;
     &:not(&.swiper-button-disabled) {

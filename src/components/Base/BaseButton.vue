@@ -136,7 +136,7 @@ withDefaults(defineProps<Props>(), {
   &--ghost {
     padding: 1.6rem 2.4rem;
     font-weight: 500;
-    border: 0.1rem solid #e1e3e5;
+    border: 0.1rem solid var(--color-gray);
     background-color: var(--color-white);
     color: var(--color-black);
     &:focus-visible {
@@ -159,7 +159,7 @@ withDefaults(defineProps<Props>(), {
   }
 
   &--gray {
-    background-color: var(--color-gray);
+    background-color: var(--color-light-gray);
     color: var(--color-black);
   }
 

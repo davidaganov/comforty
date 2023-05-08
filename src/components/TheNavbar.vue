@@ -126,7 +126,7 @@ import IconHeart from "./Icons/IconHeart.vue"
 <style scoped lang="scss">
 .navbar {
   $parent: &;
-  box-shadow: 0px 0.1rem 0px #e1e3e6;
+  box-shadow: 0px 0.1rem 0px var(--color-gray);
   &__inner {
     display: flex;
     justify-content: space-between;

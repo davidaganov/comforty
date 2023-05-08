@@ -127,7 +127,7 @@ const modules = [EffectFade, Navigation, Autoplay]
 
   &__content {
     position: relative;
-    background-color: var(--color-gray);
+    background-color: var(--color-light-gray);
     @media (min-width: 1021px) {
       border-radius: 0px 0px 4.8rem 4.8rem;
     }

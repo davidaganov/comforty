@@ -63,7 +63,7 @@ defineProps<Props>()
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: var(--color-gray);
+  background-color: var(--color-light-gray);
   isolation: isolate;
 
   @media (min-width: 769px) {

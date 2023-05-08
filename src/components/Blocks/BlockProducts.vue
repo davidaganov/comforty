@@ -35,10 +35,10 @@ import BaseCardProduct from "../Base/BaseCardProduct.vue"
 const store = useStore()
 const { getSelectedSortingTag } = storeToRefs(store)
 
-const products = ref(store.getSortingProducts())
+const products = ref(store.getSortingProducts({ tag: "all" }))
 
 watch(getSelectedSortingTag, () => {
-  products.value = store.getSortingProducts(getSelectedSortingTag.value)
+  products.value = store.getSortingProducts({ tag: getSelectedSortingTag.value })
 })
 </script>
 

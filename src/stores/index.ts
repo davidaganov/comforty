@@ -15,43 +15,50 @@ export const useStore = defineStore("shop", {
     categories: [
       {
         id: 1,
+        title: { en: "All categories", ru: "Все категории" },
+        cover: "cat-1.jpg",
+        slug: "all",
+        productsCount: 12
+      },
+      {
+        id: 2,
         title: { en: "Wing Chair", ru: "Кресла с подголовником" },
-        productsCount: 1204,
+        productsCount: 2,
         cover: "cat-1.jpg",
         slug: "wingchair"
       },
       {
-        id: 2,
+        id: 3,
         title: { en: "Wooden Chair", ru: "Деревянные стулья" },
-        productsCount: 1,
+        productsCount: 2,
         cover: "cat-2.jpg",
         slug: "woodenchair"
       },
       {
-        id: 3,
+        id: 4,
         title: { en: "Desk Chair", ru: "Офисные кресла" },
         productsCount: 1,
         cover: "cat-3.jpg",
         slug: "deskchair"
       },
       {
-        id: 4,
+        id: 5,
         title: { en: "Park Bench", ru: "Скамейки" },
-        productsCount: 1,
+        productsCount: 2,
         cover: "cat-2.jpg",
         slug: "parkbench"
       },
       {
-        id: 5,
+        id: 6,
         title: { en: "Armchair", ru: "Кресла" },
-        productsCount: 1,
+        productsCount: 3,
         cover: "cat-1.jpg",
         slug: "armchair"
       },
       {
-        id: 6,
+        id: 7,
         title: { en: "Sofa", ru: "Диваны" },
-        productsCount: 1,
+        productsCount: 3,
         cover: "cat-3.jpg",
         slug: "sofa"
       }
@@ -322,6 +329,7 @@ export const useStore = defineStore("shop", {
 
     cart: [] as Product[],
     favorites: [] as Product[],
+    selectedCategory: "all",
     selectedSortingTag: "all"
   }),
 
@@ -334,7 +342,8 @@ export const useStore = defineStore("shop", {
     getReviews: (state) => state.reviews,
     getCart: (state) => state.cart,
     getFavorites: (state) => state.favorites,
-    getSelectedSortingTag: (state) => state.selectedSortingTag
+    getSelectedSortingTag: (state) => state.selectedSortingTag,
+    getSelectedCategory: (state) => state.selectedCategory
   },
 
   actions: {
@@ -374,18 +383,35 @@ export const useStore = defineStore("shop", {
       this.selectedSortingTag = tag
     },
 
-    // Checked sorting tag
+    // Checked current sorting tag
     isSelectedSortingTag(tag: string) {
       return this.selectedSortingTag === tag
     },
 
+    // Get name current sorting tag
+    getTitleSelectedSortingTag() {
+      return this.sortingTags.find((item) => item.slug === this.selectedSortingTag)?.tag
+    },
+
+    // Set current category
+    setSelectedCategory(category: string) {
+      this.selectedCategory = category
+    },
+
+    // Checked current category
+    isSelectedCategory(category: string) {
+      return this.selectedCategory === category
+    },
+
     // Get current sorting products
-    getSortingProducts(tag?: string): Product[] {
-      const selectedTag = tag || this.selectedSortingTag
+    getSortingProducts({ tag, category }: { tag?: string; category?: string }): Product[] {
+      const selectedTag = tag ?? this.selectedSortingTag
+      const selectedCategory = category ?? this.selectedCategory
 
       const filteredProducts = this.products.filter((product) => {
-        if (selectedTag === "all") return this.products
-        else return product.attr[selectedTag]
+        const hasTag = selectedTag === "all" || product.attr[selectedTag]
+        const hasCategory = selectedCategory === "all" || product.category === selectedCategory
+        return hasTag && hasCategory
       })
 
       return filteredProducts

@@ -18,15 +18,18 @@
         <ul class="footer__list">
           <li
             class="footer__item"
-            :key="item.link"
-            v-for="item in $tm('blocks.footer.list.categories')"
+            :key="id"
+            v-for="{ id, title, slug } in categories"
           >
-            <a
+            <RouterLink
               class="footer__link"
-              :href="`/categories/${item.link}`"
+              :to="Translation.i18nRoute({ name: 'products', query: { cat: slug } })"
+              :aria-label="title[Translation.currentLocale]"
+              :title="title[Translation.currentLocale]"
+              @click="setSelectedCategory(slug)"
             >
-              {{ item.title }}
-            </a>
+              {{ title[Translation.currentLocale] }}
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -35,14 +38,14 @@
         <ul class="footer__list">
           <li
             class="footer__item"
-            :key="item.link"
-            v-for="item in $tm('blocks.footer.list.support')"
+            :key="link"
+            v-for="{ link, title } in $tm('blocks.footer.list.support')"
           >
             <a
               class="footer__link"
-              :href="`${item.link}`"
+              :href="link"
             >
-              {{ item.title }}
+              {{ title }}
             </a>
           </li>
         </ul>
@@ -58,16 +61,23 @@
 </template>
 
 <script setup lang="ts">
+import { RouterLink } from "vue-router"
+import { useStore } from "../stores"
+import Translation from "../i18n/translation"
+
 import BaseInner from "./Base/BaseInner.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import BaseSocial from "./Base/BaseSocial.vue"
 import FormNewsletter from "./Form/FormNewsletter.vue"
+
+const { setSelectedCategory, getCategories } = useStore()
+const categories = getCategories
 </script>
 
 <style scoped lang="scss">
 .footer {
   margin-top: 10rem;
-  border-top: 0.1rem solid #e1e3e6;
+  border-top: 0.1rem solid var(--color-gray);
   &__inner {
     display: grid;
     width: 100%;

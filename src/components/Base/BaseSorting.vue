@@ -4,20 +4,45 @@
     role="listbox"
     :class="{ 'sorting--dropdown': dropdown, 'sorting--open': open }"
     :aria-expanded="open || !dropdown"
-    @click="openDropdown()"
+    @click="toggleDropdown(!open)"
+    @keydown.esc="open ? toggleDropdown(false) : null"
   >
     <span
       id="sortLabel"
       class="sorting__label"
-      :class="!dropdown ? 'visually-hidden' : ''"
-      :tabindex="dropdown ? '0' : '-1'"
     >
-      {{ $t("sorting.label") }}
+      {{ $t("page.products.sorting.label") }}:
     </span>
+    <button
+      type="button"
+      class="sorting__current"
+      tabindex="0"
+      :aria-label="$t('page.products.sorting.aria')"
+      v-if="dropdown"
+      @keydown.shift.exact="(e: KeyboardEvent) => e.key === 'Tab' ? toggleDropdown(false) : null"
+    >
+      <span>{{ store.getTitleSelectedSortingTag()?.[Translation.currentLocale] }}</span>
+      <IconBase
+        class="sorting__icon"
+        box="0 0 9 5"
+        :stroke="true"
+        :width="12"
+        :height="8"
+      >
+        <IconChevron />
+      </IconBase>
+      <IconBase
+        class="sorting__settings"
+        :width="24"
+        :height="24"
+      >
+        <IconSettings />
+      </IconBase>
+    </button>
     <Transition name="sorting--dropdown">
       <div
-        v-show="open"
         class="sorting__container"
+        v-show="open"
       >
         <button
           type="button"
@@ -28,8 +53,9 @@
           :aria-selected="store.isSelectedSortingTag(slug)"
           :aria-labelledby="`sortLabel tag-${slug}`"
           :key="id"
-          v-for="{ id, slug, tag } in tags"
+          v-for="({ id, slug, tag }, index) in tags"
           @click="store.setSelectedSortingTag(slug)"
+          @keydown.tab.exact="index === tags.length - 1 ? toggleDropdown(false) : null"
         >
           {{ tag[Translation.currentLocale] }}
         </button>
@@ -43,15 +69,19 @@ import { onMounted, ref } from "vue"
 import { useStore } from "../../stores"
 import Translation from "../../i18n/translation"
 
+import IconBase from "../Icons/IconBase.vue"
+import IconChevron from "../Icons/IconChevron.vue"
+import IconSettings from "../Icons/IconSettings.vue"
+
 const props = defineProps<{ dropdown?: boolean }>()
 
 const store = useStore()
-const tags = store.getSortingTags
+const tags = ref(store.getSortingTags)
 const dropdown = ref(props.dropdown)
 const open = ref(false)
 
-const openDropdown = () => {
-  dropdown.value ? (open.value = !open.value) : null
+const toggleDropdown = (value: boolean) => {
+  dropdown.value ? (open.value = value) : null
 }
 
 onMounted(() => {
@@ -69,17 +99,79 @@ onMounted(() => {
   }
 
   &__tag {
-    font: 400 1.6rem/110% var(--main-font);
     letter-spacing: 0.05em;
     cursor: pointer;
     transition: all 0.2s;
   }
 
+  &__current {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-radius: 0.8rem;
+    border-width: 0.1rem;
+    border-style: solid;
+    transition: all 0.2s;
+    user-select: none;
+    cursor: pointer;
+    @media (min-width: 576px) {
+      width: 20rem;
+      span {
+        font: 500 1.6rem/110% var(--main-font);
+      }
+    }
+    @media (max-width: 575px) {
+      font-size: 0.1rem;
+      span {
+        position: absolute;
+        width: 0.1rem;
+        height: 0.1rem;
+        margin: -0.1rem;
+        border: 0;
+        padding: 0;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+      }
+    }
+  }
+
+  &__icon {
+    @media (max-width: 575px) {
+      display: none;
+    }
+  }
+
+  &__settings {
+    @media (min-width: 576px) {
+      display: none;
+    }
+  }
+
   &--open {
-    #{$parent}__label {
+    #{$parent}__current {
       background-color: var(--color-accent);
       color: var(--color-white);
       border-color: var(--color-accent);
+    }
+
+    @media (min-width: 576px) {
+      #{$parent}__icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &:not(&--open) {
+    #{$parent}__current {
+      color: var(--color-black);
+      border-color: var(--color-gray);
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+        border-color: var(--color-accent);
+      }
     }
   }
 
@@ -100,43 +192,39 @@ onMounted(() => {
       opacity: 0;
     }
 
-    &:not(#{$parent}--open) {
-      #{$parent}__label {
-        color: var(--color-black);
-        border-color: #e1e3e5;
-      }
-    }
-
     #{$parent}__container {
       position: absolute;
       flex-direction: column;
+      max-width: 20rem;
       width: 100%;
-      left: 0;
-      top: 5.5rem;
+      right: 0;
+      top: 6rem;
       border-radius: 1rem;
-      box-shadow: 0px 1.9rem 3rem 0px rgba(39, 35, 67, 0.12);
+      border: 0.1rem solid var(--color-gray);
       z-index: 3;
     }
 
     #{$parent}__label {
-      padding: 1.6rem 2.4rem;
-      font: 500 1.6rem/110% var(--main-font);
-      border-radius: 0.8rem;
-      border-width: 0.1rem;
-      border-style: solid;
-      transition: all 0.2s;
-      user-select: none;
-      cursor: pointer;
-      &:hover,
-      &:focus-visible {
-        background-color: var(--color-accent);
-        color: var(--color-white);
-        border-color: var(--color-accent);
+      @media (min-width: 576px) {
+        margin-right: 1rem;
+        font: 400 1.6rem/110% var(--main-font);
+        color: var(--color-black);
+      }
+      @media (max-width: 575px) {
+        position: absolute;
+        width: 0.1rem;
+        height: 0.1rem;
+        margin: -0.1rem;
+        border: 0;
+        padding: 0;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
       }
     }
 
     #{$parent}__tag {
       padding: 1.2rem 1rem;
+      font: 400 1.6rem/110% var(--main-font);
       background-color: var(--color-white);
       color: var(--color-black);
       &:first-of-type {
@@ -160,19 +248,40 @@ onMounted(() => {
   &:not(&--dropdown) {
     #{$parent}__container {
       gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    #{$parent}__label {
+      position: absolute;
+      width: 0.1rem;
+      height: 0.1rem;
+      margin: -0.1rem;
+      border: 0;
+      padding: 0;
+      clip: rect(0 0 0 0);
+      overflow: hidden;
     }
 
     #{$parent}__tag {
-      padding: 0.8rem;
       color: var(--color-dark-gray);
       text-transform: uppercase;
       &:not(#{$parent}--active) {
-        &:hover {
-          color: var(--color-black);
-        }
         &:focus-visible {
           background-color: var(--color-accent);
           color: var(--color-white);
+        }
+      }
+      @media (min-width: 769px) {
+        padding: 0.8rem;
+        font: 500 1.6rem/110% var(--main-font);
+      }
+      @media (max-width: 768px) {
+        padding: 0.4rem;
+        font: 400 1.6rem/110% var(--main-font);
+      }
+      @media (min-width: 576px) {
+        &:not(#{$parent}--active):hover {
+          color: var(--color-black);
         }
       }
       &--active {

@@ -14,10 +14,12 @@
         {{ $t("categories.title") }}
       </span>
     </div>
-    <a
+    <RouterLink
       class="card__link"
-      :href="slug"
+      :to="Translation.i18nRoute({ name: 'products', query: { cat: slug } })"
       :aria-label="title[Translation.currentLocale]"
+      :title="title[Translation.currentLocale]"
+      @click="setSelectedCategory(slug)"
     />
   </article>
 </template>
@@ -33,10 +35,14 @@ interface Props {
 </script>
 
 <script setup lang="ts">
+import { useStore } from "../../stores"
+import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
 
 defineProps<Props>()
+
+const { setSelectedCategory } = useStore()
 </script>
 
 <style scoped lang="scss">

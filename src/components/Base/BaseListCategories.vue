@@ -3,8 +3,8 @@
     appearance="ghost"
     :aria-label="$t('nav.bottom.categories.aria')"
     :aria-expanded="open"
-    @click="open = !open"
-    @keydown.esc="open = false"
+    @click="toggleModal(true)"
+    @keydown.esc="toggleModal(false)"
   >
     <IconBase
       :width="18"
@@ -22,9 +22,8 @@
     >
       <BaseInner
         class="categories__inner"
-        @keydown.esc="open = false"
+        @keydown.esc="toggleModal(false)"
       >
-        <!-- Title -->
         <BaseTitle
           class="categories__title"
           tag="h2"
@@ -32,31 +31,21 @@
           {{ $t("categories.modal.title") }}
         </BaseTitle>
 
-        <!-- Close Button -->
-        <BaseButton
+        <BaseButtonClose
           class="categories__close"
-          appearance="gray"
           :aria-label="$t('categories.modal.closeAria')"
-          @click="open = false"
-          @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? open = false : null"
-        >
-          <IconBase
-            box="0 0 24 24"
-            :width="24"
-            :height="24"
-          >
-            <IconClose />
-          </IconBase>
-        </BaseButton>
+          @click="toggleModal(false)"
+          @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? toggleModal(false) : null"
+        />
 
-        <!-- List categories -->
         <div class="categories__list">
           <BaseCardCategory
             class="categories__item"
             :key="category.id"
-            v-for="(category, i) in categories"
+            v-for="(category, index) in categories"
             v-bind="category"
-            @keydown.tab.exact="i === categories.length - 1 ? (open = false) : null"
+            @keydown.tab.exact="index === categories.length - 1 ? toggleModal(false) : null"
+            @click="toggleModal(false)"
           />
         </div>
       </BaseInner>
@@ -71,15 +60,19 @@ import { useStore } from "../../stores"
 import BaseInner from "./BaseInner.vue"
 import BaseTitle from "./BaseTitle.vue"
 import BaseButton from "./BaseButton.vue"
+import BaseButtonClose from "./BaseButtonClose.vue"
+import BaseCardCategory from "./BaseCardCategory.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconMenu from "../Icons/IconMenu.vue"
-import IconClose from "../Icons/IconClose.vue"
-import BaseCardCategory from "./BaseCardCategory.vue"
 
 const open = ref(false)
 const store = useStore()
 
 const categories = store.getCategories
+
+const toggleModal = (value: boolean) => {
+  open.value = value
+}
 </script>
 
 <style scoped lang="scss">

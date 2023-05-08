@@ -8,5 +8,10 @@ html, body {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   font-size: 62.5%;
+}
+
+.no-scroll {
+  overflow: hidden;
 }

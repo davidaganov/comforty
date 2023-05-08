@@ -146,7 +146,7 @@ defineProps<Props>()
     position: absolute;
     right: -1rem;
     bottom: -1rem;
-    color: var(--color-gray);
+    color: var(--color-light-gray);
   }
 }
 </style>

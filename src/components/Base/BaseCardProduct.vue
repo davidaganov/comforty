@@ -29,24 +29,26 @@
       <RouterLink
         class="product__link"
         :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
+        :aria-label="title[Translation.currentLocale]"
       />
     </div>
     <h3 class="product__title">
       <RouterLink
         class="product__title-link"
         :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
+        :title="title[Translation.currentLocale]"
       >
         {{ title[Translation.currentLocale] }}
       </RouterLink>
     </h3>
     <div class="product__price">
       <span class="product__price-regular">${{ price.regular }}</span>
-      <span
-        class="product__price-discount"
+      <s
+        class="product__price-old"
         v-if="price.discount"
       >
         ${{ price.discount }}
-      </span>
+      </s>
     </div>
     <BaseAddedCart
       class="product__cart"
@@ -144,7 +146,11 @@ const product = defineProps<Props>()
     height: 100%;
     top: 0;
     left: 0;
+    border-radius: 0.6rem;
     z-index: 1;
+    &:focus-visible {
+      box-shadow: 0 0 0 0.2rem var(--color-accent);
+    }
   }
 
   &__title {
@@ -155,6 +161,11 @@ const product = defineProps<Props>()
       margin: 0 -0.3rem;
       text-transform: capitalize;
       color: var(--color-black);
+      word-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
       transition: all 0.2s;
       &:focus-visible {
         background-color: var(--color-accent);
@@ -162,11 +173,6 @@ const product = defineProps<Props>()
       }
       @media (min-width: 769px) {
         font: 400 1.6rem/130% var(--main-font);
-        word-wrap: anywhere;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
         &:hover {
           color: var(--color-accent-hover);
         }
@@ -186,7 +192,7 @@ const product = defineProps<Props>()
       font: 600 1.8rem/110% var(--main-font);
       color: var(--color-black);
     }
-    &-discount {
+    &-old {
       margin-left: 0.4rem;
       font: 400 1.4rem/110% var(--main-font);
       color: var(--color-dark-gray);

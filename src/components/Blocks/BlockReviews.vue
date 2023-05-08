@@ -69,7 +69,7 @@ const modules = [Navigation, Autoplay]
   $parent: &;
   margin: 8rem 0;
   padding: 8rem 0;
-  background-color: var(--color-gray);
+  background-color: var(--color-light-gray);
 
   &__inner {
     display: grid;
