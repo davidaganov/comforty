@@ -202,6 +202,9 @@ onMounted(() => {
       border-radius: 1rem;
       border: 0.1rem solid var(--color-gray);
       z-index: 3;
+      @media (max-width: 575px) {
+        width: 20rem;
+      }
     }
 
     #{$parent}__label {

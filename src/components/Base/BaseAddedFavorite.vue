@@ -33,7 +33,6 @@ const store = useStore()
 
 <style scoped lang="scss">
 .favorite {
-  right: 2rem;
   transition: all 0.1s;
   cursor: pointer;
   &:focus-visible {

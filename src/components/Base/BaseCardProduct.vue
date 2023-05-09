@@ -89,6 +89,7 @@ const product = defineProps<Props>()
 .product {
   $parent: &;
   display: grid;
+
   &__picture {
     grid-area: 1 / 1 / 1 / 3;
     position: relative;
@@ -121,22 +122,39 @@ const product = defineProps<Props>()
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 2rem;
     z-index: 2;
   }
 
   &__attr {
-    left: 2rem;
     padding: 0.6rem 1rem;
     text-transform: capitalize;
     font: 500 1.3rem/110% var(--main-font);
     color: var(--color-white);
     border-radius: 0.4rem;
+    @media (min-width: 576px) {
+      top: 2rem;
+      left: 2rem;
+    }
+    @media (max-width: 575px) {
+      left: 1rem;
+      bottom: 1rem;
+    }
     &--sales {
       background-color: #f5813f;
     }
     &--newest {
       background-color: #01ad5a;
+    }
+  }
+
+  &__favorite {
+    @media (min-width: 576px) {
+      right: 2rem;
+      top: 2rem;
+    }
+    @media (max-width: 575px) {
+      right: 1rem;
+      top: 1rem;
     }
   }
 
@@ -196,7 +214,6 @@ const product = defineProps<Props>()
       margin-left: 0.4rem;
       font: 400 1.4rem/110% var(--main-font);
       color: var(--color-dark-gray);
-      text-decoration-line: line-through;
     }
   }
 

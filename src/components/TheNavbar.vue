@@ -4,30 +4,27 @@
     id="navbar"
   >
     <div class="navbar__top">
-      <BaseInner class="navbar__inner">
-        <p class="navbar__info">{{ $t("nav.top.info") }}</p>
-        <div class="navbar__right">
-          <BaseLanguageSwitcher />
-          <a
-            href="#"
-            class="navbar__info"
+      <BaseInner class="navbar__top-inner">
+        <BaseLanguageSwitcher />
+        <a
+          href="#"
+          class="navbar__info"
+        >
+          {{ $t("nav.top.faq") }}
+        </a>
+        <a
+          href="#"
+          class="navbar__info"
+        >
+          <IconBase
+            :width="16"
+            :height="16"
+            :stroke="true"
           >
-            {{ $t("nav.top.faq") }}
-          </a>
-          <a
-            href="#"
-            class="navbar__info"
-          >
-            <IconBase
-              :width="16"
-              :height="16"
-              :stroke="true"
-            >
-              <IconAttention />
-            </IconBase>
-            {{ $t("nav.top.help") }}
-          </a>
-        </div>
+            <IconAttention />
+          </IconBase>
+          {{ $t("nav.top.help") }}
+        </a>
       </BaseInner>
     </div>
     <div class="navbar__middle">
@@ -114,9 +111,9 @@ import BaseInner from "./Base/BaseInner.vue"
 import BaseButton from "./Base/BaseButton.vue"
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
-import FormSearch from "./Form/FormSearch.vue"
 import BaseListCategories from "./Base/BaseListCategories.vue"
 import BaseCart from "./Base/BaseCart.vue"
+import FormSearch from "./Form/FormSearch.vue"
 import IconBase from "./Icons/IconBase.vue"
 import IconAttention from "./Icons/IconAttention.vue"
 import IconMenu from "./Icons/IconMenu.vue"
@@ -138,23 +135,16 @@ import IconHeart from "./Icons/IconHeart.vue"
     padding: 1.4rem 0;
     background-color: var(--color-black);
     z-index: 3;
-  }
-
-  &__info {
-    font: 400 1.3rem/110% var(--main-font);
-    text-transform: capitalize;
-    color: var(--color-white);
-    opacity: 0.7;
-    @media (max-width: 575px) {
-      margin: 0 auto;
-    }
-  }
-
-  &__right {
-    @media (min-width: 576px) {
+    &-inner {
       display: flex;
       align-items: center;
-      gap: 2.4rem;
+      justify-content: flex-end;
+      @media (min-width: 769px) {
+        gap: 2.4rem;
+      }
+      @media (max-width: 768px) {
+        gap: 1rem;
+      }
       a {
         display: flex;
         align-items: center;
@@ -173,9 +163,12 @@ import IconHeart from "./Icons/IconHeart.vue"
         }
       }
     }
-    @media (max-width: 575px) {
-      display: none;
-    }
+  }
+
+  &__info {
+    font: 400 1.3rem/110% var(--main-font);
+    color: var(--color-white);
+    opacity: 0.7;
   }
 
   &__middle {

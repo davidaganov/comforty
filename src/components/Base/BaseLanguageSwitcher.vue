@@ -24,7 +24,7 @@
     <div
       class="select__items"
       role="listbox"
-      :class="{ selectHide: !open }"
+      :class="{ 'select__items--open': open }"
     >
       <button
         type="button"
@@ -70,6 +70,7 @@ const switchLanguage = async (newLocale: string) => {
 
 <style scoped lang="scss">
 .select {
+  $parent: &;
   position: relative;
   outline: none;
   max-width: 8rem;
@@ -109,6 +110,9 @@ const switchLanguage = async (newLocale: string) => {
     left: 0;
     right: 0;
     z-index: 1;
+    &:not(&--open) {
+      display: none;
+    }
     button {
       display: block;
       padding: 0.3rem 0;
@@ -123,9 +127,5 @@ const switchLanguage = async (newLocale: string) => {
       }
     }
   }
-}
-
-.selectHide {
-  display: none;
 }
 </style>
