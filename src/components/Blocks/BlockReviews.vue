@@ -43,10 +43,10 @@
 <script lang="ts">
 interface Props {
   id: number
-  text: { [key: string]: string }
+  text: Record<string, string>
   avatar: string
-  userName: { [key: string]: string }
-  job: { [key: string]: string }
+  userName: Record<string, string>
+  job: Record<string, string>
 }
 </script>
 

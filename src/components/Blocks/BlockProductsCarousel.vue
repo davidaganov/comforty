@@ -38,13 +38,13 @@
 <script lang="ts">
 interface Props {
   id: number
-  title: { [key: string]: string }
+  title: Record<string, string>
   cover: string
   gallery: string[]
-  description: { [key: string]: string }
+  description: Record<string, string>
   slug: string
   category: string
-  attr: { [key: string]: boolean }
+  attr: Record<string, boolean>
   price: {
     regular: number
     discount?: number | null

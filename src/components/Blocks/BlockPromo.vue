@@ -72,8 +72,8 @@
 <script lang="ts">
 interface Props {
   id: number
-  title: { [key: string]: string }
-  subtitle: { [key: string]: string }
+  title: Record<string, string>
+  subtitle: Record<string, string>
   img: string
   slug: string
   discount: number

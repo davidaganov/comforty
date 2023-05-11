@@ -1,6 +1,6 @@
 export interface Category {
   id: number
-  title: { [key: string]: string }
+  title: Record<string, string>
   productsCount: number
   cover: string
   slug: string
@@ -8,8 +8,8 @@ export interface Category {
 
 export interface PromoProduct {
   id: number
-  title: { [key: string]: string }
-  subtitle: { [key: string]: string }
+  title: Record<string, string>
+  subtitle: Record<string, string>
   img: string
   slug: string
   discount: number
@@ -17,13 +17,13 @@ export interface PromoProduct {
 
 export interface Product {
   id: number
-  title: { [key: string]: string }
+  title: Record<string, string>
   cover: string
   gallery: string[]
-  description: { [key: string]: string }
+  description: Record<string, string>
   slug: string
   category: string
-  attr: { [key: string]: boolean }
+  attr: Record<string, boolean>
   price: {
     regular: number
     discount?: number | null
@@ -33,7 +33,7 @@ export interface Product {
 export interface SortingTag {
   id: number
   slug: string
-  tag: { [key: string]: string }
+  tag: Record<string, string>
 }
 
 export interface Company {
@@ -44,8 +44,8 @@ export interface Company {
 
 export interface Review {
   id: number
-  text: { [key: string]: string }
+  text: Record<string, string>
   avatar: string
-  userName: { [key: string]: string }
-  job: { [key: string]: string }
+  userName: Record<string, string>
+  job: Record<string, string>
 }

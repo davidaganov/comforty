@@ -41,7 +41,7 @@
 <script lang="ts">
 interface Props {
   id: number
-  title: { [key: string]: string }
+  title: Record<string, string>
   productsCount: number
   cover: string
   slug: string

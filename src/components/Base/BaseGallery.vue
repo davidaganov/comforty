@@ -65,7 +65,7 @@ import { EffectFade, Thumbs, FreeMode } from "swiper"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
-defineProps<{ gallery: string[]; title: { [key: string]: string } }>()
+defineProps<{ gallery: string[]; title: Record<string, string> }>()
 
 const thumbnailsSwiper = ref()
 const currentSlide = ref<number>(0)
