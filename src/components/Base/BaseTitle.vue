@@ -6,7 +6,6 @@
 
 <style scoped lang="scss">
 .title {
-  text-transform: capitalize;
   color: var(--color-black);
   @media (min-width: 769px) {
     font: 600 3.2rem/110% var(--main-font);

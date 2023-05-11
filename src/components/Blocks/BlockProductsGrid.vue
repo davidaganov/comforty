@@ -34,24 +34,8 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Product {
-  id: number
-  title: Record<string, string>
-  cover: string
-  gallery: string[]
-  description: Record<string, string>
-  slug: string
-  category: string
-  attr: Record<string, boolean>
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
+import type { Product } from "../../interfaces"
 import { ref, watch, onMounted } from "vue"
 import { storeToRefs } from "pinia"
 import { useRoute, useRouter } from "vue-router"

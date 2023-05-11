@@ -38,17 +38,8 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: Record<string, string>
-  productsCount: number
-  cover: string
-  slug: string
-}
-</script>
-
 <script setup lang="ts">
+import type { Category } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Navigation } from "swiper"
 
@@ -57,7 +48,7 @@ import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardCategory from "../Base/BaseCardCategory.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ categories: Props[] }>()
+defineProps<{ categories: Category[] }>()
 
 const modules = [Navigation]
 </script>

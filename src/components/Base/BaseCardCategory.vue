@@ -24,23 +24,14 @@
   </article>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: Record<string, string>
-  productsCount: number
-  cover: string
-  slug: string
-}
-</script>
-
 <script setup lang="ts">
+import type { Category } from "../../interfaces"
 import { useStore } from "../../stores"
 import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
 
-defineProps<Props>()
+defineProps<Category>()
 
 const { setSelectedCategory } = useStore()
 </script>

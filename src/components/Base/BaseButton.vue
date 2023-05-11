@@ -61,22 +61,13 @@
   </button>
 </template>
 
-<script lang="ts">
-export interface Props {
-  link?: string
-  to?: string | { name: string; params?: any }
-  type?: "button" | "submit" | "reset" | undefined
-  appearance?: "primary" | "gray" | "white" | "ghost"
-  arrow?: boolean
-}
-</script>
-
 <script setup lang="ts">
+import type { Button } from "../../interfaces"
 import { RouterLink } from "vue-router"
 import IconArrow from "../Icons/IconArrow.vue"
 import IconBase from "../Icons/IconBase.vue"
 
-withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Button>(), {
   link: undefined,
   type: "button",
   appearance: "primary",

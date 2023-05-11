@@ -37,23 +37,16 @@
   </div>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: Record<string, string>
-  subtitle: Record<string, string>
-  img: string
-  slug: string
-  discount: number
-  active: boolean
-}
-</script>
-
 <script setup lang="ts">
+import type { PromoProduct } from "../../interfaces"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
 import BaseButton from "../Base/BaseButton.vue"
+
+interface Props extends PromoProduct {
+  active: boolean
+}
 
 defineProps<Props>()
 </script>

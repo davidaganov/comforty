@@ -29,24 +29,15 @@
   </article>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  text: Record<string, string>
-  avatar: string
-  userName: Record<string, string>
-  job: Record<string, string>
-}
-</script>
-
 <script setup lang="ts">
+import type { Review } from "../../interfaces"
 import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
 
 import IconBase from "../Icons/IconBase.vue"
 import IconQuotes from "../Icons/IconQuotes.vue"
 
-defineProps<Props>()
+defineProps<Review>()
 </script>
 
 <style scoped lang="scss">

@@ -43,29 +43,14 @@
         </BaseButton>
         <BaseLogo :hiddenText="true" />
         <FormSearch class="navbar__search" />
-        <div class="navbar__control">
-          <BaseCart />
-          <BaseButton
-            appearance="white"
-            :aria-label="$t('nav.middle.favorite')"
-          >
-            <IconBase
-              box="0 0 22 22"
-              :width="22"
-              :height="22"
-              :stroke="true"
-            >
-              <IconHeart />
-            </IconBase>
-          </BaseButton>
-        </div>
+        <BaseUserMenu class="navbar__menu" />
       </BaseInner>
     </div>
     <div class="navbar__bottom">
       <BaseInner class="navbar__inner">
         <div class="navbar__left">
           <BaseListCategories />
-          <nav class="navbar__menu">
+          <nav class="navbar__container">
             <ul class="navbar__list">
               <li
                 class="navbar__item"
@@ -112,12 +97,11 @@ import BaseButton from "./Base/BaseButton.vue"
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import BaseListCategories from "./Base/BaseListCategories.vue"
-import BaseCart from "./Base/BaseCart.vue"
+import BaseUserMenu from "./Base/BaseUserMenu.vue"
 import FormSearch from "./Form/FormSearch.vue"
 import IconBase from "./Icons/IconBase.vue"
 import IconAttention from "./Icons/IconAttention.vue"
 import IconMenu from "./Icons/IconMenu.vue"
-import IconHeart from "./Icons/IconHeart.vue"
 </script>
 
 <style scoped lang="scss">
@@ -217,7 +201,7 @@ import IconHeart from "./Icons/IconHeart.vue"
     }
   }
 
-  &__control {
+  &__menu {
     display: flex;
     align-items: center;
     gap: 1.2rem;

@@ -40,17 +40,8 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  text: Record<string, string>
-  avatar: string
-  userName: Record<string, string>
-  job: Record<string, string>
-}
-</script>
-
 <script setup lang="ts">
+import type { Review } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Navigation, Autoplay } from "swiper"
 
@@ -59,7 +50,7 @@ import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardReview from "../Base/BaseCardReview.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ reviews: Props[] }>()
+defineProps<{ reviews: Review[] }>()
 
 const modules = [Navigation, Autoplay]
 </script>

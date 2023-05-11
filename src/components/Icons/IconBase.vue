@@ -21,19 +21,10 @@
   </svg>
 </template>
 
-<script lang="ts">
-interface Props {
-  iconName?: string
-  iconColor?: string
-  stroke?: boolean
-  box?: string
-  width?: number
-  height?: number
-}
-</script>
-
 <script setup lang="ts">
-withDefaults(defineProps<Props>(), {
+import type { Icon } from "../../interfaces"
+
+withDefaults(defineProps<Icon>(), {
   iconColor: "currentColor",
   stroke: false,
   width: 18,

@@ -69,18 +69,8 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: Record<string, string>
-  subtitle: Record<string, string>
-  img: string
-  slug: string
-  discount: number
-}
-</script>
-
 <script setup lang="ts">
+import type { PromoProduct } from "../../interfaces"
 import { ref } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { EffectFade, Navigation, Autoplay } from "swiper"
@@ -91,7 +81,7 @@ import BaseAbout from "../Base/BaseAbout.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconArrow from "../Icons/IconArrow.vue"
 
-defineProps<{ products: Props[] }>()
+defineProps<{ products: PromoProduct[] }>()
 
 const promoSwiper = ref()
 const currentSlide = ref<number>(0)

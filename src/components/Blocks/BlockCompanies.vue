@@ -35,22 +35,15 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  name: string
-  logo: string
-}
-</script>
-
 <script setup lang="ts">
+import type { Company } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Autoplay } from "swiper"
 import { getImageUrl } from "../../utils/getImageUrl"
 
 import BaseInner from "../Base/BaseInner.vue"
 
-defineProps<{ companies: Props[] }>()
+defineProps<{ companies: Company[] }>()
 
 const modules = [Autoplay]
 </script>

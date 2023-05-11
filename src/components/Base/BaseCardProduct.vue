@@ -32,15 +32,15 @@
         :aria-label="title[Translation.currentLocale]"
       />
     </div>
-    <h3 class="product__title">
-      <RouterLink
-        class="product__title-link"
-        :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
-        :title="title[Translation.currentLocale]"
-      >
-        {{ title[Translation.currentLocale] }}
-      </RouterLink>
-    </h3>
+
+    <RouterLink
+      class="product__title"
+      :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
+      :title="title[Translation.currentLocale]"
+    >
+      <h3>{{ title[Translation.currentLocale] }}</h3>
+    </RouterLink>
+
     <div class="product__price">
       <span class="product__price-regular">${{ price.regular }}</span>
       <s
@@ -57,24 +57,8 @@
   </article>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: Record<string, string>
-  cover: string
-  gallery: string[]
-  description: Record<string, string>
-  slug: string
-  category: string
-  attr: Record<string, boolean>
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
+import type { Product } from "../../interfaces"
 import { RouterLink } from "vue-router"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
@@ -82,7 +66,7 @@ import Translation from "../../i18n/translation"
 import BaseAddedCart from "./BaseAddedCart.vue"
 import BaseAddedFavorite from "./BaseAddedFavorite.vue"
 
-const product = defineProps<Props>()
+const product = defineProps<Product>()
 </script>
 
 <style scoped lang="scss">
@@ -172,32 +156,30 @@ const product = defineProps<Props>()
   }
 
   &__title {
+    grid-area: 2 / 1 / 3 / 2;
+    padding: 0 0.3rem;
+    margin: 0 -0.3rem;
     text-align: left;
-    &-link {
-      grid-area: 2 / 1 / 3 / 2;
-      padding: 0 0.3rem;
-      margin: 0 -0.3rem;
-      text-transform: capitalize;
-      color: var(--color-black);
-      word-wrap: anywhere;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      transition: all 0.2s;
-      &:focus-visible {
-        background-color: var(--color-accent);
-        color: var(--color-white);
+    text-transform: capitalize;
+    color: var(--color-black);
+    word-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.2s;
+    &:focus-visible {
+      background-color: var(--color-accent);
+      color: var(--color-white);
+    }
+    @media (min-width: 769px) {
+      font: 400 1.6rem/130% var(--main-font);
+      &:hover {
+        color: var(--color-accent-hover);
       }
-      @media (min-width: 769px) {
-        font: 400 1.6rem/130% var(--main-font);
-        &:hover {
-          color: var(--color-accent-hover);
-        }
-      }
-      @media (max-width: 768px) {
-        font: 400 1.8rem/130% var(--main-font);
-      }
+    }
+    @media (max-width: 768px) {
+      font: 400 1.8rem/130% var(--main-font);
     }
   }
 
@@ -214,6 +196,7 @@ const product = defineProps<Props>()
       margin-left: 0.4rem;
       font: 400 1.4rem/110% var(--main-font);
       color: var(--color-dark-gray);
+      text-decoration: line-through;
     }
   }
 

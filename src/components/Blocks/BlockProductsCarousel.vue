@@ -35,24 +35,8 @@
   </section>
 </template>
 
-<script lang="ts">
-interface Props {
-  id: number
-  title: Record<string, string>
-  cover: string
-  gallery: string[]
-  description: Record<string, string>
-  slug: string
-  category: string
-  attr: Record<string, boolean>
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
+import type { Product } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Navigation } from "swiper"
 
@@ -61,7 +45,7 @@ import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ name: string; products: Props[] }>()
+defineProps<{ name: string; products: Product[] }>()
 
 const modules = [Navigation]
 </script>

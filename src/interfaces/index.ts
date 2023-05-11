@@ -49,3 +49,20 @@ export interface Review {
   userName: Record<string, string>
   job: Record<string, string>
 }
+
+export interface Button {
+  link?: string
+  to?: string | { name: string; params?: any }
+  type?: "button" | "submit" | "reset" | undefined
+  appearance?: "primary" | "gray" | "white" | "ghost"
+  arrow?: boolean
+}
+
+export interface Icon {
+  iconName?: string
+  iconColor?: string
+  stroke?: boolean
+  box?: string
+  width?: number
+  height?: number
+}

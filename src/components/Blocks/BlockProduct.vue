@@ -48,24 +48,8 @@
   </section>
 </template>
 
-<script lang="ts">
-export interface Props {
-  id: number
-  title: Record<string, string>
-  cover: string
-  gallery: string[]
-  description: Record<string, string>
-  slug: string
-  category: string
-  attr: Record<string, boolean>
-  price: {
-    regular: number
-    discount?: number | null
-  }
-}
-</script>
-
 <script setup lang="ts">
+import type { Product } from "../../interfaces"
 import Translation from "../../i18n/translation"
 
 import BaseInner from "../Base/BaseInner.vue"
@@ -73,7 +57,7 @@ import BaseGallery from "../Base/BaseGallery.vue"
 import BaseAddedCart from "../Base/BaseAddedCart.vue"
 import BaseAddedFavorite from "../Base/BaseAddedFavorite.vue"
 
-const product = defineProps<Props>()
+const product = defineProps<Product>()
 </script>
 
 <style scoped lang="scss">
