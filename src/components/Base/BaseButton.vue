@@ -127,7 +127,7 @@ withDefaults(defineProps<Button>(), {
   &--ghost {
     padding: 1.6rem 2.4rem;
     font-weight: 500;
-    border: 0.1rem solid var(--color-gray);
+    border: 0.1rem solid var(--color-gray-400);
     background-color: var(--color-white);
     color: var(--color-black);
     &:focus-visible {
@@ -150,7 +150,7 @@ withDefaults(defineProps<Button>(), {
   }
 
   &--gray {
-    background-color: var(--color-light-gray);
+    background-color: var(--color-gray-600);
     color: var(--color-black);
   }
 

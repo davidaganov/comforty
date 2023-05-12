@@ -8,7 +8,7 @@
   <defs>
     <clipPath id="clip0_2636_332">
       <path
-        fill="#fff"
+        fill="#FFFFFF"
         d="M0 0h24v24H0z"
       />
     </clipPath>

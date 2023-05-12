@@ -56,7 +56,7 @@ defineProps<Props>()
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: var(--color-light-gray);
+  background-color: var(--color-gray-600);
   isolation: isolate;
 
   @media (min-width: 769px) {
@@ -225,7 +225,7 @@ defineProps<Props>()
       top: 0;
       span {
         font: 700 3.6rem/110% var(--main-font);
-        color: #f05c52;
+        color: var(--color-attention);
       }
     }
     @media (max-width: 575px) {
@@ -234,7 +234,7 @@ defineProps<Props>()
       right: 5rem;
       span {
         font: 700 2.5rem/110% var(--main-font);
-        color: #f05c52;
+        color: var(--color-attention);
       }
     }
   }

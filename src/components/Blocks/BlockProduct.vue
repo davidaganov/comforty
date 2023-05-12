@@ -111,7 +111,7 @@ const product = defineProps<Product>()
     &-discount {
       margin-left: 0.4rem;
       font: 400 1.4rem/110% var(--main-font);
-      color: var(--color-dark-gray);
+      color: var(--color-gray-200);
       text-decoration-line: line-through;
     }
   }

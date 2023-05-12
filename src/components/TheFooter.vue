@@ -77,7 +77,7 @@ const categories = getCategories
 <style scoped lang="scss">
 .footer {
   margin-top: 10rem;
-  border-top: 0.1rem solid var(--color-gray);
+  border-top: 0.1rem solid var(--color-gray-400);
   &__inner {
     display: grid;
     width: 100%;
@@ -125,7 +125,7 @@ const categories = getCategories
     font: 500 1.4rem/110% var(--main-font);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-dark-gray);
+    color: var(--color-gray-200);
   }
 
   &__description {

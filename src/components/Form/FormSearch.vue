@@ -48,7 +48,7 @@ import IconSearch from "../Icons/IconSearch.vue"
   background-color: var(--color-white);
   border-radius: 0.5rem;
   @media (max-width: 575px) {
-    background-color: #f0f2f3;
+    background-color: var(--color-gray-600);
   }
 
   &__input {
@@ -68,7 +68,7 @@ import IconSearch from "../Icons/IconSearch.vue"
       box-shadow: 0 0 0 0.2rem var(--color-accent);
     }
     &::placeholder {
-      color: var(--color-dark-gray);
+      color: var(--color-gray-200);
       transition: all 0.2s;
     }
     &[type="search"]::-webkit-search-decoration,

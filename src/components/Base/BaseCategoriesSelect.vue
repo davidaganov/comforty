@@ -145,7 +145,7 @@ onMounted(() => {
       justify-content: center;
 
       border-radius: 0.8rem;
-      border: 0.1rem solid var(--color-gray);
+      border: 0.1rem solid var(--color-gray-400);
       background-color: var(--color-white);
       transition: all 0.2s;
       color: var(--color-black);
@@ -214,7 +214,7 @@ onMounted(() => {
       justify-content: space-between;
       align-items: center;
       padding-bottom: 2rem;
-      border-bottom: 0.1rem solid var(--color-gray);
+      border-bottom: 0.1rem solid var(--color-gray-400);
       &-title {
         color: var(--color-accent);
       }
@@ -229,18 +229,18 @@ onMounted(() => {
     @media (min-width: 1021px) {
       margin-top: 2rem;
       padding-left: 2rem;
-      border-left: 0.1rem solid var(--color-gray);
+      border-left: 0.1rem solid var(--color-gray-400);
     }
     @media (max-width: 1020px) {
       margin-top: 2rem;
       padding-bottom: 2rem;
       padding-left: 1rem;
-      border-bottom: 0.1rem solid var(--color-gray);
+      border-bottom: 0.1rem solid var(--color-gray-400);
     }
   }
 
   &__item {
-    color: var(--color-dark-gray);
+    color: var(--color-gray-200);
     cursor: pointer;
     transition: all 0.2s;
     &:focus-visible {

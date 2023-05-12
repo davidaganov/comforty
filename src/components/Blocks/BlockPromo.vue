@@ -117,9 +117,9 @@ const modules = [EffectFade, Navigation, Autoplay]
 
   &__content {
     position: relative;
-    background-color: var(--color-light-gray);
+    background-color: var(--color-gray-600);
     @media (min-width: 1021px) {
-      border-radius: 0px 0px 4.8rem 4.8rem;
+      border-radius: 0 0 4.8rem 4.8rem;
     }
   }
 
@@ -128,15 +128,15 @@ const modules = [EffectFade, Navigation, Autoplay]
   }
 
   &__arrow {
-    @media (min-width: 1720px) {
+    @media (min-width: 1721px) {
       margin: auto 0;
       top: 0;
       bottom: 0;
     }
-    @media (max-width: 1719px) {
+    @media (max-width: 1720px) {
       margin: 0 auto;
     }
-    @media (max-width: 1719px) and (min-width: 1201px) {
+    @media (max-width: 1720px) and (min-width: 1201px) {
       bottom: 10rem;
     }
     @media (max-width: 1200px) and (min-width: 576px) {
@@ -173,20 +173,20 @@ const modules = [EffectFade, Navigation, Autoplay]
 
   &__prev {
     transform: rotate(180deg);
-    @media (min-width: 1720px) {
+    @media (min-width: 1721px) {
       left: 8.8rem;
     }
-    @media (max-width: 1719px) and (min-width: 576px) {
+    @media (max-width: 1720px) and (min-width: 576px) {
       left: 0;
       right: 10rem;
     }
   }
 
   &__next {
-    @media (min-width: 1720px) {
+    @media (min-width: 1721px) {
       right: 8.8rem;
     }
-    @media (max-width: 1719px) and (min-width: 576px) {
+    @media (max-width: 1720px) and (min-width: 576px) {
       left: 10rem;
       right: 0;
     }

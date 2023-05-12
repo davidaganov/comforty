@@ -114,7 +114,7 @@ onMounted(() => {
     width: 100%;
     height: 0.1rem;
     border: none;
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-400);
     @media (min-width: 1021px) {
       grid-area: 2 / 1 / 3 / 3;
     }

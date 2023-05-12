@@ -49,7 +49,7 @@ import IconBase from "../Icons/IconBase.vue"
   &__input {
     width: 100%;
     padding: 1.5rem 2rem;
-    border: 0.1rem solid var(--color-gray);
+    border: 0.1rem solid var(--color-gray-400);
     border-radius: 0.8rem;
     font: 400 1.6rem var(--main-font);
     color: var(--color-black);
@@ -61,7 +61,7 @@ import IconBase from "../Icons/IconBase.vue"
       border-color: var(--color-accent);
     }
     &::placeholder {
-      color: var(--color-dark-gray);
+      color: var(--color-gray-200);
     }
   }
 

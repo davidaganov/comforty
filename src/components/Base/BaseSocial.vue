@@ -83,7 +83,7 @@ const socialList = [
     height: 3.8rem;
     border-radius: 3.8rem;
     border: 0.1rem solid transparent;
-    color: #636270;
+    color: var(--color-gray);
     &:focus-visible {
       color: var(--color-white);
       background-color: var(--color-accent-hover);

@@ -73,7 +73,7 @@ const aboutList = [
     left: 0;
     right: 0;
     background-color: var(--color-white);
-    box-shadow: 0px 2.4rem 10rem rgba(22, 25, 50, 0.07);
+    box-shadow: 0 2.4rem 10rem rgba(22, 25, 50, 0.07);
     z-index: 1;
   }
   @media (max-width: 575px) {
@@ -126,7 +126,7 @@ const aboutList = [
   &__description {
     @media (min-width: 1201px) {
       font: 400 1.5rem/110% var(--main-font);
-      color: var(--color-dark-gray);
+      color: var(--color-gray-200);
     }
     @media (max-width: 1200px) {
       display: none;

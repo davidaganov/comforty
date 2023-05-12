@@ -107,7 +107,7 @@ import IconMenu from "./Icons/IconMenu.vue"
 <style scoped lang="scss">
 .navbar {
   $parent: &;
-  box-shadow: 0px 0.1rem 0px var(--color-gray);
+  box-shadow: 0 0.1rem 0 var(--color-gray-400);
   &__inner {
     display: flex;
     justify-content: space-between;
@@ -160,7 +160,7 @@ import IconMenu from "./Icons/IconMenu.vue"
     padding: 2rem 0;
     z-index: 2;
     @media (min-width: 576px) {
-      background-color: #f0f2f3;
+      background-color: var(--color-gray-600);
     }
     &-inner {
       @media (min-width: 576px) {
@@ -257,7 +257,7 @@ import IconMenu from "./Icons/IconMenu.vue"
       margin: 0 -0.3rem;
       font: 500 1.4rem/110% var(--main-font);
       text-transform: capitalize;
-      color: #636270;
+      color: var(--color-gray);
       transition: all 0.2s;
       &:hover {
         color: var(--color-accent);
@@ -277,7 +277,7 @@ import IconMenu from "./Icons/IconMenu.vue"
       padding: 0 0.3rem;
       margin: 0 -0.3rem;
       font: 400 1.4rem/110% var(--main-font);
-      color: #636270;
+      color: var(--color-gray);
       &:hover {
         strong {
           color: var(--color-accent-hover);

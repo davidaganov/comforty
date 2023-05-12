@@ -31,8 +31,8 @@
 
 <script setup lang="ts">
 import type { Review } from "../../interfaces"
-import Translation from "../../i18n/translation"
 import { getImageUrl } from "../../utils/getImageUrl"
+import Translation from "../../i18n/translation"
 
 import IconBase from "../Icons/IconBase.vue"
 import IconQuotes from "../Icons/IconQuotes.vue"
@@ -56,7 +56,7 @@ defineProps<Review>()
     @media (min-width: 1401px) {
       height: 28rem;
     }
-    @media (max-width: 1400px) and (min-width: 1021px) {
+    @media (max-width: 1460px) and (min-width: 1021px) {
       height: 32rem;
     }
   }
@@ -64,12 +64,12 @@ defineProps<Review>()
   &__text {
     position: relative;
     padding-left: 2.4rem;
-    color: #636270;
+    color: var(--color-gray);
     border-left: 0.1rem solid var(--color-accent);
     @media (min-width: 1401px) {
       -webkit-line-clamp: 4;
     }
-    @media (max-width: 1400px) and (min-width: 1021px) {
+    @media (max-width: 1460px) and (min-width: 1021px) {
       -webkit-line-clamp: 5;
     }
     @media (min-width: 1021px) {
@@ -124,7 +124,7 @@ defineProps<Review>()
     grid-area: 2 / 2 / 3 / 3;
     text-transform: capitalize;
 
-    color: var(--color-dark-gray);
+    color: var(--color-gray-200);
     @media (min-width: 769px) {
       font: 400 1.6rem/140% var(--main-font);
     }
@@ -137,7 +137,7 @@ defineProps<Review>()
     position: absolute;
     right: -1rem;
     bottom: -1rem;
-    color: var(--color-light-gray);
+    color: var(--color-gray-600);
   }
 }
 </style>

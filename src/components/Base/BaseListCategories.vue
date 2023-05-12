@@ -95,7 +95,7 @@ const toggleModal = (value: boolean) => {
     top: 0;
     left: 0;
     background-color: var(--color-white);
-    box-shadow: 0px 19px 30px 0px rgba(39, 35, 67, 0.12);
+    box-shadow: 0 1.9rem 3rem 0 rgba(39, 35, 67, 0.12);
     z-index: 4;
   }
 

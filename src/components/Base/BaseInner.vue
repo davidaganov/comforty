@@ -14,7 +14,7 @@
     padding-left: 2rem;
     padding-right: 2rem;
   }
-  @media (max-width: 374px) {
+  @media (max-width: 375px) {
     padding-left: 1rem;
     padding-right: 1rem;
   }

@@ -13,7 +13,7 @@
   <defs>
     <clipPath id="clip0_1_605">
       <path
-        fill="#fff"
+        fill="#FFFFFF"
         d="M0 0h50v50H0z"
       />
     </clipPath>

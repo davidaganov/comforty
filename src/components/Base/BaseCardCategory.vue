@@ -1,6 +1,7 @@
 <template>
   <article
     class="card"
+    :id="`category-card-${id}`"
     :style="{
       backgroundImage: `url(${getImageUrl({ fileName: cover, folder: 'images/categories' })})`
     }"
@@ -26,10 +27,10 @@
 
 <script setup lang="ts">
 import type { Category } from "../../interfaces"
-import { useStore } from "../../stores"
 import { RouterLink } from "vue-router"
-import Translation from "../../i18n/translation"
+import { useStore } from "../../stores"
 import { getImageUrl } from "../../utils/getImageUrl"
+import Translation from "../../i18n/translation"
 
 defineProps<Category>()
 
@@ -88,6 +89,7 @@ const { setSelectedCategory } = useStore()
     height: 100%;
     left: 0;
     right: 0;
+    color: var(--color-black);
     border-radius: 1rem;
     &:focus-visible {
       box-shadow: 0 0 0 0.5rem var(--color-accent);

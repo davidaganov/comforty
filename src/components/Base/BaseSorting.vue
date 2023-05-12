@@ -165,7 +165,7 @@ onMounted(() => {
   &:not(&--open) {
     #{$parent}__current {
       color: var(--color-black);
-      border-color: var(--color-gray);
+      border-color: var(--color-gray-400);
       &:hover,
       &:focus-visible {
         background-color: var(--color-accent);
@@ -200,7 +200,7 @@ onMounted(() => {
       right: 0;
       top: 6rem;
       border-radius: 1rem;
-      border: 0.1rem solid var(--color-gray);
+      border: 0.1rem solid var(--color-gray-400);
       z-index: 3;
       @media (max-width: 575px) {
         width: 20rem;
@@ -266,7 +266,7 @@ onMounted(() => {
     }
 
     #{$parent}__tag {
-      color: var(--color-dark-gray);
+      color: var(--color-gray-200);
       text-transform: uppercase;
       &:not(#{$parent}--active) {
         &:focus-visible {
@@ -289,9 +289,9 @@ onMounted(() => {
       }
       &--active {
         color: var(--color-black);
-        box-shadow: inset 0px -0.2rem 0px #038053;
+        box-shadow: inset 0 -0.2rem 0 #038053;
         &:hover {
-          box-shadow: inset 0px -0.2rem 0px var(--color-accent);
+          box-shadow: inset 0 -0.2rem 0 var(--color-accent);
         }
         &:focus-visible {
           background-color: #038053;

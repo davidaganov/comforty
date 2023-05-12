@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
+
 import IconBase from "../../components/Icons/IconBase.vue"
 import IconLogo from "../Icons/IconLogo.vue"
 const home = "home"
@@ -32,6 +33,7 @@ const home = "home"
   padding: 0.3rem;
   margin: -0.3rem;
   border-radius: 0.5rem;
+  color: var(--color-black);
   &:focus-visible {
     box-shadow: 0 0 0 0.2rem var(--color-accent);
   }

@@ -1,9 +1,9 @@
 <template>
   <article
-    class="product"
-    :id="`product-${id}`"
+    class="card"
+    :id="`product-card-${id}`"
   >
-    <div class="product__picture">
+    <div class="card__picture">
       <img
         width="311"
         height="312"
@@ -12,46 +12,46 @@
       />
       <span
         v-if="attr.newest"
-        class="product__attr product__attr--newest"
+        class="card__attr card__attr--newest"
       >
         {{ $t("product.attr.newest") }}
       </span>
       <span
         v-if="price.discount && !attr.newest"
-        class="product__attr product__attr--sales"
+        class="card__attr card__attr--sales"
       >
         {{ $t("product.attr.sales") }}
       </span>
       <BaseAddedFavorite
-        class="product__favorite"
+        class="card__favorite"
         :id="product.id"
       />
       <RouterLink
-        class="product__link"
+        class="card__link"
         :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
         :aria-label="title[Translation.currentLocale]"
       />
     </div>
 
     <RouterLink
-      class="product__title"
+      class="card__title"
       :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
       :title="title[Translation.currentLocale]"
     >
       <h3>{{ title[Translation.currentLocale] }}</h3>
     </RouterLink>
 
-    <div class="product__price">
-      <span class="product__price-regular">${{ price.regular }}</span>
+    <div class="card__price">
+      <span class="card__price-regular">${{ price.regular }}</span>
       <s
-        class="product__price-old"
+        class="card__price-old"
         v-if="price.discount"
       >
         ${{ price.discount }}
       </s>
     </div>
     <BaseAddedCart
-      class="product__cart"
+      class="card__cart"
       :id="product.id"
     />
   </article>
@@ -70,7 +70,7 @@ const product = defineProps<Product>()
 </script>
 
 <style scoped lang="scss">
-.product {
+.card {
   $parent: &;
   display: grid;
 
@@ -124,10 +124,10 @@ const product = defineProps<Product>()
       bottom: 1rem;
     }
     &--sales {
-      background-color: #f5813f;
+      background-color: var(--color-delivery);
     }
     &--newest {
-      background-color: #01ad5a;
+      background-color: var(--color-newest);
     }
   }
 
@@ -149,6 +149,7 @@ const product = defineProps<Product>()
     top: 0;
     left: 0;
     border-radius: 0.6rem;
+    color: var(--color-black);
     z-index: 1;
     &:focus-visible {
       box-shadow: 0 0 0 0.2rem var(--color-accent);
@@ -195,7 +196,7 @@ const product = defineProps<Product>()
     &-old {
       margin-left: 0.4rem;
       font: 400 1.4rem/110% var(--main-font);
-      color: var(--color-dark-gray);
+      color: var(--color-gray-200);
       text-decoration: line-through;
     }
   }
