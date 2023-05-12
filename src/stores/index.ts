@@ -101,7 +101,7 @@ export const useStore = defineStore("shop", {
     products: [
       {
         id: 1,
-        title: { en: "Product #1", ru: "Продукт #1" },
+        title: { en: "Sleek metal chair", ru: "Стул из элегантного металла" },
         cover: "pic-2.jpg",
         gallery: ["pic-2.jpg", "pic-3.jpg", "pic-1.jpg", "pic-7.jpg"],
         description: {
@@ -115,7 +115,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 2,
-        title: { en: "Product #2", ru: "Продукт #2" },
+        title: { en: "Adjustable ergonomic chair", ru: "Регулируемый эргономичный стул" },
         cover: "pic-3.jpg",
         gallery: ["pic-3.jpg", "pic-7.jpg"],
         description: {
@@ -129,7 +129,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 3,
-        title: { en: "Product #3", ru: "Продукт #3" },
+        title: { en: "Stylish compact chair", ru: "Стильный компактный стул" },
         cover: "pic-7.jpg",
         gallery: ["pic-7.jpg", "pic-4.jpg", "pic-5.jpg"],
         description: {
@@ -143,7 +143,10 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 4,
-        title: { en: "Product #4", ru: "Продукт #4" },
+        title: {
+          en: "Wooden upholstered chair",
+          ru: "Стул с обитым сиденьем"
+        },
         cover: "pic-6.jpg",
         gallery: ["pic-6.jpg", "pic-5.jpg", "pic-4.jpg", "pic-3.jpg", "pic-1.jpg"],
         description: {
@@ -157,7 +160,10 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 5,
-        title: { en: "Product #5", ru: "Продукт #5" },
+        title: {
+          en: "Vintage-Inspired distressed chair",
+          ru: "Стул в стиле винтаж с потертой отделкой"
+        },
         cover: "pic-3.jpg",
         gallery: ["pic-3.jpg", "pic-1.jpg"],
         description: {
@@ -171,7 +177,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 6,
-        title: { en: "Product #6", ru: "Продукт #6" },
+        title: { en: "Stackable lightweight chair", ru: "Легкий и складной стул" },
         cover: "pic-5.jpg",
         gallery: ["pic-5.jpg"],
         description: {
@@ -185,7 +191,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 7,
-        title: { en: "Product #7", ru: "Продукт #7" },
+        title: { en: "Adjustable swivel office chair", ru: "Регулируемое стул-кресло для офиса" },
         cover: "pic-1.jpg",
         gallery: ["pic-1.jpg", "pic-7.jpg"],
         description: {
@@ -199,7 +205,10 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 8,
-        title: { en: "Product #8", ru: "Продукт #8" },
+        title: {
+          en: "Minimalist chair with clean lines",
+          ru: "Минималистический стул с чистыми линиями"
+        },
         cover: "pic-5.jpg",
         gallery: ["pic-5.jpg", "pic-6.jpg", "pic-7.jpg"],
         description: {
@@ -213,7 +222,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 9,
-        title: { en: "Product #9", ru: "Продукт #9" },
+        title: { en: "Luxurious velvet chair", ru: "Роскошный стул из бархата" },
         cover: "pic-4.jpg",
         gallery: ["pic-4.jpg", "pic-5.jpg", "pic-3.jpg", "pic-1.jpg"],
         description: {
@@ -227,7 +236,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 10,
-        title: { en: "Product #10", ru: "Продукт #10" },
+        title: { en: "Rustic wooden chair", ru: "Стул из массива дерева" },
         cover: "pic-2.jpg",
         gallery: ["pic-2.jpg", "pic-5.jpg", "pic-7.jpg", "pic-3.jpg"],
         description: {
@@ -241,7 +250,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 11,
-        title: { en: "Product #11", ru: "Продукт #11" },
+        title: { en: "Versatile Chair", ru: "Универсальный стул" },
         cover: "pic-6.jpg",
         gallery: ["pic-6.jpg"],
         description: {
@@ -255,7 +264,7 @@ export const useStore = defineStore("shop", {
       },
       {
         id: 12,
-        title: { en: "Product #12", ru: "Продукт #12" },
+        title: { en: "Comfortable Armchair", ru: "Удобное кресло" },
         cover: "pic-7.jpg",
         gallery: ["pic-7.jpg", "pic-4.jpg", "pic-3.jpg", "pic-2.jpg"],
         description: {

@@ -1,6 +1,9 @@
-import Translation from "../i18n/translation"
 import { createRouter, createWebHashHistory, RouterView } from "vue-router"
+import Translation from "../i18n/translation"
+
 import HomeView from "../views/HomeView.vue"
+import ProductsView from "../views/ProductsView.vue"
+import ProductView from "../views/ProductView.vue"
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -18,16 +21,22 @@ const router = createRouter({
         {
           path: "products",
           name: "products",
-          component: () => import("../views/ProductsView.vue")
+          component: ProductsView
         },
         {
           path: "products/:slug",
           name: "product",
-          component: () => import("../views/ProductView.vue")
+          component: ProductView
         }
       ]
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.params.slug) window.scrollTo(0, 0)
+
+  next()
 })
 
 export default router
