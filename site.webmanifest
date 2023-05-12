@@ -15,8 +15,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#3d294f",
-  "background_color": "#3d294f",
+  "theme_color": "#029FAE",
+  "background_color": "#272343",
   "display": "standalone",
   "start_url": "https://aganov.dev/landing-comforty"
 }
