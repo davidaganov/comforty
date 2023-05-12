@@ -1,24 +1,24 @@
 <template>
   <article
-    class="review"
-    :id="`review-${id}`"
+    class="card"
+    :id="`review-card-${id}`"
   >
-    <div class="review__wrapper">
-      <p class="review__text">{{ text[Translation.currentLocale] }}</p>
-      <div class="review__bottom">
+    <div class="card__wrapper">
+      <p class="card__text">{{ text[Translation.currentLocale] }}</p>
+      <div class="card__bottom">
         <img
-          class="review__avatar"
+          class="card__avatar"
           width="60"
           height="60"
           aria-hidden="true"
           alt=""
           :src="getImageUrl({ fileName: avatar, folder: 'images/users' })"
         />
-        <p class="review__name">{{ userName[Translation.currentLocale] }}</p>
-        <p class="review__job">{{ job[Translation.currentLocale] }}</p>
+        <p class="card__name">{{ userName[Translation.currentLocale] }}</p>
+        <p class="card__job">{{ job[Translation.currentLocale] }}</p>
       </div>
       <IconBase
-        class="review__quotes"
+        class="card__quotes"
         box="0 0 163 163"
         :width="163"
         :height="163"
@@ -41,7 +41,7 @@ defineProps<Review>()
 </script>
 
 <style scoped lang="scss">
-.review {
+.card {
   height: 100%;
   &__wrapper {
     position: relative;

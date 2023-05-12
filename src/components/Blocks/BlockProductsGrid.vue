@@ -86,9 +86,7 @@ const updateSortingByCategory = () => {
 watch(getSelectedSortingTag, updateSortingByTag)
 watch(getSelectedCategory, updateSortingByCategory)
 
-onMounted(() => {
-  addQueryParams()
-})
+onMounted(addQueryParams)
 </script>
 
 <style scoped lang="scss">

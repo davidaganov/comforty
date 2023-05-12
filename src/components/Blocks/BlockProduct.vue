@@ -30,14 +30,14 @@
         </div>
 
         <div class="product__buttons">
-          <BaseAddedCart
+          <BaseButtonCart
             class="product__cart"
             appearance="ghost"
             :id="product.id"
           >
             Добавить в корзину
-          </BaseAddedCart>
-          <BaseAddedFavorite
+          </BaseButtonCart>
+          <BaseButtonFavorite
             class="product__favorite"
             appearance="ghost"
             :id="product.id"
@@ -54,8 +54,8 @@ import Translation from "../../i18n/translation"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseGallery from "../Base/BaseGallery.vue"
-import BaseAddedCart from "../Base/BaseAddedCart.vue"
-import BaseAddedFavorite from "../Base/BaseAddedFavorite.vue"
+import BaseButtonCart from "../Base/BaseButtonCart.vue"
+import BaseButtonFavorite from "../Base/BaseButtonFavorite.vue"
 
 const product = defineProps<Product>()
 </script>
@@ -72,7 +72,6 @@ const product = defineProps<Product>()
   }
 
   &__title {
-    text-transform: capitalize;
     color: var(--color-black);
     @media (min-width: 769px) {
       font: 600 2.8rem/110% var(--main-font);

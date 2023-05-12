@@ -22,7 +22,7 @@
       >
         {{ $t("product.attr.sales") }}
       </span>
-      <BaseAddedFavorite
+      <BaseButtonFavorite
         class="card__favorite"
         :id="product.id"
       />
@@ -50,7 +50,7 @@
         ${{ price.discount }}
       </s>
     </div>
-    <BaseAddedCart
+    <BaseButtonCart
       class="card__cart"
       :id="product.id"
     />
@@ -63,8 +63,8 @@ import { RouterLink } from "vue-router"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
-import BaseAddedCart from "./BaseAddedCart.vue"
-import BaseAddedFavorite from "./BaseAddedFavorite.vue"
+import BaseButtonCart from "./BaseButtonCart.vue"
+import BaseButtonFavorite from "./BaseButtonFavorite.vue"
 
 const product = defineProps<Product>()
 </script>
@@ -161,7 +161,6 @@ const product = defineProps<Product>()
     padding: 0 0.3rem;
     margin: 0 -0.3rem;
     text-align: left;
-    text-transform: capitalize;
     color: var(--color-black);
     word-wrap: anywhere;
     display: -webkit-box;
