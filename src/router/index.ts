@@ -6,7 +6,7 @@ import ProductsView from "../views/ProductsView.vue"
 import ProductView from "../views/ProductView.vue"
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(import.meta.env.VITE_BASE_URL),
   routes: [
     {
       path: "/:locale?",

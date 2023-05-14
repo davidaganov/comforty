@@ -43,9 +43,9 @@
           >
             <a
               class="footer__link"
-              :href="link"
+              :href="$rt(link)"
             >
-              {{ title }}
+              {{ $rt(title) }}
             </a>
           </li>
         </ul>

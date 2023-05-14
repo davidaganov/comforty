@@ -9,7 +9,7 @@
         v-show="cart"
       >
         <div class="menu__top">
-          <h3 class="menu__title">{{ $t("nav.middle.cart.text") }}</h3>
+          <h3 class="menu__title">{{ $t("nav.middle.cart.text") }} sss</h3>
           <button
             type="button"
             class="menu__close"
@@ -134,7 +134,7 @@ import BaseButton from "../Base/BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconClose from "../Icons/IconClose.vue"
 
-const cart = ref(true)
+const cart = ref(false)
 const favorites = ref(false)
 
 const store = useStore()

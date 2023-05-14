@@ -11,8 +11,7 @@
         {{ title[Translation.currentLocale] }}
       </span>
       <span class="card__products">
-        {{ productsCount ? productsCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "" }}
-        {{ $t("categories.title") }}
+        {{ $t("categories.count", productsCount) }}
       </span>
     </div>
     <RouterLink

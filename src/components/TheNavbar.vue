@@ -59,17 +59,17 @@
               >
                 <RouterLink
                   class="navbar__link"
-                  :to="Translation.i18nRoute({ name: link })"
+                  :to="Translation.i18nRoute({ name: $rt(link) })"
                   v-if="link"
                 >
-                  {{ title }}
+                  {{ $rt(title) }}
                 </RouterLink>
                 <a
                   class="navbar__link"
-                  :href="anchor"
+                  :href="$rt(anchor)"
                   v-if="anchor"
                 >
-                  {{ title }}
+                  {{ $rt(title) }}
                 </a>
               </li>
             </ul>

@@ -18,6 +18,22 @@ const Translation = {
     i18n.global.locale.value = newLocale
   },
 
+  async switchLanguage(newLocale: string) {
+    await Translation.loadLocalMessages(newLocale)
+    Translation.currentLocale = newLocale
+    document.querySelector("html")?.setAttribute("lang", newLocale)
+    localStorage.setItem("user-locale", newLocale)
+  },
+
+  async loadLocalMessages(locale: string) {
+    if (!i18n.global.availableLocales.includes(locale)) {
+      const messages = await import(`./locales/${locale}.json`)
+      i18n.global.setLocaleMessage(locale, messages.default)
+    }
+
+    return nextTick()
+  },
+
   isLocaleSupported(locale: string): boolean {
     return Translation.supportedLocales.includes(locale)
   },
@@ -59,23 +75,7 @@ const Translation = {
     return Translation.defaultLocale
   },
 
-  async switchLanguage(newLocale: string) {
-    await Translation.loadLocalMessages(newLocale)
-    Translation.currentLocale = newLocale
-    document.querySelector("html")?.setAttribute("lang", newLocale)
-    localStorage.setItem("user-locale", newLocale)
-  },
-
-  async loadLocalMessages(locale: string) {
-    if (!i18n.global.availableLocales.includes(locale)) {
-      const messages = await import(`./locales/${locale}.json`)
-      i18n.global.setLocaleMessage(locale, messages.default)
-    }
-
-    return nextTick()
-  },
-
-  async routeMiddleware(to: any, from: any, next: any) {
+  async routeMiddleware(to: any, _from: any, next: any) {
     const paramLocale = to.params.locale
 
     if (!Translation.isLocaleSupported(paramLocale)) {
