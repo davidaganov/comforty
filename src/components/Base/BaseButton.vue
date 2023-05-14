@@ -25,7 +25,7 @@
     :class="`btn--${appearance} ${arrow ? 'btn--arrow' : ''}`"
     v-else-if="to"
   >
-    <slot></slot>
+    <slot />
     <span
       v-if="arrow"
       class="btn__arrow"
@@ -87,6 +87,9 @@ withDefaults(defineProps<Button>(), {
   font: 600 1.6rem/110% var(--main-font);
   transition: all 0.2s;
   cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 
   &--arrow {
     padding: 1.4rem 2.4rem;
@@ -95,15 +98,17 @@ withDefaults(defineProps<Button>(), {
   &--primary {
     background-color: var(--color-accent);
     color: var(--color-white);
-    &:focus-visible {
-      background-color: var(--color-accent-hover);
-    }
     &:not(#{$parent}--arrow) {
       padding: 1.7rem 2.4rem;
     }
-    @media (min-width: 576px) {
-      &:hover {
+    &:not(:disabled) {
+      &:focus-visible {
         background-color: var(--color-accent-hover);
+      }
+      @media (min-width: 576px) {
+        &:hover {
+          background-color: var(--color-accent-hover);
+        }
       }
     }
   }
@@ -111,14 +116,16 @@ withDefaults(defineProps<Button>(), {
   &--white,
   &--gray {
     padding: 1.1rem;
-    &:focus-visible {
-      background-color: var(--color-accent);
-      color: var(--color-white);
-    }
-    @media (min-width: 576px) {
-      &:hover {
+    &:not(:disabled) {
+      &:focus-visible {
         background-color: var(--color-accent);
         color: var(--color-white);
+      }
+      @media (min-width: 576px) {
+        &:hover {
+          background-color: var(--color-accent);
+          color: var(--color-white);
+        }
       }
     }
   }
@@ -129,16 +136,36 @@ withDefaults(defineProps<Button>(), {
     border: 0.1rem solid var(--color-gray-400);
     background-color: var(--color-white);
     color: var(--color-black);
-    &:focus-visible {
-      background-color: var(--color-accent);
-      color: var(--color-white);
-      border-color: var(--color-accent);
-    }
-    @media (min-width: 576px) {
-      &:hover {
+    &:not(:disabled) {
+      &:focus-visible {
         background-color: var(--color-accent);
         color: var(--color-white);
         border-color: var(--color-accent);
+      }
+      @media (min-width: 576px) {
+        &:hover {
+          background-color: var(--color-accent);
+          color: var(--color-white);
+          border-color: var(--color-accent);
+        }
+      }
+    }
+  }
+
+  &--attention {
+    padding: 1.6rem;
+    font-weight: 500;
+    background-color: var(--color-attention);
+    color: var(--color-white);
+    &:not(:disabled) {
+      &:focus-visible {
+        background-color: var(--color-attention-hover);
+        color: var(--color-white);
+      }
+      @media (min-width: 576px) {
+        &:hover {
+          background-color: var(--color-attention-hover);
+        }
       }
     }
   }

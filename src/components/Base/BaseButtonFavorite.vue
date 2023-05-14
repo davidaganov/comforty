@@ -49,8 +49,8 @@ const store = useStore()
     transition: all 0.2s;
     opacity: 1 !important;
     &:hover {
-      background-color: #d95138;
-      border-color: #d95138;
+      background-color: var(--color-attention-hover);
+      border-color: var(--color-attention-hover);
     }
   }
 

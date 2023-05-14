@@ -12,15 +12,15 @@
       :tabindex="screenWidth < 1021 ? 0 : -1"
       :aria-label="
         screenWidth < 1021
-          ? $t('page.products.filter.ariaOpen')
-          : $t('page.products.filter.ariaList')
+          ? $t('pages.products.filter.ariaOpen')
+          : $t('pages.products.filter.ariaList')
       "
       @click="toggleModal(true)"
     >
       {{
         screenWidth > 1021
-          ? $t("page.products.filter.categories")
-          : $t("page.products.filter.title")
+          ? $t("pages.products.filter.categories")
+          : $t("pages.products.filter.title")
       }}
       <IconBase
         class="categories__label-icon"
@@ -39,25 +39,25 @@
       >
         <div class="categories__top">
           <BaseTitle class="categories__top-title">
-            {{ $t("page.products.filter.title") }}
+            {{ $t("pages.products.filter.title") }}
           </BaseTitle>
 
           <BaseButtonClose
-            :aria-label="$t('page.products.filter.ariaClose')"
+            :aria-label="$t('pages.products.filter.ariaClose')"
             @click="toggleModal(false)"
             @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? toggleModal(false) : null"
           />
         </div>
 
         <h3 class="categories__title">
-          {{ $t("page.products.filter.categories") }}
+          {{ $t("pages.products.filter.categories") }}
         </h3>
         <div class="categories__list">
           <span
             id="categoriesLabel"
             class="visually-hidden"
           >
-            {{ $t("page.products.filter.ariaLabel") }}:
+            {{ $t("pages.products.filter.ariaLabel") }}:
           </span>
 
           <button
@@ -77,7 +77,7 @@
         </div>
 
         <!-- <h3 class="categories__title">
-          {{ $t("page.products.filter.price") }}
+          {{ $t("pages.products.filter.price") }}
         </h3> -->
       </div>
     </Transition>
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
+import { onMounted, onUnmounted, ref } from "vue"
 import { useStore } from "../../stores"
 import Translation from "../../i18n/translation"
 
@@ -108,10 +108,16 @@ const toggleModal = (value: boolean) => {
   }
 }
 
+const handleResize = () => {
+  screenWidth.value = window.innerWidth
+}
+
 onMounted(() => {
-  window.addEventListener("resize", () => {
-    screenWidth.value = window.innerWidth
-  })
+  window.addEventListener("resize", handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleResize)
 })
 </script>
 

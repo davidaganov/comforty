@@ -19,13 +19,10 @@
         "buttonAria": "Click for search"
       },
       "cart": {
-        "aria": "Open Cart",
-        "ariaClose": "Close Cart",
-        "ariaDelete": "Click to remove the product from the cart",
-        "text": "Cart",
-        "add": "Go to the products",
+        "link": "Go to the cart",
         "more": "no products | add 1 more product | add {count} more products",
-        "link": "Go to the cart"
+        "aria": "Open Cart",
+        "ariaClose": "Close Cart"
       },
       "favorite": "Open favorites products"
     },
@@ -132,7 +129,7 @@
       }
     }
   },
-  "page": {
+  "pages": {
     "products": {
       "category": {
         "title": "All categories"
@@ -151,6 +148,26 @@
         "ariaClose": "Close a modal window with product filters"
       },
       "notFound": "Nothing was found on the specified filters :("
+    },
+    "cart": {
+      "title": "Cart",
+      "products": "Go to the products",
+      "count": "No products | 1 product | {count} products",
+      "empty": "Your cart is empty :(",
+      "clear": "Clear cart",
+      "ariaDelete": "Click to remove a product from the cart",
+      "modal": {
+        "title": "Confirmation",
+        "description": "Are you sure you want to clear the cart?",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "ariaClose": "Close confirmation"
+      }
+    },
+    "favorites": {
+      "title": "Favorite products",
+      "empty": "No favorite products",
+      "ariaDelete": "Click to remove a product from favorites"
     }
   },
   "carousel": {

@@ -5,70 +5,193 @@
   >
     <BaseInner class="products__inner">
       <BaseTitle class="products__title">
-        {{ $t("blocks.products.title") }}
+        {{ store.getTitleSelectedCategory()?.[Translation.currentLocale] }}
       </BaseTitle>
-
-      <BaseSorting />
-
-      <div class="products__list">
+      <BaseCategoriesSelect class="products__categories" />
+      <hr class="products__line" />
+      <BaseSorting
+        class="products__sorting"
+        :dropdown="true"
+      />
+      <div
+        class="products__list"
+        v-if="products.length !== 0"
+      >
         <BaseCardProduct
           class="products__item"
-          v-for="product in products.slice(0, 8)"
-          v-bind="product"
           :key="product.id"
+          v-bind="product"
+          v-for="product in products"
         />
+      </div>
+
+      <div
+        class="products__empty"
+        v-else
+      >
+        <span class="products__empty-title">404</span>
+        <p class="products__empty-description">{{ $t("pages.products.notFound") }}</p>
       </div>
     </BaseInner>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue"
-import { useStore } from "../../stores"
+import type { Product } from "../../interfaces"
+import { ref, watch, onMounted } from "vue"
 import { storeToRefs } from "pinia"
+import { useRoute, useRouter } from "vue-router"
+import { useStore } from "../../stores"
+import Translation from "../../i18n/translation"
 
 import BaseInner from "../Base/BaseInner.vue"
-import BaseTitle from "../Base/BaseTitle.vue"
-import BaseSorting from "../Base/BaseSorting.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
+import BaseSorting from "../Base/BaseSorting.vue"
+import BaseTitle from "../Base/BaseTitle.vue"
+import BaseCategoriesSelect from "../Base/BaseCategoriesSelect.vue"
+
+const products = ref<Product[]>([])
+
+const route = useRoute()
+const router = useRouter()
 
 const store = useStore()
-const { getSelectedSortingTag } = storeToRefs(store)
+const { getSelectedSortingTag, getSelectedCategory } = storeToRefs(store)
 
-const products = ref(store.getSortingProducts({ tag: "all" }))
+const addQueryParams = () => {
+  const selectedCategory = route.query.cat ? route.query.cat : "all"
+  const queryParams = { cat: selectedCategory }
 
-watch(getSelectedSortingTag, () => {
-  products.value = store.getSortingProducts({ tag: getSelectedSortingTag.value })
-})
+  if (typeof selectedCategory === "string") {
+    products.value = store.getSortingProducts({ category: selectedCategory })
+    store.setSelectedCategory(selectedCategory)
+  }
+
+  router.push({ path: route.path, query: queryParams })
+}
+
+const updateSortingByTag = () => {
+  products.value = store.getSortingProducts({
+    tag: getSelectedSortingTag.value,
+    category: getSelectedCategory.value
+  })
+}
+
+const updateSortingByCategory = () => {
+  store.setSelectedSortingTag("all")
+  products.value = store.getSortingProducts({ category: getSelectedCategory.value })
+  router.push({
+    path: route.path,
+    query: { cat: getSelectedCategory.value }
+  })
+}
+
+watch(getSelectedSortingTag, updateSortingByTag)
+watch(getSelectedCategory, updateSortingByCategory)
+
+onMounted(addQueryParams)
 </script>
 
 <style scoped lang="scss">
 .products {
+  &__inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem 3rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+
   &__title {
-    text-align: center;
-    margin-bottom: 1.6rem;
+    @media (min-width: 1021px) {
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    @media (max-width: 1020px) {
+      grid-area: 1 / 1 / 2 / 3;
+    }
+  }
+
+  &__line {
+    width: 100%;
+    height: 0.1rem;
+    border: none;
+    background-color: var(--color-gray-400);
+    @media (min-width: 1021px) {
+      grid-area: 2 / 1 / 3 / 3;
+    }
+    @media (max-width: 1020px) {
+      grid-area: 2 / 1 / 3 / 3;
+    }
+  }
+
+  &__categories {
+    @media (min-width: 1021px) {
+      grid-area: 3 / 1 / 4 / 2;
+      align-self: flex-start;
+    }
+    @media (max-width: 1020px) {
+      grid-area: 3 / 1 / 4 / 2;
+    }
+  }
+
+  &__sorting {
+    margin-left: auto;
+    @media (min-width: 1021px) {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    @media (max-width: 1020px) {
+      grid-area: 3 / 2 / 4 / 3;
+    }
   }
 
   &__list {
     display: grid;
     gap: 1.5rem;
-    margin-top: 4rem;
-    @media (min-width: 1021px) {
+    height: 100%;
+
+    @media (min-width: 1201px) {
       grid-template-columns: repeat(4, 1fr);
     }
-    @media (max-width: 1020px) and (min-width: 576px) {
+    @media (max-width: 1200px) and (min-width: 769px) {
       grid-template-columns: repeat(3, 1fr);
     }
-    @media (max-width: 575px) {
+    @media (max-width: 768px) {
       grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: 1021px) {
+      grid-area: 3 / 2 / 4 / 3;
+    }
+    @media (max-width: 1020px) and (min-width: 576px) {
+      grid-area: 4 / 1 / 5 / 3;
+    }
+    @media (max-width: 575px) {
+      grid-area: 5 / 1 / 6 / 3;
     }
   }
 
-  &__item {
+  &__empty {
+    text-align: center;
+    @media (min-width: 1021px) {
+      grid-area: 3 / 2 / 4 / 3;
+    }
     @media (max-width: 1020px) {
-      &:nth-of-type(n + 7) {
-        display: none;
-      }
+      margin-top: 4rem;
+    }
+    @media (max-width: 1020px) and (min-width: 576px) {
+      grid-area: 4 / 1 / 5 / 3;
+    }
+    @media (max-width: 575px) {
+      grid-area: 5 / 1 / 6 / 3;
+    }
+    &-title {
+      display: block;
+      margin-bottom: 1rem;
+      font: 600 4rem/110% var(--main-font);
+      color: var(--color-black);
+    }
+    &-description {
+      font: 600 2rem/110% var(--main-font);
+      color: var(--color-black);
     }
   }
 }

@@ -5,8 +5,8 @@
   >
     <div class="card__picture">
       <img
-        width="311"
-        height="312"
+        width="310"
+        height="310"
         :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
         :alt="title[Translation.currentLocale]"
       />
@@ -24,7 +24,7 @@
       </span>
       <BaseButtonFavorite
         class="card__favorite"
-        :id="product.id"
+        :id="id"
       />
       <RouterLink
         class="card__link"
@@ -42,17 +42,17 @@
     </RouterLink>
 
     <div class="card__price">
-      <span class="card__price-regular">${{ price.regular }}</span>
+      <span class="card__price-regular"> ${{ getDivisors(price.regular) }} </span>
       <s
         class="card__price-old"
         v-if="price.discount"
       >
-        ${{ price.discount }}
+        ${{ getPercent(price.regular, price.discount) }}
       </s>
     </div>
     <BaseButtonCart
       class="card__cart"
-      :id="product.id"
+      :id="id"
     />
   </article>
 </template>
@@ -61,12 +61,14 @@
 import type { Product } from "../../interfaces"
 import { RouterLink } from "vue-router"
 import { getImageUrl } from "../../utils/getImageUrl"
+import { getDivisors } from "../../utils/getDivisors"
+import { getPercent } from "../../utils/getPercent"
 import Translation from "../../i18n/translation"
 
 import BaseButtonCart from "./BaseButtonCart.vue"
 import BaseButtonFavorite from "./BaseButtonFavorite.vue"
 
-const product = defineProps<Product>()
+defineProps<Product>()
 </script>
 
 <style scoped lang="scss">
@@ -80,7 +82,7 @@ const product = defineProps<Product>()
     width: 100%;
     margin-bottom: 1.4rem;
     @media (min-width: 769px) {
-      height: 31.2rem;
+      height: 31rem;
       &:not(&:hover) {
         #{$parent}__favorite {
           opacity: 0;
@@ -159,7 +161,7 @@ const product = defineProps<Product>()
   &__title {
     grid-area: 2 / 1 / 3 / 2;
     padding: 0 0.3rem;
-    margin: 0 -0.3rem;
+    margin: 0 -0.3rem 0.5rem;
     text-align: left;
     color: var(--color-black);
     word-wrap: anywhere;
@@ -186,7 +188,7 @@ const product = defineProps<Product>()
   &__price {
     display: flex;
     align-items: center;
-    margin-top: 1rem;
+    gap: 0.5rem;
     grid-area: 3 / 1 / 4 / 2;
     &-regular {
       font: 600 1.8rem/110% var(--main-font);

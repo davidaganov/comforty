@@ -54,7 +54,7 @@ export interface Button {
   link?: string
   to?: string | { name: string; params?: any }
   type?: "button" | "submit" | "reset" | undefined
-  appearance?: "primary" | "gray" | "white" | "ghost"
+  appearance?: "primary" | "gray" | "white" | "ghost" | "attention"
   arrow?: boolean
 }
 

@@ -1,6 +1,7 @@
 <template>
   <BaseButton
     appearance="white"
+    :to="to"
     :aria-label="$t('nav.middle.favorite')"
   >
     <IconBase
@@ -18,4 +19,6 @@
 import BaseButton from "../Base/BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconHeart from "../Icons/IconHeart.vue"
+
+defineProps<{ to?: string }>()
 </script>

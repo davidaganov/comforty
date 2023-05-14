@@ -10,7 +10,7 @@
 
   <BlockCategories :categories="categories" />
 
-  <BlockProducts />
+  <BlockProductsGrid />
 
   <BlockReviews :reviews="reviews" />
 
@@ -28,7 +28,7 @@ import BlockPromo from "../components/Blocks/BlockPromo.vue"
 import BlockCompanies from "../components/Blocks/BlockCompanies.vue"
 import BlockProductsCarousel from "../components/Blocks/BlockProductsCarousel.vue"
 import BlockCategories from "../components/Blocks/BlockCategories.vue"
-import BlockProducts from "../components/Blocks/BlockProducts.vue"
+import BlockProductsGrid from "../components/Blocks/BlockProductsGrid.vue"
 import BlockReviews from "../components/Blocks/BlockReviews.vue"
 
 const { getPromoProducts, getCategories, getCompanies, getReviews, getSortingProducts } = useStore()
@@ -38,8 +38,8 @@ const categories = getCategories
 const companies = getCompanies
 const reviews = getReviews
 
-const featuredProducts = getSortingProducts({ tag: "featured" })
-const newestProducts = getSortingProducts({ tag: "newest" })
+const featuredProducts = getSortingProducts({ tag: "featured" }).slice(0, 16)
+const newestProducts = getSortingProducts({ tag: "newest" }).slice(0, 16)
 
 onMounted(() => {
   document.title = "Comforty"

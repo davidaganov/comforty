@@ -11,13 +11,13 @@
       id="sortLabel"
       class="sorting__label"
     >
-      {{ $t("page.products.sorting.label") }}:
+      {{ $t("pages.products.sorting.label") }}:
     </span>
     <button
       type="button"
       class="sorting__current"
       tabindex="0"
-      :aria-label="$t('page.products.sorting.aria')"
+      :aria-label="$t('pages.products.sorting.aria')"
       v-if="dropdown"
       @keydown.shift.exact="(e: KeyboardEvent) => e.key === 'Tab' ? toggleDropdown(false) : null"
     >

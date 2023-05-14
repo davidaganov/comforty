@@ -62,7 +62,7 @@ const product = defineProps<Product>()
 
 <style scoped lang="scss">
 .product {
-  margin: 4rem 0;
+  margin-top: 4rem;
   &__inner {
     display: flex;
     gap: 2rem;

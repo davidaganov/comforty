@@ -1,10 +1,10 @@
 <template>
-  <BlockProductsGrid />
+  <BlockProducts />
 </template>
 
 <script setup lang="ts">
 import { onMounted } from "vue"
-import BlockProductsGrid from "../components/Blocks/BlockProductsGrid.vue"
+import BlockProducts from "../components/Blocks/BlockProducts.vue"
 
 onMounted(() => {
   document.title = "Comforty — Products"

@@ -111,7 +111,7 @@ export const useStore = defineStore("shop", {
         slug: "product-1",
         category: "sofa",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
-        price: { regular: 15, discount: 10 }
+        price: { regular: 190, discount: 10 }
       },
       {
         id: 2,
@@ -125,7 +125,7 @@ export const useStore = defineStore("shop", {
         slug: "product-2",
         category: "woodenchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
-        price: { regular: 15 }
+        price: { regular: 290 }
       },
       {
         id: 3,
@@ -139,7 +139,7 @@ export const useStore = defineStore("shop", {
         slug: "product-3",
         category: "woodenchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
-        price: { regular: 15, discount: 17 }
+        price: { regular: 1500, discount: 55 }
       },
       {
         id: 4,
@@ -156,7 +156,7 @@ export const useStore = defineStore("shop", {
         slug: "product-4",
         category: "wingchair",
         attr: { newest: false, trending: false, bestsellers: false, featured: true },
-        price: { regular: 15 }
+        price: { regular: 690 }
       },
       {
         id: 5,
@@ -173,7 +173,7 @@ export const useStore = defineStore("shop", {
         slug: "product-5",
         category: "deskchair",
         attr: { newest: true, trending: false, bestsellers: true, featured: false },
-        price: { regular: 25, discount: 10 }
+        price: { regular: 450, discount: 15 }
       },
       {
         id: 6,
@@ -187,7 +187,7 @@ export const useStore = defineStore("shop", {
         slug: "product-6",
         category: "parkbench",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
-        price: { regular: 10, discount: 2 }
+        price: { regular: 290, discount: 30 }
       },
       {
         id: 7,
@@ -201,7 +201,7 @@ export const useStore = defineStore("shop", {
         slug: "product-7",
         category: "armchair",
         attr: { newest: false, trending: true, bestsellers: true, featured: false },
-        price: { regular: 30, discount: 7 }
+        price: { regular: 1700, discount: 20 }
       },
       {
         id: 8,
@@ -218,7 +218,7 @@ export const useStore = defineStore("shop", {
         slug: "product-8",
         category: "wingchair",
         attr: { newest: false, trending: true, bestsellers: false, featured: true },
-        price: { regular: 20 }
+        price: { regular: 90 }
       },
       {
         id: 9,
@@ -232,7 +232,7 @@ export const useStore = defineStore("shop", {
         slug: "product-9",
         category: "armchair",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
-        price: { regular: 12 }
+        price: { regular: 360 }
       },
       {
         id: 10,
@@ -246,7 +246,7 @@ export const useStore = defineStore("shop", {
         slug: "product-10",
         category: "parkbench",
         attr: { newest: false, trending: false, bestsellers: true, featured: false },
-        price: { regular: 18 }
+        price: { regular: 550 }
       },
       {
         id: 11,
@@ -260,7 +260,7 @@ export const useStore = defineStore("shop", {
         slug: "product-11",
         category: "armchair",
         attr: { newest: false, trending: true, bestsellers: false, featured: true },
-        price: { regular: 28, discount: 9 }
+        price: { regular: 150, discount: 22 }
       },
       {
         id: 12,
@@ -274,7 +274,7 @@ export const useStore = defineStore("shop", {
         slug: "product-12",
         category: "sofa",
         attr: { newest: true, trending: false, bestsellers: false, featured: false },
-        price: { regular: 8 }
+        price: { regular: 350 }
       }
     ] as Product[],
     sortingTags: [
@@ -382,6 +382,10 @@ export const useStore = defineStore("shop", {
         : this.addProduct(productId, state)
     },
 
+    clearCart(): void {
+      this.cart = []
+    },
+
     // Get current product
     getProduct(slug: string) {
       return this.products.find((product) => product.slug === slug)
@@ -399,7 +403,7 @@ export const useStore = defineStore("shop", {
 
     // Get name current sorting tag
     getTitleSelectedSortingTag() {
-      return this.sortingTags.find((item) => item.slug === this.selectedSortingTag)?.tag
+      return this.sortingTags.find((tag) => tag.slug === this.selectedSortingTag)?.tag
     },
 
     // Set current category
@@ -410,6 +414,11 @@ export const useStore = defineStore("shop", {
     // Checked current category
     isSelectedCategory(category: string) {
       return this.selectedCategory === category
+    },
+
+    // Get name current category
+    getTitleSelectedCategory() {
+      return this.categories.find((category) => category.slug === this.selectedCategory)?.title
     },
 
     // Get current sorting products

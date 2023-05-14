@@ -3,11 +3,6 @@
     v-bind="product"
     v-if="product"
   />
-
-  <BlockProductsCarousel
-    name="featured"
-    :products="products"
-  />
 </template>
 
 <script setup lang="ts">
@@ -17,13 +12,11 @@ import { useStore } from "../stores"
 import Translation from "../i18n/translation"
 
 import BlockProduct from "../components/Blocks/BlockProduct.vue"
-import BlockProductsCarousel from "../components/Blocks/BlockProductsCarousel.vue"
 
-const store = useStore()
+const { getProduct } = useStore()
 const route = useRoute()
 
-const product = ref(store.getProduct(`${route.params.slug}`))
-const products = store.getProducts.slice(0, 8)
+const product = ref(getProduct(`${route.params.slug}`))
 
 const changeMetaTitle = () => {
   document.title = `Comforty — ${product.value?.title[Translation.currentLocale]}`
@@ -32,7 +25,7 @@ const changeMetaTitle = () => {
 watch(
   () => route.params.slug,
   () => {
-    product.value = store.getProduct(`${route.params.slug}`)
+    product.value = getProduct(`${route.params.slug}`)
     changeMetaTitle()
   }
 )

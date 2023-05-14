@@ -2,6 +2,7 @@
   <BaseButton
     class="cart"
     appearance="white"
+    :to="to"
     :aria-label="$t('nav.middle.cart.aria')"
   >
     <IconBase
@@ -12,7 +13,7 @@
     >
       <IconCart />
     </IconBase>
-    <span class="cart__text">{{ $t("nav.middle.cart.text") }}</span>
+    <span class="cart__text">{{ $t("pages.cart.title") }}</span>
     <span class="cart__counter">{{ store.getCart.length }}</span>
   </BaseButton>
 </template>
@@ -25,6 +26,8 @@ import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 
 const store = useStore()
+
+defineProps<{ to?: string }>()
 </script>
 
 <style scoped lang="scss">
