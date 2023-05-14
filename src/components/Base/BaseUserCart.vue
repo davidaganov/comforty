@@ -13,19 +13,18 @@
       <IconCart />
     </IconBase>
     <span class="cart__text">{{ $t("nav.middle.cart.text") }}</span>
-    <span class="cart__counter">{{ cart.length }}</span>
+    <span class="cart__counter">{{ store.getCart.length }}</span>
   </BaseButton>
 </template>
 
 <script setup lang="ts">
-import BaseButton from "./BaseButton.vue"
-
 import { useStore } from "../../stores"
+
+import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 
-const { getCart } = useStore()
-const cart = getCart
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

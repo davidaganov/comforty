@@ -8,7 +8,5 @@ export default createI18n({
   legacy: false,
   globalInjection: true,
   messages: { en },
-  pruralizationRules: {
-    ru: pluralRules
-  }
+  pluralRules
 })

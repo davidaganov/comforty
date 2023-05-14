@@ -9,7 +9,7 @@
       </BaseTitle>
 
       <BaseCarouselControl
-        class="block__control"
+        class="categories__control"
         prevEl="categories__prev"
         nextEl="categories__next"
       />

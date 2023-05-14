@@ -44,10 +44,13 @@ const store = useStore()
 
   &--active {
     color: var(--color-white);
-    background-color: tomato;
+    background-color: var(--color-attention);
+    border-color: var(--color-attention);
+    transition: all 0.2s;
     opacity: 1 !important;
     &:hover {
       background-color: #d95138;
+      border-color: #d95138;
     }
   }
 

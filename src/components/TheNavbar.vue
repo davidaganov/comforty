@@ -156,13 +156,13 @@ import IconMenu from "./Icons/IconMenu.vue"
   }
 
   &__middle {
-    position: relative;
     padding: 2rem 0;
     z-index: 2;
     @media (min-width: 576px) {
       background-color: var(--color-gray-600);
     }
     &-inner {
+      position: relative;
       @media (min-width: 576px) {
         display: flex;
         justify-content: space-between;

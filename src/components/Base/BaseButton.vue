@@ -111,7 +111,6 @@ withDefaults(defineProps<Button>(), {
   &--white,
   &--gray {
     padding: 1.1rem;
-    color: var(--color-black);
     &:focus-visible {
       background-color: var(--color-accent);
       color: var(--color-white);

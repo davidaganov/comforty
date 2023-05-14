@@ -20,7 +20,12 @@
       },
       "cart": {
         "aria": "Open Cart",
-        "text": "Cart"
+        "ariaClose": "Close Cart",
+        "ariaDelete": "Click to remove the product from the cart",
+        "text": "Cart",
+        "add": "Go to the products",
+        "more": "no products | add 1 more product | add {count} more products",
+        "link": "Go to the cart"
       },
       "favorite": "Open favorites products"
     },

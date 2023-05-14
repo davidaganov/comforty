@@ -3,10 +3,10 @@
     type="button"
     class="cart"
     :appearance="appearance ? appearance : 'gray'"
-    :class="store.isProduct(id, 'cart') ? 'cart--active' : ''"
-    :title="store.isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
+    :class="isProduct(id, 'cart') ? 'cart--active' : ''"
+    :title="isProduct(id, 'cart') ? $t('product.aria.remove') : $t('product.aria.add')"
     :aria-label="$t('product.aria.cart')"
-    @click="() => store.toggleProduct(id, 'cart')"
+    @click="toggleProduct(id, 'cart')"
   >
     <slot />
     <IconBase
@@ -28,13 +28,14 @@ import IconBase from "../Icons/IconBase.vue"
 import IconCart from "../Icons/IconCart.vue"
 
 defineProps<{ id: number; appearance?: "primary" | "gray" | "white" | "ghost" | undefined }>()
-const store = useStore()
+const { isProduct, toggleProduct } = useStore()
 </script>
 
 <style scoped lang="scss">
 .cart {
   &--active {
     color: var(--color-white);
+    border-color: var(--color-accent);
     background-color: var(--color-accent);
     &:hover {
       background-color: var(--color-accent-hover);
