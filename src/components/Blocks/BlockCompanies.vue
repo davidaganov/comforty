@@ -19,7 +19,7 @@
         :modules="modules"
       >
         <SwiperSlide
-          v-for="{ id, name, logo } in companies"
+          v-for="{ id, name, logo } in store.getCompanies"
           :key="id"
         >
           <img
@@ -36,16 +36,16 @@
 </template>
 
 <script setup lang="ts">
-import type { Company } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Autoplay } from "swiper"
+import { useStore } from "../../stores"
 import { getImageUrl } from "../../utils/getImageUrl"
 
 import BaseInner from "../Base/BaseInner.vue"
 
-defineProps<{ companies: Company[] }>()
-
 const modules = [Autoplay]
+
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

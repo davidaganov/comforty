@@ -30,7 +30,7 @@ export interface Product {
   }
 }
 
-export interface SortingTag {
+export interface Tag {
   id: number
   slug: string
   tag: Record<string, string>
@@ -43,7 +43,7 @@ export interface Company {
 }
 
 export interface Review {
-  id: number
+  id: string
   text: Record<string, string>
   avatar: string
   userName: Record<string, string>
@@ -66,3 +66,5 @@ export interface Icon {
   width?: number
   height?: number
 }
+
+export type Shopping = "cart" | "favorites"

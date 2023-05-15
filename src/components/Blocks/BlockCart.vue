@@ -6,13 +6,13 @@
     <BaseInner class="cart__inner">
       <div class="cart__top">
         <BaseTitle class="cart__title">
-          {{ $t("pages.cart.title") }},
-          <span class="cart__count">{{ $t("pages.cart.count", getCart.length) }}</span>
+          {{ $t("pages.cart.title")
+          }}<span class="cart__count">{{ $t("pages.cart.count", cart.length) }}</span>
         </BaseTitle>
         <BaseButton
           class="cart__clear"
           appearance="ghost"
-          :disabled="getCart.length === 0"
+          :disabled="cart.length === 0"
           @click="openDialog"
         >
           {{ $t("pages.cart.clear") }}
@@ -33,19 +33,19 @@
 
       <ul
         class="cart__list"
-        v-if="getCart.length !== 0"
+        v-if="cart.length !== 0"
       >
         <BaseProductItem
           name="cart"
           :key="product.id"
           v-bind="product"
-          v-for="product in getCart"
+          v-for="product in cart"
         />
       </ul>
 
       <div
         class="cart__empty"
-        v-if="getCart.length === 0"
+        v-if="cart.length === 0"
       >
         <span class="cart__empty-title">404</span>
         <p class="cart__empty-description">{{ $t("pages.cart.empty") }}</p>
@@ -77,6 +77,8 @@ const open = ref(false)
 
 const store = useStore()
 const { getCart } = storeToRefs(store)
+
+const cart = getCart
 
 const openDialog = () => {
   open.value = true
@@ -119,10 +121,14 @@ const closeDialog = () => {
   }
 
   &__count {
-    @media (min-width: 769px) {
+    @media (min-width: 576px) {
       color: var(--color-gray);
+      &::before {
+        content: ", ";
+        color: var(--color-black);
+      }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 575px) {
       display: none;
     }
   }

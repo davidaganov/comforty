@@ -1,103 +1,12 @@
+import type { Category, PromoProduct, Product, Company, Review, Tag, Shopping } from "../interfaces"
 import { defineStore } from "pinia"
-import type { Category, PromoProduct, Product, Company, Review, SortingTag } from "../interfaces"
 
-type State = "cart" | "favorites"
-
-// export const useStore = defineStore("cart", {
-//   state: () => {(
-//     cart: [] as Product[]
-//   )},
-//   persist: true
-// })
+import { getCollection } from "../services/getCollection"
 
 export const useStore = defineStore("shop", {
   state: () => ({
-    categories: [
-      {
-        id: 1,
-        title: { en: "All categories", ru: "Все категории" },
-        cover: "cat-1.jpg",
-        slug: "all",
-        productsCount: 12
-      },
-      {
-        id: 2,
-        title: { en: "Wing Chair", ru: "Кресла с подголовником" },
-        productsCount: 2,
-        cover: "cat-1.jpg",
-        slug: "wingchair"
-      },
-      {
-        id: 3,
-        title: { en: "Wooden Chair", ru: "Деревянные стулья" },
-        productsCount: 2,
-        cover: "cat-2.jpg",
-        slug: "woodenchair"
-      },
-      {
-        id: 4,
-        title: { en: "Desk Chair", ru: "Офисные кресла" },
-        productsCount: 1,
-        cover: "cat-3.jpg",
-        slug: "deskchair"
-      },
-      {
-        id: 5,
-        title: { en: "Park Bench", ru: "Скамейки" },
-        productsCount: 2,
-        cover: "cat-2.jpg",
-        slug: "parkbench"
-      },
-      {
-        id: 6,
-        title: { en: "Armchair", ru: "Кресла" },
-        productsCount: 3,
-        cover: "cat-1.jpg",
-        slug: "armchair"
-      },
-      {
-        id: 7,
-        title: { en: "Sofa", ru: "Диваны" },
-        productsCount: 3,
-        cover: "cat-3.jpg",
-        slug: "sofa"
-      }
-    ] as Category[],
-    promoProducts: [
-      {
-        id: 1,
-        title: {
-          en: "Best furniture collection for your interior",
-          ru: "Лучшая коллекция мебели для вашего интерьера"
-        },
-        subtitle: { en: "Welcome to Comforty", ru: "Добро пожаловать в Comforty" },
-        img: "pic-1.png",
-        slug: "product-1",
-        discount: 54
-      },
-      {
-        id: 2,
-        title: {
-          en: "Modern furniture for your office space",
-          ru: "Современная мебель для вашего офиса"
-        },
-        subtitle: { en: "Welcome to Comforty", ru: "Добро пожаловать в Comforty" },
-        img: "pic-1.png",
-        slug: "product-2",
-        discount: 35
-      },
-      {
-        id: 3,
-        title: {
-          en: "Luxurious furniture for stylish relaxation",
-          ru: "Роскошная мебель для стильного отдыха"
-        },
-        subtitle: { en: "Welcome to Comforty", ru: "Добро пожаловать в Comforty" },
-        img: "pic-1.png",
-        slug: "product-3",
-        discount: 20
-      }
-    ] as PromoProduct[],
+    categories: [] as Category[],
+    promoProducts: [] as PromoProduct[],
     products: [
       {
         id: 1,
@@ -277,113 +186,89 @@ export const useStore = defineStore("shop", {
         price: { regular: 350 }
       }
     ] as Product[],
-    sortingTags: [
-      { id: 1, slug: "all", tag: { en: "All", ru: "Все" } },
-      { id: 2, slug: "newest", tag: { en: "Newest", ru: "Новинки" } },
-      { id: 3, slug: "trending", tag: { en: "Trending", ru: "Трендинг" } },
-      { id: 4, slug: "bestsellers", tag: { en: "Best sellers", ru: "Бестселлеры" } },
-      { id: 5, slug: "featured", tag: { en: "Featured", ru: "Рекомендуемые" } }
-    ] as SortingTag[],
-    companies: [
-      { id: 1, name: "Zapier", logo: "logo-1.png" },
-      { id: 2, name: "Pipedrive", logo: "logo-2.png" },
-      { id: 3, name: "CIB Bank", logo: "logo-3.png" },
-      { id: 4, name: "Company", logo: "logo-4.png" },
-      { id: 5, name: "Burnt Toast", logo: "logo-5.png" },
-      { id: 6, name: "PandaDoc", logo: "logo-6.png" },
-      { id: 7, name: "MOZ", logo: "logo-7.png" }
-    ] as Company[],
-    reviews: [
-      {
-        id: 1,
-        text: {
-          en: "This sectional sofa is not only comfortable and spacious, but it's also the centerpiece of my living room that ties everything together with its beautiful design and quality craftsmanship.",
-          ru: "Этот угловой диван не только удобный и просторный, но и является центральным элементом моей гостиной, который своим красивым дизайном и качественным исполнением связывает все вместе."
-        },
-        avatar: "avatar-1.jpg",
-        userName: { en: "Kristin Watson", ru: "Кристина Ватсон" },
-        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
-      },
-      {
-        id: 2,
-        text: {
-          en: "I purchased this high-back executive office chair for my home office, and it has been a game-changer in terms of my productivity and overall comfort.",
-          ru: "Я приобрел этот офисный стул с высокой спинкой для своего домашнего офиса, и он стал настоящей находкой в плане моей продуктивности и общего комфорта."
-        },
-        avatar: "avatar-2.jpg",
-        userName: { en: "Esther Howard", ru: "Эстер Говард" },
-        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
-      },
-      {
-        id: 3,
-        text: {
-          en: "These folding chairs are perfect for outdoor events, camping, or even as extra seating for guests. They're lightweight, easy to transport.",
-          ru: "Эти складные стулья идеально подходят для мероприятий на открытом воздухе, кемпинга или даже в качестве дополнительного сиденья для гостей."
-        },
-        avatar: "avatar-1.jpg",
-        userName: { en: "Charlotte Mitchell", ru: "Шарлотта Митчелл" },
-        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
-      },
-      {
-        id: 4,
-        text: {
-          en: "This swivel glider chair is a must-have for any new parent. It's comfortable, supportive, and the perfect spot for cuddling and bonding with your little one.",
-          ru: "Этот кресло-качалка - необходимый предмет для любого молодого родителя. Оно комфортное, поддерживающее и идеальное место для ласковых объятий и общения с вашим малышом."
-        },
-        avatar: "avatar-2.jpg",
-        userName: { en: "Oliver Reynolds", ru: "Оливер Рейнольдс" },
-        job: { en: "Fashion Designer", ru: "Фэшн Дизайнер" }
-      }
-    ] as Review[],
+    tags: [] as Tag[],
+    companies: [] as Company[],
+    reviews: [] as Review[],
 
     cart: [] as Product[],
     favorites: [] as Product[],
     selectedCategory: "all",
-    selectedSortingTag: "all"
+    selectedTag: "all"
   }),
 
   getters: {
     getCategories: (state) => state.categories,
     getPromoProducts: (state) => state.promoProducts,
     getProducts: (state) => state.products,
-    getSortingTags: (state) => state.sortingTags,
+    getTags: (state) => state.tags,
     getCompanies: (state) => state.companies,
     getReviews: (state) => state.reviews,
     getCart: (state) => state.cart,
     getFavorites: (state) => state.favorites,
-    getSelectedSortingTag: (state) => state.selectedSortingTag,
+    getSelectedTag: (state) => state.selectedTag,
     getSelectedCategory: (state) => state.selectedCategory
   },
 
   actions: {
+    // Fetch reviews
+    async fetchReviews() {
+      if (this.reviews.length === 0) this.reviews = await getCollection("reviews")
+    },
+
+    // Fetch companies
+    async fetchCompanies() {
+      if (this.companies.length === 0) this.companies = await getCollection("companies")
+    },
+
+    // Fetch categories
+    async fetchCategories() {
+      if (this.categories.length === 0) this.categories = await getCollection("categories")
+    },
+
+    // Fetch tags
+    async fetchTags() {
+      if (this.tags.length === 0) this.tags = await getCollection("tags")
+    },
+
+    // Fetch promo products
+    async fetchPromoProducts() {
+      if (this.promoProducts.length === 0) this.promoProducts = await getCollection("promoProducts")
+    },
+
     // Checked product in cart or favorites
-    isProduct(productId: number, state: State): boolean {
+    isProduct(productId: number, state: Shopping): boolean {
       return this[state].some((list) => list.id === productId)
     },
 
     // Added to cart or favorites
-    addProduct(productId: number, state: State): void {
+    addProduct(productId: number, state: Shopping): void {
       console.log("added: ", productId)
       const product = this.products.filter((list) => list.id === productId)
       this[state].push(product[0])
     },
 
     // Removed from cart or favorites
-    deleteProduct(productId: number, state: State): void {
+    deleteProduct(productId: number, state: Shopping): void {
       console.log("remove: ", productId)
       this[state] = this[state].filter((list) => list.id !== productId)
     },
 
     // Toggle product in cart or favorites
-    toggleProduct(productId: number, state: State): void {
+    toggleProduct(productId: number, state: Shopping): void {
       console.log("toggle: ", productId)
       this.isProduct(productId, state)
         ? this.deleteProduct(productId, state)
         : this.addProduct(productId, state)
     },
 
+    // Clear cart
     clearCart(): void {
       this.cart = []
+    },
+
+    // Clear favorites
+    clearFavorites(): void {
+      this.favorites = []
     },
 
     // Get current product
@@ -391,19 +276,19 @@ export const useStore = defineStore("shop", {
       return this.products.find((product) => product.slug === slug)
     },
 
-    // Set current sorting tag
-    setSelectedSortingTag(tag: string) {
-      this.selectedSortingTag = tag
+    // Set current tag
+    setSelectedTag(tag: string) {
+      this.selectedTag = tag
     },
 
-    // Checked current sorting tag
-    isSelectedSortingTag(tag: string) {
-      return this.selectedSortingTag === tag
+    // Checked current tag
+    isSelectedTag(tag: string) {
+      return this.selectedTag === tag
     },
 
-    // Get name current sorting tag
-    getTitleSelectedSortingTag() {
-      return this.sortingTags.find((tag) => tag.slug === this.selectedSortingTag)?.tag
+    // Get name current tag
+    getTitleSelectedTag() {
+      return this.tags.find((tag) => tag.slug === this.selectedTag)?.tag
     },
 
     // Set current category
@@ -423,7 +308,7 @@ export const useStore = defineStore("shop", {
 
     // Get current sorting products
     getSortingProducts({ tag, category }: { tag?: string; category?: string }): Product[] {
-      const selectedTag = tag ?? this.selectedSortingTag
+      const selectedTag = tag ?? this.selectedTag
       const selectedCategory = category ?? this.selectedCategory
 
       const filteredProducts = this.products.filter((product) => {
@@ -437,6 +322,7 @@ export const useStore = defineStore("shop", {
   },
 
   persist: {
-    paths: ["cart", "favorites"]
+    // Then remove everything except Cart and Favorites
+    paths: ["cart", "favorites", "categories", "promoProducts", "tags", "companies", "reviews"]
   }
 })

@@ -13,7 +13,7 @@ import Translation from "../i18n/translation"
 
 import BlockProduct from "../components/Blocks/BlockProduct.vue"
 
-const { getProduct } = useStore()
+const { getProduct, fetchCategories } = useStore()
 const route = useRoute()
 
 const product = ref(getProduct(`${route.params.slug}`))
@@ -30,7 +30,11 @@ watch(
   }
 )
 
-onMounted(changeMetaTitle)
+onMounted(() => {
+  changeMetaTitle()
+
+  fetchCategories()
+})
 </script>
 
 <style scoped></style>

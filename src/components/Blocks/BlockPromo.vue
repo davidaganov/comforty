@@ -54,7 +54,7 @@
           >
             <SwiperSlide
               :key="product.id"
-              v-for="product in products"
+              v-for="product in store.promoProducts"
             >
               <BaseCardPromo
                 :active="currentSlide === product.id - 1"
@@ -70,18 +70,16 @@
 </template>
 
 <script setup lang="ts">
-import type { PromoProduct } from "../../interfaces"
 import { ref } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { EffectFade, Navigation, Autoplay } from "swiper"
+import { useStore } from "../../stores"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseCardPromo from "../Base/BaseCardPromo.vue"
 import BaseAbout from "../Base/BaseAbout.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconArrow from "../Icons/IconArrow.vue"
-
-defineProps<{ products: PromoProduct[] }>()
 
 const promoSwiper = ref()
 const currentSlide = ref<number>(0)
@@ -95,6 +93,8 @@ const changeCurrentSlide = () => {
 }
 
 const modules = [EffectFade, Navigation, Autoplay]
+
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

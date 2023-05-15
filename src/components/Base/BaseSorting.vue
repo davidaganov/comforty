@@ -21,7 +21,7 @@
       v-if="dropdown"
       @keydown.shift.exact="(e: KeyboardEvent) => e.key === 'Tab' ? toggleDropdown(false) : null"
     >
-      <span>{{ store.getTitleSelectedSortingTag()?.[Translation.currentLocale] }}</span>
+      <span>{{ store.getTitleSelectedTag()?.[Translation.currentLocale] }}</span>
       <IconBase
         class="sorting__icon"
         box="0 0 9 5"
@@ -49,12 +49,12 @@
           class="sorting__tag"
           role="option"
           :id="`tag-${slug}`"
-          :class="{ 'sorting__tag--active': store.isSelectedSortingTag(slug) }"
-          :aria-selected="store.isSelectedSortingTag(slug)"
+          :class="{ 'sorting__tag--active': store.isSelectedTag(slug) }"
+          :aria-selected="store.isSelectedTag(slug)"
           :aria-labelledby="`sortLabel tag-${slug}`"
           :key="id"
           v-for="({ id, slug, tag }, index) in tags"
-          @click="store.setSelectedSortingTag(slug)"
+          @click="store.setSelectedTag(slug)"
           @keydown.tab.exact="index === tags.length - 1 ? toggleDropdown(false) : null"
         >
           {{ tag[Translation.currentLocale] }}
@@ -66,6 +66,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
+import { storeToRefs } from "pinia"
 import { useStore } from "../../stores"
 import Translation from "../../i18n/translation"
 
@@ -76,7 +77,9 @@ import IconSettings from "../Icons/IconSettings.vue"
 const props = defineProps<{ dropdown?: boolean }>()
 
 const store = useStore()
-const tags = ref(store.getSortingTags)
+const { getTags } = storeToRefs(store)
+
+const tags = ref(getTags)
 const dropdown = ref(props.dropdown)
 const open = ref(false)
 

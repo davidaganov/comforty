@@ -9,7 +9,7 @@
       </BaseTitle>
 
       <BaseCarouselControl
-        class="block__control"
+        class="reviews__control"
         prevEl="reviews__prev"
         nextEl="reviews__next"
       />
@@ -30,7 +30,7 @@
         >
           <SwiperSlide
             :key="review.id"
-            v-for="review in reviews"
+            v-for="review in store.getReviews"
           >
             <BaseCardReview v-bind="review" />
           </SwiperSlide>
@@ -41,18 +41,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Review } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Navigation, Autoplay } from "swiper"
+import { useStore } from "../../stores"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardReview from "../Base/BaseCardReview.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ reviews: Review[] }>()
-
 const modules = [Navigation, Autoplay]
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

@@ -56,7 +56,7 @@ const route = useRoute()
 const router = useRouter()
 
 const store = useStore()
-const { getSelectedSortingTag, getSelectedCategory } = storeToRefs(store)
+const { getSelectedTag, getSelectedCategory } = storeToRefs(store)
 
 const addQueryParams = () => {
   const selectedCategory = route.query.cat ? route.query.cat : "all"
@@ -72,13 +72,13 @@ const addQueryParams = () => {
 
 const updateSortingByTag = () => {
   products.value = store.getSortingProducts({
-    tag: getSelectedSortingTag.value,
+    tag: getSelectedTag.value,
     category: getSelectedCategory.value
   })
 }
 
 const updateSortingByCategory = () => {
-  store.setSelectedSortingTag("all")
+  store.setSelectedTag("all")
   products.value = store.getSortingProducts({ category: getSelectedCategory.value })
   router.push({
     path: route.path,
@@ -86,7 +86,7 @@ const updateSortingByCategory = () => {
   })
 }
 
-watch(getSelectedSortingTag, updateSortingByTag)
+watch(getSelectedTag, updateSortingByTag)
 watch(getSelectedCategory, updateSortingByCategory)
 
 onMounted(addQueryParams)

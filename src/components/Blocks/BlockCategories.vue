@@ -16,16 +16,16 @@
 
       <div class="categories__carousel">
         <Swiper
-          :slides-per-view="1"
+          :slides-per-view="2"
           :space-between="12"
-          :breakpoints="{ 500: { slidesPerView: 2 }, 769: { slidesPerView: 3 } }"
+          :breakpoints="{ 769: { slidesPerView: 3 } }"
           :navigation="{ prevEl: '.categories__prev', nextEl: '.categories__next' }"
           :modules="modules"
           :aria-label="$t('blocks.categories.carouselAria')"
         >
           <SwiperSlide
             :key="category.id"
-            v-for="category in categories"
+            v-for="category in store.getCategories"
           >
             <BaseCardCategory
               class="categories__item"
@@ -39,18 +39,18 @@
 </template>
 
 <script setup lang="ts">
-import type { Category } from "../../interfaces"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Navigation } from "swiper"
+import { useStore } from "../../stores"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardCategory from "../Base/BaseCardCategory.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ categories: Category[] }>()
-
 const modules = [Navigation]
+
+const store = useStore()
 </script>
 
 <style scoped lang="scss">

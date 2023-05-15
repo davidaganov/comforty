@@ -69,7 +69,7 @@
             :aria-selected="store.isSelectedCategory(slug)"
             :aria-labelledby="`categoriesLabel category-${slug}`"
             :key="id"
-            v-for="{ id, slug, title } in categories"
+            v-for="{ id, slug, title } in store.getCategories"
             @click="store.setSelectedCategory(slug), toggleModal(false)"
           >
             {{ title[Translation.currentLocale] }}
@@ -95,7 +95,6 @@ import IconBase from "../Icons/IconBase.vue"
 import IconChevron from "../Icons/IconChevron.vue"
 
 const store = useStore()
-const categories = ref(store.getCategories)
 const open = ref(false)
 const screenWidth = ref(window.innerWidth)
 

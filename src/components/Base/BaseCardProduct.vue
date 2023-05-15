@@ -75,6 +75,7 @@ defineProps<Product>()
 .card {
   $parent: &;
   display: grid;
+  gap: 0 1rem;
 
   &__picture {
     grid-area: 1 / 1 / 1 / 3;

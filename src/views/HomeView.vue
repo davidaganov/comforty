@@ -1,18 +1,18 @@
 <template>
-  <BlockPromo :products="promoProducts" />
+  <BlockPromo />
 
-  <BlockCompanies :companies="companies" />
+  <BlockCompanies />
 
   <BlockProductsCarousel
     name="featured"
     :products="featuredProducts"
   />
 
-  <BlockCategories :categories="categories" />
+  <BlockCategories />
 
   <BlockProductsGrid />
 
-  <BlockReviews :reviews="reviews" />
+  <BlockReviews />
 
   <BlockProductsCarousel
     name="recently"
@@ -31,17 +31,25 @@ import BlockCategories from "../components/Blocks/BlockCategories.vue"
 import BlockProductsGrid from "../components/Blocks/BlockProductsGrid.vue"
 import BlockReviews from "../components/Blocks/BlockReviews.vue"
 
-const { getPromoProducts, getCategories, getCompanies, getReviews, getSortingProducts } = useStore()
-
-const promoProducts = getPromoProducts
-const categories = getCategories
-const companies = getCompanies
-const reviews = getReviews
+const {
+  getSortingProducts,
+  fetchPromoProducts,
+  fetchCompanies,
+  fetchCategories,
+  fetchTags,
+  fetchReviews
+} = useStore()
 
 const featuredProducts = getSortingProducts({ tag: "featured" }).slice(0, 16)
 const newestProducts = getSortingProducts({ tag: "newest" }).slice(0, 16)
 
 onMounted(() => {
   document.title = "Comforty"
+
+  fetchPromoProducts()
+  fetchCompanies()
+  fetchCategories()
+  fetchTags()
+  fetchReviews()
 })
 </script>

@@ -19,14 +19,14 @@
           <li
             class="footer__item"
             :key="id"
-            v-for="{ id, title, slug } in categories"
+            v-for="{ id, title, slug } in store.getCategories"
           >
             <RouterLink
               class="footer__link"
               :to="Translation.i18nRoute({ name: 'products', query: { cat: slug } })"
               :aria-label="title[Translation.currentLocale]"
               :title="title[Translation.currentLocale]"
-              @click="setSelectedCategory(slug)"
+              @click="store.setSelectedCategory(slug)"
             >
               {{ title[Translation.currentLocale] }}
             </RouterLink>
@@ -70,8 +70,7 @@ import BaseLogo from "./Base/BaseLogo.vue"
 import BaseSocial from "./Base/BaseSocial.vue"
 import FormNewsletter from "./Form/FormNewsletter.vue"
 
-const { setSelectedCategory, getCategories } = useStore()
-const categories = getCategories
+const store = useStore()
 </script>
 
 <style scoped lang="scss">
