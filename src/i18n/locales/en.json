@@ -166,8 +166,18 @@
     },
     "favorites": {
       "title": "Favorite products",
+      "products": "Go to products",
+      "count": "No products | 1 product | {count} products",
       "empty": "No favorite products",
-      "ariaDelete": "Click to remove a product from favorites"
+      "clear": "Clear favorites",
+      "ariaDelete": "Click to remove item from favorites",
+      "modal": {
+        "title": "Confirmation",
+        "description": "Are you sure you want to clear favorites?",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "ariaClose": "Close confirmation"
+      }
     }
   },
   "carousel": {
