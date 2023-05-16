@@ -16,7 +16,7 @@
     </div>
     <RouterLink
       class="card__link"
-      :to="Translation.i18nRoute({ name: 'products', query: { cat: slug } })"
+      :to="Translation.i18nRoute({ name: 'products', query: { category: slug } })"
       :aria-label="title[Translation.currentLocale]"
       :title="title[Translation.currentLocale]"
       @click="setSelectedCategory(slug)"

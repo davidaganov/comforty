@@ -17,6 +17,6 @@ Category.args = {
   id: 1,
   title: { en: "Wing Chair", ru: "Кресла" },
   productsCount: 1204,
-  cover: "cat-1.jpg",
+  cover: "category-1.jpg",
   link: "wing"
 }

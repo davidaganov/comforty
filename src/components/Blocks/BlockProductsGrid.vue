@@ -13,9 +13,9 @@
       <div class="products__list">
         <BaseCardProduct
           class="products__item"
-          v-for="product in products.slice(0, 8)"
-          v-bind="product"
           :key="product.id"
+          v-for="product in products"
+          v-bind="product"
         />
       </div>
     </BaseInner>
@@ -23,7 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue"
+import type { Product } from "../../interfaces"
+import { ref, onMounted, watch } from "vue"
 import { useStore } from "../../stores"
 import { storeToRefs } from "pinia"
 
@@ -35,11 +36,19 @@ import BaseCardProduct from "../Base/BaseCardProduct.vue"
 const store = useStore()
 const { getSelectedTag } = storeToRefs(store)
 
-const products = ref(store.getSortingProducts({ tag: "all" }))
+const products = ref<Product[]>()
 
-watch(getSelectedTag, () => {
-  products.value = store.getSortingProducts({ tag: getSelectedTag.value })
-})
+const getProducts = async () => {
+  products.value = await store.getSortingProducts({ attr: "all" })
+}
+
+const updateProducts = async () => {
+  products.value = await store.getSortingProducts({ attr: getSelectedTag.value })
+}
+
+watch(getSelectedTag, updateProducts)
+
+onMounted(getProducts)
 </script>
 
 <style scoped lang="scss">

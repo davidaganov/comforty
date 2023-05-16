@@ -32,7 +32,7 @@
       class="product__delete"
       :aria-label="$t(`pages.${name}.ariaDelete`)"
       :title="$t(`pages.${name}.ariaDelete`)"
-      @click="toggleProduct(id, name)"
+      @click="toggleProduct(slug, name)"
     >
       <IconBase
         :box="name === 'cart' ? '0 0 24 24' : '0 0 20 20'"

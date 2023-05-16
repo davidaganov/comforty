@@ -3,10 +3,10 @@
     type="button"
     class="favorite"
     :appearance="appearance ? appearance : 'white'"
-    :class="store.isProduct(id, 'favorites') ? 'favorite--active' : ''"
-    :title="store.isProduct(id, 'favorites') ? $t('product.aria.dislike') : $t('product.aria.like')"
+    :class="isProduct(slug, 'favorites') ? 'favorite--active' : ''"
+    :title="isProduct(slug, 'favorites') ? $t('product.aria.dislike') : $t('product.aria.like')"
     :aria-label="$t('product.aria.favorite')"
-    @click="() => store.toggleProduct(id, 'favorites')"
+    @click="() => toggleProduct(slug, 'favorites')"
   >
     <IconBase
       class="favorite__icon"
@@ -27,8 +27,8 @@ import BaseButton from "./BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconHeart from "../Icons/IconHeart.vue"
 
-defineProps<{ id: number; appearance?: "primary" | "gray" | "white" | "ghost" | undefined }>()
-const store = useStore()
+defineProps<{ slug: string; appearance?: "primary" | "gray" | "white" | "ghost" | undefined }>()
+const { isProduct, toggleProduct } = useStore()
 </script>
 
 <style scoped lang="scss">

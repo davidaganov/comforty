@@ -15,7 +15,7 @@
       />
       <div
         class="products__list"
-        v-if="products.length !== 0"
+        v-if="products && products.length !== 0"
       >
         <BaseCardProduct
           class="products__item"
@@ -50,39 +50,47 @@ import BaseSorting from "../Base/BaseSorting.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCategoriesSelect from "../Base/BaseCategoriesSelect.vue"
 
-const products = ref<Product[]>([])
+const products = ref<Product[]>()
+const firstUpdateCategory = ref(true)
 
 const route = useRoute()
 const router = useRouter()
 
 const store = useStore()
+
 const { getSelectedTag, getSelectedCategory } = storeToRefs(store)
 
-const addQueryParams = () => {
-  const selectedCategory = route.query.cat ? route.query.cat : "all"
-  const queryParams = { cat: selectedCategory }
+const addQueryParams = async () => {
+  const selectedCategory = route.query.category ? route.query.category : "all"
+  const queryParams = { category: selectedCategory }
 
   if (typeof selectedCategory === "string") {
-    products.value = store.getSortingProducts({ category: selectedCategory })
+    products.value = await store.getSortingProducts({ category: selectedCategory })
     store.setSelectedCategory(selectedCategory)
   }
 
   router.push({ path: route.path, query: queryParams })
 }
 
-const updateSortingByTag = () => {
-  products.value = store.getSortingProducts({
-    tag: getSelectedTag.value,
+const updateSortingByTag = async () => {
+  products.value = await store.getSortingProducts({
+    attr: getSelectedTag.value,
     category: getSelectedCategory.value
   })
 }
 
-const updateSortingByCategory = () => {
+const updateSortingByCategory = async () => {
   store.setSelectedTag("all")
-  products.value = store.getSortingProducts({ category: getSelectedCategory.value })
+
+  if (!firstUpdateCategory.value) {
+    products.value = await store.getSortingProducts({ category: getSelectedCategory.value })
+  } else {
+    firstUpdateCategory.value = false
+  }
+
   router.push({
     path: route.path,
-    query: { cat: getSelectedCategory.value }
+    query: { category: getSelectedCategory.value }
   })
 }
 

@@ -37,17 +37,28 @@
 
 <script setup lang="ts">
 import type { Product } from "../../interfaces"
+import { ref, onMounted } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { Navigation } from "swiper"
+import { useStore } from "../../stores"
 
 import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
-defineProps<{ name: string; products: Product[] }>()
+const props = defineProps<{ name: string }>()
 
 const modules = [Navigation]
+const products = ref<Product[]>()
+
+const { getSortingProducts } = useStore()
+
+const getProducts = async () => {
+  products.value = await getSortingProducts({ attr: props.name })
+}
+
+onMounted(getProducts)
 </script>
 
 <style scoped lang="scss">

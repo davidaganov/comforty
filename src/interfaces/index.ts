@@ -1,5 +1,5 @@
 export interface Category {
-  id: number
+  id: string
   title: Record<string, string>
   productsCount: number
   cover: string
@@ -7,7 +7,7 @@ export interface Category {
 }
 
 export interface PromoProduct {
-  id: number
+  id: string
   title: Record<string, string>
   subtitle: Record<string, string>
   img: string
@@ -16,7 +16,7 @@ export interface PromoProduct {
 }
 
 export interface Product {
-  id: number
+  id: string
   title: Record<string, string>
   cover: string
   gallery: string[]
@@ -31,13 +31,13 @@ export interface Product {
 }
 
 export interface Tag {
-  id: number
+  id: string
   slug: string
   tag: Record<string, string>
 }
 
 export interface Company {
-  id: number
+  id: string
   name: string
   logo: string
 }
@@ -52,7 +52,7 @@ export interface Review {
 
 export interface Button {
   link?: string
-  to?: string | { name: string; params?: any }
+  to?: string | { name: string; params?: any; query?: any }
   type?: "button" | "submit" | "reset" | undefined
   appearance?: "primary" | "gray" | "white" | "ghost" | "attention"
   arrow?: boolean
@@ -65,6 +65,12 @@ export interface Icon {
   box?: string
   width?: number
   height?: number
+}
+
+export interface Request {
+  slug?: string
+  category?: string
+  attr?: string
 }
 
 export type Shopping = "cart" | "favorites"

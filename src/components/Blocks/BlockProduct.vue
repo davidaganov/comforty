@@ -33,14 +33,14 @@
           <BaseButtonCart
             class="product__cart"
             appearance="ghost"
-            :id="product.id"
+            :slug="slug"
           >
             Добавить в корзину
           </BaseButtonCart>
           <BaseButtonFavorite
             class="product__favorite"
             appearance="ghost"
-            :id="product.id"
+            :slug="slug"
           />
         </div>
       </div>
@@ -57,7 +57,7 @@ import BaseGallery from "../Base/BaseGallery.vue"
 import BaseButtonCart from "../Base/BaseButtonCart.vue"
 import BaseButtonFavorite from "../Base/BaseButtonFavorite.vue"
 
-const product = defineProps<Product>()
+defineProps<Product>()
 </script>
 
 <style scoped lang="scss">

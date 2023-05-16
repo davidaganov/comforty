@@ -1,7 +1,12 @@
 <template>
   <div class="popup">
     <div class="popup__top">
-      <h3 class="popup__title">{{ $t("pages.cart.title") }}</h3>
+      <RouterLink
+        class="popup__title"
+        :to="Translation.i18nRoute({ name: 'cart' })"
+      >
+        {{ $t("pages.cart.title") }}
+      </RouterLink>
       <button
         type="button"
         class="popup__close"
@@ -40,7 +45,7 @@
             class="popup__delete"
             :aria-label="$t('pages.cart.ariaDelete')"
             :title="$t('pages.cart.ariaDelete')"
-            @click="toggleProduct(id, 'cart')"
+            @click="toggleProduct(slug, 'cart')"
           >
             <IconBase
               box="0 0 24 24"
@@ -113,6 +118,7 @@ import Translation from "../../i18n/translation"
 
 import BaseButton from "../Base/BaseButton.vue"
 import IconBase from "../Icons/IconBase.vue"
+import IconClose from "../Icons/IconClose.vue"
 import IconTrash from "../Icons/IconTrash.vue"
 
 const store = useStore()
@@ -161,6 +167,14 @@ const togglePopup = () => {
   &__title {
     font: 400 1.8rem/100% var(--main-font);
     color: var(--color-black);
+    transition: all 0.2s;
+    &:hover {
+      color: var(--color-accent);
+    }
+    &:focus-visible {
+      background-color: var(--color-accent);
+      color: var(--color-white);
+    }
   }
 
   &__close {

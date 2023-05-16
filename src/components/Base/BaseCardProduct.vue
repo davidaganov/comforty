@@ -24,7 +24,7 @@
       </span>
       <BaseButtonFavorite
         class="card__favorite"
-        :id="id"
+        :slug="slug"
       />
       <RouterLink
         class="card__link"
@@ -52,7 +52,7 @@
     </div>
     <BaseButtonCart
       class="card__cart"
-      :id="id"
+      :slug="slug"
     />
   </article>
 </template>

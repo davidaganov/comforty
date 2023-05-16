@@ -4,6 +4,8 @@
       @click="togglePopup(!open)"
       v-if="screenWidth > 576"
     />
+    <!-- @mouseover="togglePopup(true)" -->
+    <!-- @mouseleave="togglePopup(false)" -->
     <BaseUserCart
       :to="Translation.i18nRoute({ name: 'cart' })"
       v-else
