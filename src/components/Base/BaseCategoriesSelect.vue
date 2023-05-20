@@ -52,7 +52,11 @@
         <h3 class="categories__title">
           {{ $t("pages.products.filter.categories") }}
         </h3>
-        <div class="categories__list">
+
+        <div
+          class="categories__list"
+          v-if="store.getCategories.length !== 0"
+        >
           <span
             id="categoriesLabel"
             class="visually-hidden"
@@ -74,6 +78,17 @@
           >
             {{ title[Translation.currentLocale] }}
           </button>
+        </div>
+
+        <div
+          class="categories__list"
+          v-else
+        >
+          <div
+            class="categories__skeleton skeleton"
+            :key="index"
+            v-for="(_, index) in 3"
+          ></div>
         </div>
 
         <!-- <h3 class="categories__title">
@@ -271,6 +286,13 @@ onUnmounted(() => {
       &:focus-visible {
         background-color: var(--color-accent-hover);
       }
+    }
+  }
+
+  &__skeleton {
+    @media (min-width: 1021px) {
+      width: 100%;
+      height: 1.98rem;
     }
   }
 

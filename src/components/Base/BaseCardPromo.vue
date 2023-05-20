@@ -17,7 +17,7 @@
         class="card__btn"
         :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
         :arrow="true"
-        :tabindex="active ? 0 : -1"
+        :tabindex="isVisible ? 0 : -1"
       >
         {{ $t("blocks.promo.link") }}
       </BaseButton>
@@ -42,16 +42,16 @@
 
 <script setup lang="ts">
 import type { PromoProduct } from "../../interfaces"
+import { inject } from "vue"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
 import BaseButton from "../Base/BaseButton.vue"
 
-interface Props extends PromoProduct {
-  active: boolean
-}
+const swiperSlide: any = inject("swiperSlide")
+const isVisible = swiperSlide.value?.isVisible
 
-defineProps<Props>()
+defineProps<PromoProduct>()
 </script>
 
 <style scoped lang="scss">

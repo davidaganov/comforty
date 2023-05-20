@@ -7,7 +7,12 @@
       <img
         width="310"
         height="310"
-        :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
+        :src="
+          getImageUrl({
+            fileName: cover.length > 0 ? cover : 'nopic.jpg',
+            folder: 'images/products'
+          })
+        "
         :alt="title[Translation.currentLocale]"
       />
       <span
@@ -30,6 +35,7 @@
         class="card__link"
         :to="Translation.i18nRoute({ name: 'product', params: { slug } })"
         :aria-label="title[Translation.currentLocale]"
+        :tabindex="-1"
       />
     </div>
 
@@ -75,6 +81,7 @@ defineProps<Product>()
 .card {
   $parent: &;
   display: grid;
+  grid-template-columns: auto 1fr;
   gap: 0 1rem;
 
   &__picture {
@@ -154,9 +161,6 @@ defineProps<Product>()
     border-radius: 0.6rem;
     color: var(--color-black);
     z-index: 1;
-    &:focus-visible {
-      box-shadow: 0 0 0 0.2rem var(--color-accent);
-    }
   }
 
   &__title {

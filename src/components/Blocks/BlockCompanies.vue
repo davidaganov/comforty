@@ -50,21 +50,9 @@ const store = useStore()
 
 <style scoped lang="scss">
 .companies {
-  &__item {
-    @media (min-width: 1021px) {
-      padding: 3rem;
-    }
-    @media (max-width: 1020px) and (min-width: 769px) {
-      padding: 2rem;
-    }
-    @media (max-width: 768px) {
-      padding: 0.5rem;
-    }
-  }
-
   &__logo {
     width: 100%;
-    height: 100%;
+    height: 13rem;
     object-fit: contain;
     object-position: center;
     border-radius: inherit;

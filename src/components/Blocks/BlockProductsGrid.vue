@@ -10,12 +10,26 @@
 
       <BaseSorting />
 
-      <div class="products__list">
+      <div
+        class="products__list"
+        v-if="products"
+      >
         <BaseCardProduct
           class="products__item"
           :key="product.id"
           v-for="product in products"
           v-bind="product"
+        />
+      </div>
+
+      <div
+        class="products__list"
+        v-else
+      >
+        <SkeletonCardProduct
+          class="products__item"
+          :key="index"
+          v-for="(_, index) in 8"
         />
       </div>
     </BaseInner>
@@ -33,17 +47,22 @@ import BaseTitle from "../Base/BaseTitle.vue"
 import BaseSorting from "../Base/BaseSorting.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 
+import SkeletonCardProduct from "../Skeleton/SkeletonCardProduct.vue"
+
 const store = useStore()
 const { getSelectedTag } = storeToRefs(store)
 
 const products = ref<Product[]>()
 
 const getProducts = async () => {
-  products.value = await store.getSortingProducts({ attr: "all" })
+  products.value = (await store.getSortingProducts({ attr: "all", count: 8 })) as Product[]
 }
 
 const updateProducts = async () => {
-  products.value = await store.getSortingProducts({ attr: getSelectedTag.value })
+  products.value = (await store.getSortingProducts({
+    attr: getSelectedTag.value,
+    count: 8
+  })) as Product[]
 }
 
 watch(getSelectedTag, updateProducts)

@@ -4,18 +4,24 @@
     id="products"
   >
     <BaseInner class="products__inner">
-      <BaseTitle class="products__title">
-        {{ store.getTitleSelectedCategory()?.[Translation.currentLocale] }}
+      <BaseTitle
+        class="products__title"
+        :class="{ skeleton: !store.getTitleCategory() }"
+      >
+        {{ store.getTitleCategory()?.[Translation.currentLocale] }}
       </BaseTitle>
+
       <BaseCategoriesSelect class="products__categories" />
       <hr class="products__line" />
+
       <BaseSorting
         class="products__sorting"
         :dropdown="true"
       />
+
       <div
         class="products__list"
-        v-if="products && products.length !== 0"
+        v-if="products"
       >
         <BaseCardProduct
           class="products__item"
@@ -26,18 +32,36 @@
       </div>
 
       <div
-        class="products__empty"
+        class="products__list"
         v-else
+      >
+        <SkeletonCardProduct
+          class="products__item"
+          :key="index"
+          v-for="(_, index) in 8"
+        />
+      </div>
+
+      <div
+        class="products__empty"
+        v-if="products && products.length === 0"
       >
         <span class="products__empty-title">404</span>
         <p class="products__empty-description">{{ $t("pages.products.notFound") }}</p>
       </div>
+
+      <BasePagination
+        class="products__pagination"
+        v-bind="pagination"
+        v-if="pagination"
+        @updatePage="setProducts({ category: getSelectedCategory, page: $event })"
+      />
     </BaseInner>
   </section>
 </template>
 
 <script setup lang="ts">
-import type { Product } from "../../interfaces"
+import type { Pagination, Product, Products, RequestProducts } from "../../interfaces"
 import { ref, watch, onMounted } from "vue"
 import { storeToRefs } from "pinia"
 import { useRoute, useRouter } from "vue-router"
@@ -49,49 +73,72 @@ import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseSorting from "../Base/BaseSorting.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCategoriesSelect from "../Base/BaseCategoriesSelect.vue"
+import BasePagination from "../Base/BasePagination.vue"
+
+import SkeletonCardProduct from "../Skeleton/SkeletonCardProduct.vue"
 
 const products = ref<Product[]>()
+const pagination = ref<Pagination>()
 const firstUpdateCategory = ref(true)
 
 const route = useRoute()
 const router = useRouter()
 
 const store = useStore()
+const { setSelectedCategory, setCurrentPage, setSelectedTag } = store
+const { getSelectedTag, getSelectedCategory, getCurrentPage } = storeToRefs(store)
 
-const { getSelectedTag, getSelectedCategory } = storeToRefs(store)
-
-const addQueryParams = async () => {
-  const selectedCategory = route.query.category ? route.query.category : "all"
-  const queryParams = { category: selectedCategory }
-
-  if (typeof selectedCategory === "string") {
-    products.value = await store.getSortingProducts({ category: selectedCategory })
-    store.setSelectedCategory(selectedCategory)
-  }
-
-  router.push({ path: route.path, query: queryParams })
+const setRouter = ({ category, page }: RequestProducts) => {
+  router.push({ path: route.path, query: { category, page } })
 }
 
-const updateSortingByTag = async () => {
-  products.value = await store.getSortingProducts({
-    attr: getSelectedTag.value,
-    category: getSelectedCategory.value
-  })
+const setProducts = async ({ category, attr, page }: RequestProducts) => {
+  const queryParams = { category, page: page ? page : 1 }
+  const response = (await store.getSortingProducts({
+    attr: attr ? attr : undefined,
+    category,
+    count: 2,
+    page: page ? page : undefined,
+    pagination: true
+  })) as Products
+
+  products.value = response.data
+  pagination.value = response.pagination
+
+  setCurrentPage(queryParams.page)
+  setRouter(queryParams)
+}
+
+const addQueryParams = () => {
+  const selectedCategory = route.query.category ? route.query.category : "all"
+  const currentPage = route.query.page ? route.query.page : 1
+  const queryParams = { category: `${selectedCategory}`, page: +currentPage }
+
+  if (selectedCategory === "all") firstUpdateCategory.value = false
+
+  setSelectedCategory(queryParams.category)
+  setCurrentPage(queryParams.page)
+  setProducts(queryParams)
+  setRouter(queryParams)
 }
 
 const updateSortingByCategory = async () => {
-  store.setSelectedTag("all")
+  const queryParams = { category: getSelectedCategory.value, page: 1 }
 
-  if (!firstUpdateCategory.value) {
-    products.value = await store.getSortingProducts({ category: getSelectedCategory.value })
-  } else {
-    firstUpdateCategory.value = false
+  firstUpdateCategory.value ? (firstUpdateCategory.value = false) : setProducts(queryParams)
+
+  setSelectedTag("all")
+  setRouter(queryParams)
+}
+
+const updateSortingByTag = () => {
+  const queryParams = {
+    category: getSelectedCategory.value,
+    attr: getSelectedTag.value,
+    page: getCurrentPage.value
   }
 
-  router.push({
-    path: route.path,
-    query: { category: getSelectedCategory.value }
-  })
+  setProducts(queryParams)
 }
 
 watch(getSelectedTag, updateSortingByTag)
@@ -104,18 +151,21 @@ onMounted(addQueryParams)
 .products {
   &__inner {
     display: grid;
-    grid-template-columns: auto 1fr;
     gap: 3rem 3rem;
     align-items: center;
     margin-top: 4rem;
+    @media (min-width: 1021px) {
+      grid-template-columns: minmax(24.3rem, auto) auto 1fr;
+    }
+    @media (max-width: 1020px) {
+      grid-template-columns: minmax(24.3rem, auto) 1fr;
+    }
   }
 
   &__title {
-    @media (min-width: 1021px) {
-      grid-area: 1 / 1 / 2 / 2;
-    }
-    @media (max-width: 1020px) {
-      grid-area: 1 / 1 / 2 / 3;
+    grid-area: 1 / 1 / 2 / 3;
+    @media (min-width: 769px) {
+      height: 3.5rem;
     }
   }
 
@@ -125,7 +175,7 @@ onMounted(addQueryParams)
     border: none;
     background-color: var(--color-gray-400);
     @media (min-width: 1021px) {
-      grid-area: 2 / 1 / 3 / 3;
+      grid-area: 2 / 1 / 3 / 4;
     }
     @media (max-width: 1020px) {
       grid-area: 2 / 1 / 3 / 3;
@@ -145,7 +195,7 @@ onMounted(addQueryParams)
   &__sorting {
     margin-left: auto;
     @media (min-width: 1021px) {
-      grid-area: 1 / 2 / 2 / 3;
+      grid-area: 1 / 3 / 2 / 4;
     }
     @media (max-width: 1020px) {
       grid-area: 3 / 2 / 4 / 3;
@@ -163,24 +213,36 @@ onMounted(addQueryParams)
     @media (max-width: 1200px) and (min-width: 769px) {
       grid-template-columns: repeat(3, 1fr);
     }
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
     @media (min-width: 1021px) {
-      grid-area: 3 / 2 / 4 / 3;
+      grid-area: 3 / 2 / 4 / 4;
     }
     @media (max-width: 1020px) and (min-width: 576px) {
       grid-area: 4 / 1 / 5 / 3;
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
     }
     @media (max-width: 575px) {
       grid-area: 5 / 1 / 6 / 3;
     }
   }
 
+  &__pagination {
+    @media (min-width: 1021px) {
+      grid-area: 4 / 2 / 5 / 4;
+    }
+    @media (max-width: 1020px) and (min-width: 576px) {
+      grid-area: 5 / 1 / 6 / 3;
+    }
+    @media (max-width: 575px) {
+      grid-area: 6 / 1 / 7 / 3;
+    }
+  }
+
   &__empty {
     text-align: center;
     @media (min-width: 1021px) {
-      grid-area: 3 / 2 / 4 / 3;
+      grid-area: 3 / 2 / 4 / 4;
     }
     @media (max-width: 1020px) {
       margin-top: 4rem;

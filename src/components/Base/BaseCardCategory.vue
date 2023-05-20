@@ -2,9 +2,6 @@
   <article
     class="card"
     :id="`category-card-${id}`"
-    :style="{
-      backgroundImage: `url(${getImageUrl({ fileName: cover, folder: 'images/categories' })})`
-    }"
   >
     <div class="card__bottom">
       <span class="card__text">
@@ -19,7 +16,7 @@
       :to="Translation.i18nRoute({ name: 'products', query: { category: slug } })"
       :aria-label="title[Translation.currentLocale]"
       :title="title[Translation.currentLocale]"
-      @click="setSelectedCategory(slug)"
+      @click="store.setSelectedCategory(slug)"
     />
   </article>
 </template>
@@ -31,9 +28,10 @@ import { useStore } from "../../stores"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
-defineProps<Category>()
+const props = defineProps<Category>()
+const bgImage = `url(${getImageUrl({ fileName: props.cover, folder: "images/categories" })})`
 
-const { setSelectedCategory } = useStore()
+const store = useStore()
 </script>
 
 <style scoped lang="scss">
@@ -46,6 +44,7 @@ const { setSelectedCategory } = useStore()
   background-size: cover;
   background-position: center center;
   border-radius: 1rem;
+  background-image: v-bind(bgImage);
 
   &__bottom {
     position: absolute;
@@ -91,7 +90,7 @@ const { setSelectedCategory } = useStore()
     color: var(--color-black);
     border-radius: 1rem;
     &:focus-visible {
-      box-shadow: 0 0 0 0.5rem var(--color-accent);
+      border: 0.3rem solid var(--color-accent);
     }
   }
 }

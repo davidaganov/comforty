@@ -21,7 +21,13 @@
       v-if="dropdown"
       @keydown.shift.exact="(e: KeyboardEvent) => e.key === 'Tab' ? toggleDropdown(false) : null"
     >
-      <span>{{ store.getTitleSelectedTag()?.[Translation.currentLocale] }}</span>
+      <span>
+        {{
+          store.getTitleSelectedTag()?.[Translation.currentLocale]
+            ? store.getTitleSelectedTag()?.[Translation.currentLocale]
+            : $t("pages.products.sorting.default")
+        }}
+      </span>
       <IconBase
         class="sorting__icon"
         box="0 0 9 5"
@@ -39,6 +45,7 @@
         <IconSettings />
       </IconBase>
     </button>
+
     <Transition name="sorting--dropdown">
       <div
         class="sorting__container"
@@ -211,12 +218,12 @@ onMounted(() => {
     }
 
     #{$parent}__label {
-      @media (min-width: 576px) {
+      @media (min-width: 769px) {
         margin-right: 1rem;
         font: 400 1.6rem/110% var(--main-font);
         color: var(--color-black);
       }
-      @media (max-width: 575px) {
+      @media (max-width: 768px) {
         position: absolute;
         width: 0.1rem;
         height: 0.1rem;

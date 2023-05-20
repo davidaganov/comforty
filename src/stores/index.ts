@@ -6,11 +6,13 @@ import type {
   Review,
   Tag,
   Shopping,
-  Request
+  Pagination,
+  Products,
+  RequestProducts
 } from "../interfaces"
 
 import { defineStore } from "pinia"
-import { getCollection } from "../services/getCollection"
+import { getCollection, getProduct, getProducts } from "../services/getCollection"
 
 export const useStore = defineStore("shop", {
   state: () => ({
@@ -22,8 +24,10 @@ export const useStore = defineStore("shop", {
 
     cart: [] as Product[],
     favorites: [] as Product[],
+    pagination: {} as Pagination,
     selectedCategory: "all",
-    selectedTag: "all"
+    selectedTag: "all",
+    currentPage: 1
   }),
 
   getters: {
@@ -35,7 +39,9 @@ export const useStore = defineStore("shop", {
     getCart: (state) => state.cart,
     getFavorites: (state) => state.favorites,
     getSelectedTag: (state) => state.selectedTag,
-    getSelectedCategory: (state) => state.selectedCategory
+    getSelectedCategory: (state) => state.selectedCategory,
+    getCurrentPage: (state) => state.currentPage,
+    getPagination: (state) => state.pagination
   },
 
   actions: {
@@ -78,15 +84,44 @@ export const useStore = defineStore("shop", {
       }
     },
 
+    // Added to cart or favorites
+    async addProduct(slug: string, state: Shopping): Promise<void> {
+      const product = await getProduct({ slug })
+
+      this[state].push(product)
+    },
+
+    // Get current product
+    async getProduct(slug: string): Promise<Product> {
+      return await getProduct({ slug })
+    },
+
+    // Get sorting products
+    async getSortingProducts({
+      attr,
+      category,
+      count,
+      page,
+      pagination = false
+    }: RequestProducts): Promise<Product[] | Products> {
+      const selectedTag = attr ?? this.selectedTag
+      const selectedCategory = category ?? this.selectedCategory
+
+      const products = await getProducts({
+        category: selectedCategory !== "all" ? selectedCategory : undefined,
+        attr: selectedTag !== "all" ? selectedTag : undefined,
+        count,
+        page
+      })
+
+      if (pagination) this.pagination = products.pagination
+
+      return pagination ? products : products.data
+    },
+
     // Checked product in cart or favorites
     isProduct(slug: string, state: Shopping): boolean {
       return this[state].some((list) => list.slug === slug)
-    },
-
-    // Added to cart or favorites
-    async addProduct(slug: string, state: Shopping): Promise<void> {
-      const product = await getCollection({ name: "products", slug })
-      this[state].push(product)
     },
 
     // Removed from cart or favorites
@@ -109,56 +144,46 @@ export const useStore = defineStore("shop", {
       this.favorites = []
     },
 
-    // Get current product
-    async getProduct(slug: string) {
-      return await getCollection({ name: "products", slug })
-    },
-
     // Set current tag
-    setSelectedTag(tag: string) {
+    setSelectedTag(tag: string): void {
       this.selectedTag = tag
     },
 
     // Checked current tag
-    isSelectedTag(tag: string) {
+    isSelectedTag(tag: string): boolean {
       return this.selectedTag === tag
     },
 
     // Get name current tag
-    getTitleSelectedTag() {
+    getTitleSelectedTag(): Record<string, string> | undefined {
       return this.tags.find((tag) => tag.slug === this.selectedTag)?.tag
     },
 
     // Set current category
-    setSelectedCategory(category: string) {
+    setSelectedCategory(category: string): void {
       this.selectedCategory = category
     },
 
     // Checked current category
-    isSelectedCategory(category: string) {
+    isSelectedCategory(category: string): boolean {
       return this.selectedCategory === category
     },
 
-    // Get name current category
-    getTitleSelectedCategory() {
-      return this.categories.find((category) => category.slug === this.selectedCategory)?.title
+    // Set current page
+    setCurrentPage(page: number): void {
+      this.currentPage = page
     },
 
-    // Get current sorting products
-    async getSortingProducts({ attr, category }: Request): Promise<Product[]> {
-      const selectedTag = attr ?? this.selectedTag
-      const selectedCategory = category ?? this.selectedCategory
+    // Get name current category
+    getTitleCategory(category?: string): Record<string, string> | undefined {
+      const selectedCategory = category ? category : this.selectedCategory
 
-      return await getCollection({
-        name: "products",
-        category: selectedCategory !== "all" ? selectedCategory : undefined,
-        attr: selectedTag !== "all" ? selectedTag : undefined
-      })
+      return this.categories.find((item) => item.slug === selectedCategory)?.title
     }
   },
 
   persist: {
     // Then remove everything except Cart and Favorites
-    paths: ["cart", "favorites", "categories", "promoProducts", "tags", "companies", "reviews"]
+    paths: ["cart", "favorites"]
   }
 })

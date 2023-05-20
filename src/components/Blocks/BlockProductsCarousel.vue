@@ -22,6 +22,7 @@
           :navigation="{ prevEl: `.${name}__prev`, nextEl: `.${name}__next` }"
           :modules="modules"
           :aria-label="$t(`blocks.${name}.carouselAria`)"
+          v-if="products"
         >
           <SwiperSlide
             :key="product.id"
@@ -30,6 +31,17 @@
             <BaseCardProduct v-bind="product" />
           </SwiperSlide>
         </Swiper>
+
+        <div
+          class="block__list"
+          v-else
+        >
+          <SkeletonCardProduct
+            class="block__list-item"
+            :key="index"
+            v-for="(_, index) in 4"
+          />
+        </div>
       </div>
     </BaseInner>
   </section>
@@ -47,15 +59,18 @@ import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
 
+import SkeletonCardProduct from "../Skeleton/SkeletonCardProduct.vue"
+
 const props = defineProps<{ name: string }>()
 
 const modules = [Navigation]
 const products = ref<Product[]>()
 
-const { getSortingProducts } = useStore()
+const store = useStore()
+const { getSortingProducts } = store
 
 const getProducts = async () => {
-  products.value = await getSortingProducts({ attr: props.name })
+  products.value = (await getSortingProducts({ attr: props.name })) as Product[]
 }
 
 onMounted(getProducts)
@@ -82,6 +97,26 @@ onMounted(getProducts)
 
   &__carousel {
     grid-area: 2 / 1 / 3 / 4;
+  }
+
+  &__list {
+    display: grid;
+    gap: 1.2rem;
+    @media (min-width: 1021px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 1020px) and (min-width: 769px) {
+      grid-template-columns: repeat(3, 1fr);
+      &-item:last-of-type {
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      &-item:nth-last-child(-n + 2) {
+        display: none;
+      }
+    }
   }
 }
 </style>

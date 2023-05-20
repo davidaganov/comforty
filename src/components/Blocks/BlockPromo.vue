@@ -41,27 +41,23 @@
             :slides-per-view="1"
             :space-between="50"
             :effect="'fade'"
-            :autoplay="{
-              delay: 2000,
-              disableOnInteraction: false
-            }"
             :speed="400"
             :navigation="{ prevEl: '.promo__prev', nextEl: '.promo__next' }"
             :pagination="{ el: '.promo__pagination', clickable: true, type: 'custom' }"
             :modules="modules"
             @swiper="onSwiper"
             @slideChange="changeCurrentSlide"
+            v-if="store.promoProducts.length !== 0"
           >
             <SwiperSlide
               :key="product.id"
               v-for="product in store.promoProducts"
             >
-              <BaseCardPromo
-                :active="currentSlide === product.id - 1"
-                v-bind="product"
-              />
+              <BaseCardPromo v-bind="product" />
             </SwiperSlide>
           </Swiper>
+
+          <SkeletonCardPromo v-else />
           <BaseAbout />
         </BaseInner>
       </div>
@@ -80,6 +76,7 @@ import BaseCardPromo from "../Base/BaseCardPromo.vue"
 import BaseAbout from "../Base/BaseAbout.vue"
 import IconBase from "../Icons/IconBase.vue"
 import IconArrow from "../Icons/IconArrow.vue"
+import SkeletonCardPromo from "../Skeleton/SkeletonCardPromo.vue"
 
 const promoSwiper = ref()
 const currentSlide = ref<number>(0)

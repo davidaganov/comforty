@@ -134,9 +134,9 @@ withDefaults(defineProps<Button>(), {
     padding: 1.6rem 2.4rem;
     font-weight: 500;
     border: 0.1rem solid var(--color-gray-400);
-    background-color: var(--color-white);
     color: var(--color-black);
     &:not(:disabled) {
+      background-color: var(--color-white);
       &:focus-visible {
         background-color: var(--color-accent);
         color: var(--color-white);
@@ -149,6 +149,9 @@ withDefaults(defineProps<Button>(), {
           border-color: var(--color-accent);
         }
       }
+    }
+    &:disabled {
+      background-color: #f7f7f7;
     }
   }
 

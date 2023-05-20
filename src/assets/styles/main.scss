@@ -1,7 +1,8 @@
 @import "./__reset", "./__variables";
 @import "./libs/carousel.scss";
 
-html, body {
+html,
+body {
   height: 100%;
   font-family: var(--main-font);
 }
@@ -14,4 +15,32 @@ html {
 
 .no-scroll {
   overflow: hidden;
+}
+
+.skeleton {
+  position: relative;
+  background-color: var(--color-gray-600);
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      90deg,
+      var(--color-gray-600) 0,
+      #e8e8e8 14rem,
+      var(--color-gray-600) 18rem
+    );
+    background-size: cover;
+    animation: shine-lines 1.5s infinite linear;
+    @keyframes shine-lines {
+      0% {
+        left: -60%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+  }
 }

@@ -24,10 +24,7 @@
         class="categories__inner"
         @keydown.esc="toggleModal(false)"
       >
-        <BaseTitle
-          class="categories__title"
-          tag="h2"
-        >
+        <BaseTitle class="categories__title">
           {{ $t("categories.modal.title") }}
         </BaseTitle>
 
@@ -42,9 +39,11 @@
           <BaseCardCategory
             class="categories__item"
             :key="category.id"
-            v-for="(category, index) in categories"
+            v-for="(category, index) in store.getCategories"
             v-bind="category"
-            @keydown.tab.exact="index === categories.length - 1 ? toggleModal(false) : null"
+            @keydown.tab.exact="
+              index === store.getCategories.length - 1 ? toggleModal(false) : null
+            "
             @click="toggleModal(false)"
           />
         </div>
@@ -67,8 +66,6 @@ import IconMenu from "../Icons/IconMenu.vue"
 
 const open = ref(false)
 const store = useStore()
-
-const categories = store.getCategories
 
 const toggleModal = (value: boolean) => {
   open.value = value
@@ -116,7 +113,7 @@ const toggleModal = (value: boolean) => {
     gap: 1.5rem;
     width: 100%;
     @media (min-width: 1201px) {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(7, 1fr);
     }
     @media (max-width: 1200px) and (min-width: 1021px) {
       grid-template-columns: repeat(4, 1fr);

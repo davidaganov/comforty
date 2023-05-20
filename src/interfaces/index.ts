@@ -67,10 +67,26 @@ export interface Icon {
   height?: number
 }
 
-export interface Request {
+export interface Pagination {
+  count: number
+  total: number
+  per_page: number
+  page: number
+  pages: number
+}
+
+export interface Products {
+  data: Product[]
+  pagination: Pagination
+}
+
+export interface RequestProducts {
   slug?: string
   category?: string
   attr?: string
+  count?: number
+  page?: number
+  pagination?: boolean
 }
 
 export type Shopping = "cart" | "favorites"

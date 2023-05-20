@@ -5,6 +5,24 @@
     "ariaOpenList": "Click to open the choice",
     "ariaChoose": "Choose a language"
   },
+  "meta": {
+    "home": {
+      "title": "Comforty",
+      "description": "Comforty. A wide selection of chairs, armchairs, sofas and other furniture for your home. High-quality and stylish products at affordable prices. Fast delivery and quality assurance."
+    },
+    "products": {
+      "title": "Comforty — Products",
+      "description": "Comforty. Page with all the products of the store"
+    },
+    "cart": {
+      "title": "Comforty — Cart",
+      "description": "Comforty. A page with a cart of products"
+    },
+    "favorites": {
+      "title": "Comforty — Favorites",
+      "description": "Comforty. Page with a favorites of products"
+    }
+  },
   "nav": {
     "top": {
       "info": "Free shipping on all orders over $50",
@@ -59,7 +77,7 @@
       "title": "All categories",
       "closeAria": "Click to close the category selection"
     },
-    "count": "Empty | Product | Products"
+    "count": "Empty | {count} Product | {count} Products"
   },
   "blocks": {
     "promo": {
@@ -136,7 +154,8 @@
       },
       "sorting": {
         "label": "Sorting",
-        "aria": "Open sorting dropdown"
+        "aria": "Open sorting dropdown",
+        "default": "All"
       },
       "filter": {
         "title": "Filters",
@@ -147,7 +166,17 @@
         "ariaOpen": "Open a modal window with product filters",
         "ariaClose": "Close a modal window with product filters"
       },
+      "pagination": {
+        "prev": "Prev",
+        "next": "Next"
+      },
       "notFound": "Nothing was found on the specified filters :("
+    },
+    "product": {
+      "category": "Category",
+      "description": "Description",
+      "price": "Price",
+      "cart": "Add to cart"
     },
     "cart": {
       "title": "Cart",

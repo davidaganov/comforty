@@ -22,6 +22,7 @@
           :navigation="{ prevEl: '.categories__prev', nextEl: '.categories__next' }"
           :modules="modules"
           :aria-label="$t('blocks.categories.carouselAria')"
+          v-if="store.getCategories.length !== 0"
         >
           <SwiperSlide
             :key="category.id"
@@ -33,6 +34,17 @@
             />
           </SwiperSlide>
         </Swiper>
+
+        <div
+          class="categories__list"
+          v-else
+        >
+          <SkeletonCardCategory
+            class="categories__list-item"
+            :key="index"
+            v-for="(_, index) in 3"
+          />
+        </div>
       </div>
     </BaseInner>
   </section>
@@ -47,6 +59,8 @@ import BaseInner from "../Base/BaseInner.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseCardCategory from "../Base/BaseCardCategory.vue"
 import BaseCarouselControl from "../Base/BaseCarouselControl.vue"
+
+import SkeletonCardCategory from "../Skeleton/SkeletonCardCategory.vue"
 
 const modules = [Navigation]
 
@@ -74,6 +88,20 @@ const store = useStore()
 
   &__carousel {
     grid-area: 2 / 1 / 3 / 4;
+  }
+
+  &__list {
+    display: grid;
+    gap: 1.2rem;
+    @media (min-width: 1021px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 1020px) {
+      grid-template-columns: repeat(2, 1fr);
+      &-item:last-of-type {
+        display: none;
+      }
+    }
   }
 }
 </style>

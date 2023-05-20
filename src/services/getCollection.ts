@@ -1,26 +1,85 @@
-import type { Request } from "../interfaces"
-import { collection, query, where, getDocs } from "firebase/firestore"
+import type { Product, Products, RequestProducts } from "../interfaces"
+import { collection, getDocs, query, where, limit, startAfter, orderBy } from "firebase/firestore"
 import { db } from "./index"
 
-interface Params extends Request {
-  name: string
-}
-
-export const getCollection = async ({ name, category, attr, slug }: Params) => {
-  console.log(name === "products" ? `${name} category: ${category} tag: ${attr}` : name)
-  let q = query(collection(db, name))
-
-  if (category) q = query(q, where("category", "==", category))
-  if (attr) q = query(q, where(`attr.${attr}`, "!=", false))
-  if (slug) q = query(q, where("slug", "==", slug))
-
-  const querySnapshot = await getDocs(q)
-
+export const getCollection = async ({ name }: { name: string }) => {
+  const response = await getDocs(query(collection(db, name)))
   const array: any[] = []
 
-  querySnapshot.forEach((doc) => {
+  response.forEach((doc) => {
     array.push({ ...doc.data(), id: doc.id })
   })
 
-  return slug ? array[0] : array
+  return array
+}
+
+export const getProduct = async ({ slug }: { slug: string }): Promise<Product> => {
+  const response = await getDocs(query(collection(db, "products"), where("slug", "==", slug)))
+
+  return { id: response.docs[0].id, ...response.docs[0].data() } as Product
+}
+
+export const getProducts = async ({
+  category,
+  attr,
+  count = 10,
+  page = 1
+}: RequestProducts): Promise<Products> => {
+  try {
+    const array: Product[] = []
+    const products = collection(db, "products")
+    let request = query(products)
+
+    // Add filters to the query based on category and attr parameters, if provided
+
+    if (category) request = query(request, where("category", "==", category))
+    if (attr) request = query(request, where(`attr.${attr}`, "==", true))
+
+    // Get the total number of documents matching the query
+    const totalSnapshot = await getDocs(request)
+    const total = totalSnapshot.size
+
+    // Query for a specific page of products based on count and page parameters
+    const q = query(request, orderBy("createdAt"), limit(count * page))
+    const querySnapshot = await getDocs(q)
+
+    // Retrieve the starting document for the next page
+    const startAtDoc = querySnapshot.docs[(page - 1) * count]
+
+    const nextQ = query(request, orderBy("createdAt"), startAfter(startAtDoc), limit(count))
+    const nextSnapshot = await getDocs(nextQ)
+
+    // Iterate over the documents in the nextSnapshot and add them to the array
+    nextSnapshot.forEach((doc) => {
+      array.push(doc.data() as Product)
+    })
+
+    const pagination = {
+      count: array.length,
+      total,
+      per_page: count,
+      page,
+      pages: Math.ceil(total / count)
+    }
+
+    const result = {
+      data: array,
+      pagination
+    }
+
+    return result
+  } catch (error) {
+    console.log("Error when receiving data:", error)
+
+    return {
+      data: [],
+      pagination: {
+        count: 0,
+        total: 0,
+        per_page: count,
+        page,
+        pages: 0
+      }
+    }
+  }
 }
