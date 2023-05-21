@@ -97,7 +97,7 @@ const setProducts = async ({ category, attr, page }: RequestProducts) => {
   const response = (await store.getSortingProducts({
     attr: attr ? attr : undefined,
     category,
-    count: 2,
+    count: 8,
     page: page ? page : undefined,
     pagination: true
   })) as Products

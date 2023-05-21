@@ -55,11 +55,16 @@ const { getSelectedTag } = storeToRefs(store)
 const products = ref<Product[]>()
 
 const getProducts = async () => {
-  products.value = (await store.getSortingProducts({ attr: "all", count: 8 })) as Product[]
+  products.value = (await store.getSortingProducts({
+    category: "all",
+    attr: "all",
+    count: 8
+  })) as Product[]
 }
 
 const updateProducts = async () => {
   products.value = (await store.getSortingProducts({
+    category: "all",
     attr: getSelectedTag.value,
     count: 8
   })) as Product[]

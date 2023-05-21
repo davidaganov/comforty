@@ -70,7 +70,7 @@ const store = useStore()
 const { getSortingProducts } = store
 
 const getProducts = async () => {
-  products.value = (await getSortingProducts({ attr: props.name })) as Product[]
+  products.value = (await getSortingProducts({ category: "all", attr: props.name })) as Product[]
 }
 
 onMounted(getProducts)

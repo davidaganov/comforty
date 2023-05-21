@@ -100,9 +100,14 @@ onUnmounted(() => {
 .pagination {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   margin-top: 2rem;
+  @media (min-width: 1021px) {
+    justify-content: center;
+  }
+  @media (max-width: 1020px) {
+    justify-content: space-between;
+  }
 
   &__btn {
     @media (max-width: 575px) {
