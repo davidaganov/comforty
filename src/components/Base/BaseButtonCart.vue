@@ -34,11 +34,13 @@ const { isProduct, toggleProduct } = useStore()
 <style scoped lang="scss">
 .cart {
   &--active {
-    color: var(--color-white);
-    border-color: var(--color-accent);
-    background-color: var(--color-accent);
-    &:hover {
-      background-color: var(--color-accent-hover);
+    &:not(:disabled) {
+      color: var(--color-white);
+      border-color: var(--color-accent);
+      background-color: var(--color-accent);
+      &:hover {
+        background-color: var(--color-accent-hover);
+      }
     }
   }
 }

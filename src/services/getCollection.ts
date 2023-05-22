@@ -51,7 +51,7 @@ export const getProducts = async ({
 
     // Iterate over the documents in the nextSnapshot and add them to the array
     nextSnapshot.forEach((doc) => {
-      array.push(doc.data() as Product)
+      array.push({ id: doc.id, ...doc.data() } as Product)
     })
 
     const pagination = {

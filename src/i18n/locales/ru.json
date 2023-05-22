@@ -56,6 +56,12 @@
         { "anchor": "#footer", "title": "Контакты" }
       ],
       "contact": "Контакты"
+    },
+    "breadcrumbs": {
+      "home": "Главная",
+      "products": "Продукты",
+      "cart": "Корзина",
+      "favorites": "Избранные"
     }
   },
   "product": {

@@ -56,6 +56,12 @@
         { "anchor": "#footer", "title": "Contact" }
       ],
       "contact": "Contact"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "products": "Products",
+      "cart": "Cart",
+      "favorites": "Favorites"
     }
   },
   "product": {

@@ -4,58 +4,74 @@
     id="products"
   >
     <BaseInner class="products__inner">
-      <BaseTitle
-        class="products__title"
-        :class="{ skeleton: !store.getTitleCategory() }"
-      >
-        {{ store.getTitleCategory()?.[Translation.currentLocale] }}
-      </BaseTitle>
-
-      <BaseCategoriesSelect class="products__categories" />
-      <hr class="products__line" />
-
-      <BaseSorting
-        class="products__sorting"
-        :dropdown="true"
+      <BaseBreadcrumbs
+        class="products__breadcrumbs"
+        :page="getSelectedCategory === 'all' ? 'products' : undefined"
+        :path="getSelectedCategory !== 'all' ? ['products'] : undefined"
+        :title="
+          getSelectedCategory !== 'all'
+            ? getTitleCategory()?.[Translation.currentLocale]
+            : undefined
+        "
+        @click="setSelectedCategory('all')"
       />
 
-      <div
-        class="products__list"
-        v-if="products"
-      >
-        <BaseCardProduct
-          class="products__item"
-          :key="product.id"
-          v-bind="product"
-          v-for="product in products"
+      <div class="products__content">
+        <BaseTitle
+          class="products__title"
+          :class="{ skeleton: !getTitleCategory() }"
+        >
+          {{ getTitleCategory()?.[Translation.currentLocale] }}
+        </BaseTitle>
+
+        <BaseCategoriesSelect class="products__categories" />
+        <hr class="products__line" />
+
+        <BaseSorting
+          class="products__sorting"
+          :dropdown="true"
+        />
+
+        <div
+          class="products__list"
+          v-if="products"
+        >
+          <BaseCardProduct
+            class="products__item"
+            :key="product.id"
+            v-bind="product"
+            v-for="product in products"
+          />
+        </div>
+
+        <div
+          class="products__list"
+          v-else
+        >
+          <SkeletonCardProduct
+            class="products__item"
+            :key="index"
+            v-for="(_, index) in 8"
+          />
+        </div>
+
+        <div
+          class="products__empty"
+          v-if="products && products.length === 0"
+        >
+          <span class="products__empty-title">404</span>
+          <p class="products__empty-description">
+            {{ $t("pages.products.notFound") }}
+          </p>
+        </div>
+
+        <BasePagination
+          class="products__pagination"
+          v-bind="pagination"
+          v-if="pagination"
+          @updatePage="setProducts({ category: getSelectedCategory, page: $event })"
         />
       </div>
-
-      <div
-        class="products__list"
-        v-else
-      >
-        <SkeletonCardProduct
-          class="products__item"
-          :key="index"
-          v-for="(_, index) in 8"
-        />
-      </div>
-
-      <div
-        class="products__empty"
-        v-if="products && products.length === 0"
-      >
-        <span class="products__empty-title">404</span>
-        <p class="products__empty-description">{{ $t("pages.products.notFound") }}</p>
-      </div>
-
-      <BasePagination
-        class="products__pagination"
-        v-bind="pagination"
-        v-if="pagination"
-        @updatePage="setProducts({ category: getSelectedCategory, page: $event })"
-      />
     </BaseInner>
   </section>
 </template>
@@ -69,6 +85,7 @@ import { useStore } from "../../stores"
 import Translation from "../../i18n/translation"
 
 import BaseInner from "../Base/BaseInner.vue"
+import BaseBreadcrumbs from "../Base/BaseBreadcrumbs.vue"
 import BaseCardProduct from "../Base/BaseCardProduct.vue"
 import BaseSorting from "../Base/BaseSorting.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
@@ -79,13 +96,19 @@ import SkeletonCardProduct from "../Skeleton/SkeletonCardProduct.vue"
 
 const products = ref<Product[]>()
 const pagination = ref<Pagination>()
-const firstUpdateCategory = ref(true)
 
 const route = useRoute()
 const router = useRouter()
 
 const store = useStore()
-const { setSelectedCategory, setCurrentPage, setSelectedTag } = store
+const {
+  setSelectedCategory,
+  setCurrentPage,
+  setSelectedTag,
+  getTitleCategory,
+  getSortingProducts
+} = store
+
 const { getSelectedTag, getSelectedCategory, getCurrentPage } = storeToRefs(store)
 
 const setRouter = ({ category, page }: RequestProducts) => {
@@ -94,7 +117,7 @@ const setRouter = ({ category, page }: RequestProducts) => {
 
 const setProducts = async ({ category, attr, page }: RequestProducts) => {
   const queryParams = { category, page: page ? page : 1 }
-  const response = (await store.getSortingProducts({
+  const response = (await getSortingProducts({
     attr: attr ? attr : undefined,
     category,
     count: 8,
@@ -114,8 +137,6 @@ const addQueryParams = () => {
   const currentPage = route.query.page ? route.query.page : 1
   const queryParams = { category: `${selectedCategory}`, page: +currentPage }
 
-  if (selectedCategory === "all") firstUpdateCategory.value = false
-
   setSelectedCategory(queryParams.category)
   setCurrentPage(queryParams.page)
   setProducts(queryParams)
@@ -124,8 +145,6 @@ const addQueryParams = () => {
 
 const updateSortingByCategory = async () => {
   const queryParams = { category: getSelectedCategory.value, page: 1 }
-
-  firstUpdateCategory.value ? (firstUpdateCategory.value = false) : setProducts(queryParams)
 
   setSelectedTag("all")
   setRouter(queryParams)
@@ -141,6 +160,7 @@ const updateSortingByTag = () => {
   setProducts(queryParams)
 }
 
+watch(route, addQueryParams)
 watch(getSelectedTag, updateSortingByTag)
 watch(getSelectedCategory, updateSortingByCategory)
 
@@ -149,11 +169,12 @@ onMounted(addQueryParams)
 
 <style scoped lang="scss">
 .products {
-  &__inner {
+  margin-top: 4rem;
+
+  &__content {
     display: grid;
-    gap: 3rem 3rem;
+    gap: 3rem;
     align-items: center;
-    margin-top: 4rem;
     @media (min-width: 1021px) {
       grid-template-columns: minmax(24.3rem, auto) auto 1fr;
     }
@@ -210,8 +231,14 @@ onMounted(addQueryParams)
     @media (min-width: 1201px) {
       grid-template-columns: repeat(4, 1fr);
     }
-    @media (max-width: 1200px) and (min-width: 769px) {
+    @media (max-width: 1200px) and (min-width: 1021px) {
       grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 1020px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
     }
     @media (min-width: 1021px) {
       grid-area: 3 / 2 / 4 / 4;
@@ -219,11 +246,8 @@ onMounted(addQueryParams)
     @media (max-width: 1020px) and (min-width: 576px) {
       grid-area: 4 / 1 / 5 / 3;
     }
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
     @media (max-width: 575px) {
-      grid-area: 5 / 1 / 6 / 3;
+      grid-area: 4 / 1 / 5 / 3;
     }
   }
 
@@ -231,11 +255,8 @@ onMounted(addQueryParams)
     @media (min-width: 1021px) {
       grid-area: 4 / 2 / 5 / 4;
     }
-    @media (max-width: 1020px) and (min-width: 576px) {
+    @media (max-width: 1020px) {
       grid-area: 5 / 1 / 6 / 3;
-    }
-    @media (max-width: 575px) {
-      grid-area: 6 / 1 / 7 / 3;
     }
   }
 

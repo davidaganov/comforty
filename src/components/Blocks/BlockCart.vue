@@ -4,6 +4,11 @@
     id="cart"
   >
     <BaseInner class="cart__inner">
+      <BaseBreadcrumbs
+        class="cart__breadcrumbs"
+        page="cart"
+      />
+
       <div class="cart__top">
         <BaseTitle class="cart__title">
           {{ $t("pages.cart.title")
@@ -68,6 +73,7 @@ import { useStore } from "../../stores"
 import Translation from "../../i18n/translation"
 
 import BaseInner from "../Base/BaseInner.vue"
+import BaseBreadcrumbs from "../Base/BaseBreadcrumbs.vue"
 import BaseTitle from "../Base/BaseTitle.vue"
 import BaseButton from "../Base/BaseButton.vue"
 import BaseProductItem from "../Base/BaseProductItem.vue"
@@ -106,6 +112,7 @@ const closeDialog = () => {
 
 .cart {
   margin-top: 4rem;
+
   &__inner {
     display: flex;
     flex-direction: column;

@@ -43,14 +43,16 @@ const { isProduct, toggleProduct } = useStore()
   }
 
   &--active {
-    color: var(--color-white);
-    background-color: var(--color-attention);
-    border-color: var(--color-attention);
-    transition: all 0.2s;
-    opacity: 1 !important;
-    &:hover {
-      background-color: var(--color-attention-hover);
-      border-color: var(--color-attention-hover);
+    &:not(:disabled) {
+      color: var(--color-white);
+      background-color: var(--color-attention);
+      border-color: var(--color-attention);
+      transition: all 0.2s;
+      opacity: 1 !important;
+      &:hover {
+        background-color: var(--color-attention-hover);
+        border-color: var(--color-attention-hover);
+      }
     }
   }
 
