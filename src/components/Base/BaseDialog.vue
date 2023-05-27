@@ -2,9 +2,9 @@
   <div
     class="dialog"
     role="dialog"
-    :aria-modal="open"
     aria-labelledby="titleId"
     aria-describedby="descriptionId"
+    :aria-modal="open"
   >
     <div class="dialog__content">
       <div class="dialog__top">

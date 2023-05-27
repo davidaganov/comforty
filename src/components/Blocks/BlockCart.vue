@@ -42,7 +42,7 @@
       >
         <BaseProductItem
           name="cart"
-          :key="product.id"
+          :key="product.slug"
           v-bind="product"
           v-for="product in cart"
         />

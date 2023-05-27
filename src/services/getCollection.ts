@@ -3,11 +3,12 @@ import { collection, getDocs, query, where, limit, startAfter, orderBy } from "f
 import { db } from "./index"
 
 export const getCollection = async ({ name }: { name: string }) => {
+  console.log(name)
   const response = await getDocs(query(collection(db, name)))
   const array: any[] = []
 
   response.forEach((doc) => {
-    array.push({ ...doc.data(), id: doc.id })
+    array.push({ id: doc.id, ...doc.data() })
   })
 
   return array
@@ -44,9 +45,15 @@ export const getProducts = async ({
     const querySnapshot = await getDocs(q)
 
     // Retrieve the starting document for the next page
-    const startAtDoc = querySnapshot.docs[(page - 1) * count]
+    const startAtDoc = querySnapshot.docs[(page - 2) * count]
 
-    const nextQ = query(request, orderBy("createdAt"), startAfter(startAtDoc), limit(count))
+    let nextQ
+    if (page === 1) {
+      nextQ = query(request, orderBy("createdAt"), limit(count))
+    } else {
+      nextQ = query(request, orderBy("createdAt"), startAfter(startAtDoc), limit(count))
+    }
+
     const nextSnapshot = await getDocs(nextQ)
 
     // Iterate over the documents in the nextSnapshot and add them to the array

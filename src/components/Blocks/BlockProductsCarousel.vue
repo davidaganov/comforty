@@ -25,7 +25,7 @@
           v-if="products"
         >
           <SwiperSlide
-            :key="product.id"
+            :key="product.slug"
             v-for="product in products"
           >
             <BaseCardProduct v-bind="product" />

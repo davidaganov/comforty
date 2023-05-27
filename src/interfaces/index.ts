@@ -20,7 +20,7 @@ export interface Product {
   title: Record<string, string>
   cover: string
   gallery: string[]
-  description: Record<string, string>
+  description?: Record<string, string>
   slug: string
   category: string
   attr: Record<string, boolean>

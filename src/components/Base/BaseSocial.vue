@@ -2,8 +2,8 @@
   <ul class="social">
     <li
       class="social__item"
-      :key="id"
-      v-for="{ id, title, icon, link } in socialList"
+      :key="title"
+      v-for="{ title, icon, link } in socialList"
     >
       <a
         class="social__link"

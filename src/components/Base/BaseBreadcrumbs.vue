@@ -6,7 +6,7 @@
           class="breadcrumb__link"
           :to="Translation.i18nRoute({ name: 'home' })"
         >
-          {{ $t("nav.breadcrumbs.home") }}
+          <span>{{ $t("nav.breadcrumbs.home") }}</span>
         </RouterLink>
       </li>
 
@@ -16,11 +16,11 @@
       >
         <RouterLink
           class="breadcrumb__link"
-          :to="Translation.i18nRoute({ name: page })"
-          :key="page"
-          v-for="page in path"
+          :to="Translation.i18nRoute(params)"
+          :key="name"
+          v-for="{ name, params } in path"
         >
-          {{ $t(`nav.breadcrumbs.${page}`) }}
+          <span>{{ name }}</span>
         </RouterLink>
       </li>
 
@@ -47,7 +47,7 @@ import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
 
 interface Breadcrumb {
-  path?: string[]
+  path?: { params: { name: string; query?: Record<string, string> }; name: string }[]
   page?: string
   title?: string
 }
@@ -67,19 +67,21 @@ defineProps<Breadcrumb>()
 
   &__link {
     font: inherit;
-    color: var(--color-gray);
-    transition: all 0.2s;
+    span {
+      color: var(--color-gray);
+      transition: all 0.2s;
+    }
     &::after {
       content: " >";
-      margin-right: 0.5rem;
+      padding-right: 0.5rem;
       color: var(--color-gray);
     }
-    &:focus-visible {
+    &:focus-visible span {
       background-color: var(--color-accent);
       color: var(--color-white);
     }
     @media (min-width: 769px) {
-      &:hover {
+      &:hover span {
         color: var(--color-accent);
       }
     }

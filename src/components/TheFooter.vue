@@ -18,8 +18,8 @@
         <ul class="footer__list">
           <li
             class="footer__item"
-            :key="id"
-            v-for="{ id, title, slug } in store.getCategories"
+            :key="slug"
+            v-for="{ title, slug } in store.getCategories"
           >
             <RouterLink
               class="footer__link"

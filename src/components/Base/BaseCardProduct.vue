@@ -1,7 +1,7 @@
 <template>
   <article
     class="card"
-    :id="`product-card-${id}`"
+    :id="`product-card-${slug}`"
   >
     <div class="card__picture">
       <img
@@ -9,8 +9,8 @@
         height="310"
         :src="
           getImageUrl({
-            fileName: cover.length > 0 ? cover : 'nopic.jpg',
-            folder: 'images/products'
+            fileName: cover.length > 0 ? `${cover}.jpg` : 'nopic.jpg',
+            folder: cover.length > 0 ? `images/products/${category}` : 'images/products'
           })
         "
         :alt="title[Translation.currentLocale]"
@@ -90,7 +90,7 @@ defineProps<Product>()
     width: 100%;
     margin-bottom: 1.4rem;
     @media (min-width: 769px) {
-      height: 31rem;
+      height: 25rem;
       &:not(&:hover) {
         #{$parent}__favorite {
           opacity: 0;

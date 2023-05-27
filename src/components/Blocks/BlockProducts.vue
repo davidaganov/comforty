@@ -7,7 +7,11 @@
       <BaseBreadcrumbs
         class="products__breadcrumbs"
         :page="getSelectedCategory === 'all' ? 'products' : undefined"
-        :path="getSelectedCategory !== 'all' ? ['products'] : undefined"
+        :path="
+          getSelectedCategory !== 'all'
+            ? [{ name: $t(`nav.breadcrumbs.products`), params: { name: 'products' } }]
+            : undefined
+        "
         :title="
           getSelectedCategory !== 'all'
             ? getTitleCategory()?.[Translation.currentLocale]
@@ -38,7 +42,7 @@
         >
           <BaseCardProduct
             class="products__item"
-            :key="product.id"
+            :key="product.slug"
             v-bind="product"
             v-for="product in products"
           />
@@ -147,6 +151,7 @@ const updateSortingByCategory = async () => {
   const queryParams = { category: getSelectedCategory.value, page: 1 }
 
   setSelectedTag("all")
+  setProducts(queryParams)
   setRouter(queryParams)
 }
 
@@ -160,7 +165,6 @@ const updateSortingByTag = () => {
   setProducts(queryParams)
 }
 
-watch(route, addQueryParams)
 watch(getSelectedTag, updateSortingByTag)
 watch(getSelectedCategory, updateSortingByCategory)
 

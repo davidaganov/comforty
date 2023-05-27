@@ -38,7 +38,7 @@
         <div class="categories__list">
           <BaseCardCategory
             class="categories__item"
-            :key="category.id"
+            :key="category.slug"
             v-for="(category, index) in store.getCategories"
             v-bind="category"
             @keydown.tab.exact="

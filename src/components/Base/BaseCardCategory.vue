@@ -1,7 +1,7 @@
 <template>
   <article
     class="card"
-    :id="`category-card-${id}`"
+    :id="`category-card-${slug}`"
   >
     <div class="card__bottom">
       <span class="card__text">

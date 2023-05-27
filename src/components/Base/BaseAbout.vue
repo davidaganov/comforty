@@ -2,8 +2,8 @@
   <ul class="about">
     <li
       class="about__item"
-      :key="id"
-      v-for="{ id, name, icon, width, height } in aboutList"
+      :key="name"
+      v-for="{ name, icon, width, height } in aboutList"
     >
       <IconBase
         class="about__icon"

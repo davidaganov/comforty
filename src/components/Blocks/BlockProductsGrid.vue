@@ -16,7 +16,7 @@
       >
         <BaseCardProduct
           class="products__item"
-          :key="product.id"
+          :key="product.slug"
           v-for="product in products"
           v-bind="product"
         />

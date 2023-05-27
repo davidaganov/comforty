@@ -50,7 +50,7 @@
             v-if="store.promoProducts.length !== 0"
           >
             <SwiperSlide
-              :key="product.id"
+              :key="product.slug"
               v-for="product in store.promoProducts"
             >
               <BaseCardPromo v-bind="product" />

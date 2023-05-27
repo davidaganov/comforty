@@ -59,8 +59,8 @@
           :class="{ 'sorting__tag--active': store.isSelectedTag(slug) }"
           :aria-selected="store.isSelectedTag(slug)"
           :aria-labelledby="`sortLabel tag-${slug}`"
-          :key="id"
-          v-for="({ id, slug, tag }, index) in tags"
+          :key="slug"
+          v-for="({ slug, tag }, index) in tags"
           @click="store.setSelectedTag(slug)"
           @keydown.tab.exact="index === tags.length - 1 ? toggleDropdown(false) : null"
         >

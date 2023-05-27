@@ -45,7 +45,7 @@
         >
           <BaseProductItem
             name="favorites"
-            :key="product.id"
+            :key="product.slug"
             v-bind="product"
             v-for="product in favorites"
           />

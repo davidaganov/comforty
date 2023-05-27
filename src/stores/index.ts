@@ -92,7 +92,7 @@ export const useStore = defineStore("shop", {
     },
 
     // Get current product
-    async getProduct(slug: string): Promise<Product> {
+    async getCurrentProduct(slug: string): Promise<Product> {
       return await getProduct({ slug })
     },
 

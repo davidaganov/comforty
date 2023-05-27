@@ -1,8 +1,5 @@
 <template>
-  <article
-    class="card"
-    :id="`review-card-${id}`"
-  >
+  <article class="card">
     <div class="card__wrapper">
       <p class="card__text">{{ text[Translation.currentLocale] }}</p>
       <div class="card__bottom">

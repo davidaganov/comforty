@@ -22,7 +22,7 @@
               class="gallery__picture"
               width="290"
               height="290"
-              :src="getImageUrl({ fileName: img, folder: 'images/products' })"
+              :src="getImageUrl({ fileName: `${img}.jpg`, folder: `images/products/${category}` })"
               :alt="title[Translation.currentLocale]"
             />
           </div>
@@ -33,7 +33,7 @@
       <Swiper
         id="thumbnails"
         ref="thumbnailsSwiper"
-        :slides-per-view="3"
+        :slides-per-view="gallery.length > 3 ? 3.5 : 3"
         :freeMode="true"
         :watch-slides-progress="true"
         @swiper="onSwiperThumbnails"
@@ -52,7 +52,7 @@
               width="150"
               height="150"
               :class="{ 'gallery__thumbnail--active': index === currentSlide }"
-              :src="getImageUrl({ fileName: img, folder: 'images/products' })"
+              :src="getImageUrl({ fileName: `${img}.jpg`, folder: `images/products/${category}` })"
               :alt="title[Translation.currentLocale]"
             />
           </div>
@@ -71,8 +71,8 @@
       height="290"
       :src="
         getImageUrl({
-          fileName: gallery.length > 0 ? gallery[0] : 'nopic.jpg',
-          folder: 'images/products'
+          fileName: gallery.length > 0 ? `${gallery[0]}.jpg` : 'nopic.jpg',
+          folder: `images/products/${category}`
         })
       "
       :alt="title[Translation.currentLocale]"
@@ -87,7 +87,7 @@ import { EffectFade, Thumbs, FreeMode } from "swiper"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
-defineProps<{ gallery: string[]; title: Record<string, string> }>()
+defineProps<{ gallery: string[]; title: Record<string, string>; category: string }>()
 
 const thumbnailsSwiper = ref()
 const currentSlide = ref<number>(0)
@@ -116,20 +116,20 @@ const modules = [EffectFade, Thumbs, FreeMode]
   flex-direction: column;
 
   &__small {
-    max-width: 30rem;
-    margin-left: -0.5rem;
+    max-width: 46rem;
+    margin: 0 -0.5rem;
     &-slide {
       margin: 0.5rem;
     }
   }
 
   &__big {
-    max-width: 30rem;
+    max-width: 45rem;
     margin-bottom: 0.8rem;
   }
 
   &__thumbnail {
-    width: 9rem;
+    width: 100%;
     height: 9rem;
     object-fit: cover;
     object-position: center;
@@ -141,7 +141,7 @@ const modules = [EffectFade, Thumbs, FreeMode]
   }
 
   &__picture {
-    width: 29rem;
+    width: 100%;
     height: 29rem;
     object-fit: cover;
     object-position: center;

@@ -45,8 +45,10 @@ const changeTitle = () => {
 }
 
 const getProduct = async () => {
-  product.value = await store.getProduct(`${route.params.slug}`)
-  changeTitle()
+  if (route.params.slug) {
+    product.value = await store.getCurrentProduct(`${route.params.slug}`)
+    changeTitle()
+  }
 }
 
 watch(

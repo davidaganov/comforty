@@ -1,7 +1,7 @@
 <template>
   <div
     class="card"
-    :id="`promo-card-${id}`"
+    :id="`promo-card-${slug}`"
   >
     <div class="card__left">
       <span class="card__subtitle">

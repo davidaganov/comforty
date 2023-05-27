@@ -27,11 +27,13 @@
         </a>
       </BaseInner>
     </div>
+
     <div class="navbar__middle">
       <BaseInner class="navbar__middle-inner">
         <BaseButton
           class="navbar__burger"
           appearance="white"
+          @click="toggleMenu(true)"
         >
           <IconBase
             :width="18"
@@ -41,11 +43,37 @@
             <IconMenu />
           </IconBase>
         </BaseButton>
+
+        <Transition name="navbar">
+          <div
+            class="navbar__list"
+            v-show="open"
+          >
+            <div class="navbar__top">
+              <BaseTitle class="navbar__top-title">
+                {{ $t("pages.products.filter.title") }}
+              </BaseTitle>
+
+              <BaseButtonClose
+                :aria-label="$t('pages.products.filter.ariaClose')"
+                @click="toggleMenu(false)"
+                @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? toggleMenu(false) : null"
+              />
+            </div>
+
+            <h3 class="navbar__title">
+              {{ $t("pages.products.filter.categories") }}
+            </h3>
+
+            <!-- List -->
+          </div>
+        </Transition>
+
         <BaseLogo :hiddenText="true" />
-        <FormSearch class="navbar__search" />
         <BaseUserMenu class="navbar__menu" />
       </BaseInner>
     </div>
+
     <div class="navbar__bottom">
       <BaseInner class="navbar__inner">
         <div class="navbar__left">
@@ -54,8 +82,8 @@
             <ul class="navbar__list">
               <li
                 class="navbar__item"
-                :key="id"
-                v-for="{ id, title, anchor, link } in $tm('nav.bottom.list')"
+                :key="title"
+                v-for="{ title, anchor, link } in $tm('nav.bottom.list')"
               >
                 <RouterLink
                   class="navbar__link"
@@ -89,25 +117,47 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue"
 import { RouterLink } from "vue-router"
 import Translation from "../i18n/translation"
 
 import BaseInner from "./Base/BaseInner.vue"
+import BaseTitle from "./Base/BaseTitle.vue"
 import BaseButton from "./Base/BaseButton.vue"
+import BaseButtonClose from "./Base/BaseButtonClose.vue"
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import BaseListCategories from "./Base/BaseListCategories.vue"
 import BaseUserMenu from "./Base/BaseUserMenu.vue"
-import FormSearch from "./Form/FormSearch.vue"
 import IconBase from "./Icons/IconBase.vue"
 import IconAttention from "./Icons/IconAttention.vue"
 import IconMenu from "./Icons/IconMenu.vue"
+
+const open = ref<boolean>(false)
+
+const toggleMenu = (value: boolean) => {
+  open.value = value
+}
 </script>
 
 <style scoped lang="scss">
 .navbar {
   $parent: &;
   box-shadow: 0 0.1rem 0 var(--color-gray-400);
+
+  &-enter-active,
+  &-leave-active {
+    transition: all 0.3s ease;
+  }
+
+  &-enter-from {
+    transform: translateX(-100%);
+  }
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
   &__inner {
     display: flex;
     justify-content: space-between;
@@ -129,30 +179,28 @@ import IconMenu from "./Icons/IconMenu.vue"
       @media (max-width: 768px) {
         gap: 1rem;
       }
-      a {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.1em 0.3rem;
-        margin-left: -0.3rem;
-        margin-right: -0.3rem;
-        transition: all 0.2s;
-        &:hover {
-          color: var(--color-accent);
-          opacity: 1;
-        }
-        &:focus-visible {
-          background-color: var(--color-accent);
-          opacity: 1;
-        }
-      }
     }
   }
 
   &__info {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.1em 0.3rem;
+    margin-left: -0.3rem;
+    margin-right: -0.3rem;
     font: 400 1.3rem/110% var(--main-font);
     color: var(--color-white);
     opacity: 0.7;
+    transition: all 0.2s;
+    &:hover {
+      color: var(--color-accent);
+      opacity: 1;
+    }
+    &:focus-visible {
+      background-color: var(--color-accent);
+      opacity: 1;
+    }
   }
 
   &__middle {
@@ -162,17 +210,15 @@ import IconMenu from "./Icons/IconMenu.vue"
       background-color: var(--color-gray-600);
     }
     &-inner {
+      display: flex;
       position: relative;
       @media (min-width: 576px) {
-        display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 2rem;
       }
       @media (max-width: 575px) {
-        display: grid;
-        grid-template-columns: auto auto 1fr auto;
-        gap: 2rem 1rem;
+        gap: 1rem;
       }
     }
   }
@@ -181,24 +227,6 @@ import IconMenu from "./Icons/IconMenu.vue"
     @media (min-width: 576px) {
       display: none;
     }
-    @media (max-width: 575px) {
-      grid-area: 1 / 1 / 2 / 2;
-    }
-  }
-
-  &__logo {
-    @media (max-width: 575px) {
-      grid-area: 1 / 2 / 2 / 3;
-    }
-  }
-
-  &__search {
-    @media (min-width: 576px) {
-      max-width: 41.3rem;
-    }
-    @media (max-width: 575px) {
-      grid-area: 2 / 1 / 3 / 5;
-    }
   }
 
   &__menu {
@@ -206,7 +234,7 @@ import IconMenu from "./Icons/IconMenu.vue"
     align-items: center;
     gap: 1.2rem;
     @media (max-width: 575px) {
-      grid-area: 1 / 4 / 2 / 5;
+      margin-left: auto;
     }
   }
 
@@ -247,7 +275,7 @@ import IconMenu from "./Icons/IconMenu.vue"
       display: flex;
     }
     @media (max-width: 575px) {
-      display: none;
+      // display: none;
     }
   }
 
@@ -278,6 +306,11 @@ import IconMenu from "./Icons/IconMenu.vue"
       margin: 0 -0.3rem;
       font: 400 1.4rem/110% var(--main-font);
       color: var(--color-gray);
+      strong {
+        font-weight: 500;
+        color: var(--color-black);
+        transition: all 0.2s;
+      }
       &:hover {
         strong {
           color: var(--color-accent-hover);
@@ -290,11 +323,6 @@ import IconMenu from "./Icons/IconMenu.vue"
           background-color: var(--color-accent);
           color: var(--color-white);
         }
-      }
-      strong {
-        font-weight: 500;
-        color: var(--color-black);
-        transition: all 0.2s;
       }
     }
     @media (max-width: 1020px) {

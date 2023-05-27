@@ -6,7 +6,13 @@
     <BaseInner class="product__inner">
       <BaseBreadcrumbs
         class="products__breadcrumbs"
-        :path="['products']"
+        :path="[
+          { name: $t(`nav.breadcrumbs.products`), params: { name: 'products' } },
+          {
+            name: currentCategory?.[Translation.currentLocale],
+            params: { name: 'products', query: { category } }
+          }
+        ]"
         :title="title[Translation.currentLocale]"
       />
 
@@ -14,6 +20,7 @@
         <BaseGallery
           class="product__gallery"
           :title="title"
+          :category="category"
           :gallery="gallery"
         />
 
@@ -24,7 +31,10 @@
             <p class="product__description-title product__block-title">
               {{ $t("pages.product.description") }}:
             </p>
-            <div class="product__block-container">
+            <div
+              class="product__block-container"
+              v-if="description"
+            >
               <p class="product__description-text product__block-text">
                 {{ description[Translation.currentLocale] }}
               </p>
@@ -41,7 +51,7 @@
                 :to="Translation.i18nRoute({ name: 'products', query: { category } })"
                 @click="store.setSelectedCategory(category)"
               >
-                {{ store.getTitleCategory(category)?.[Translation.currentLocale] }}
+                {{ currentCategory?.[Translation.currentLocale] }}
               </RouterLink>
             </div>
           </div>
@@ -83,6 +93,7 @@
 
 <script setup lang="ts">
 import type { Product } from "../../interfaces"
+import { onMounted, ref, watch } from "vue"
 import { RouterLink } from "vue-router"
 import Translation from "../../i18n/translation"
 import { useStore } from "../../stores"
@@ -93,9 +104,21 @@ import BaseGallery from "../Base/BaseGallery.vue"
 import BaseButtonCart from "../Base/BaseButtonCart.vue"
 import BaseButtonFavorite from "../Base/BaseButtonFavorite.vue"
 
-defineProps<Product>()
+const props = defineProps<Product>()
 
 const store = useStore()
+const currentCategory = ref()
+
+watch(
+  () => store.getCategories,
+  () => (currentCategory.value = store.getTitleCategory(props.category))
+)
+
+onMounted(() => {
+  if (store.getCategories.length > 0) {
+    currentCategory.value = store.getTitleCategory(props.category)
+  }
+})
 </script>
 
 <style scoped lang="scss">
