@@ -45,31 +45,13 @@
         </BaseButton>
 
         <Transition name="navbar">
-          <div
-            class="navbar__list"
+          <BaseNavbarMenu
             v-show="open"
-          >
-            <div class="navbar__top">
-              <BaseTitle class="navbar__top-title">
-                {{ $t("pages.products.filter.title") }}
-              </BaseTitle>
-
-              <BaseButtonClose
-                :aria-label="$t('pages.products.filter.ariaClose')"
-                @click="toggleMenu(false)"
-                @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? toggleMenu(false) : null"
-              />
-            </div>
-
-            <h3 class="navbar__title">
-              {{ $t("pages.products.filter.categories") }}
-            </h3>
-
-            <!-- List -->
-          </div>
+            @toggleMenu="toggleMenu(!open)"
+          />
         </Transition>
 
-        <BaseLogo :hiddenText="true" />
+        <BaseLogo />
         <BaseUserMenu class="navbar__menu" />
       </BaseInner>
     </div>
@@ -87,7 +69,7 @@
               >
                 <RouterLink
                   class="navbar__link"
-                  :to="Translation.i18nRoute({ name: $rt(link) })"
+                  :to="Translation.i18nRoute({ name: $rt(link), query: {} })"
                   v-if="link"
                 >
                   {{ $rt(title) }}
@@ -122,12 +104,11 @@ import { RouterLink } from "vue-router"
 import Translation from "../i18n/translation"
 
 import BaseInner from "./Base/BaseInner.vue"
-import BaseTitle from "./Base/BaseTitle.vue"
 import BaseButton from "./Base/BaseButton.vue"
-import BaseButtonClose from "./Base/BaseButtonClose.vue"
 import BaseLanguageSwitcher from "./Base/BaseLanguageSwitcher.vue"
 import BaseLogo from "./Base/BaseLogo.vue"
 import BaseListCategories from "./Base/BaseListCategories.vue"
+import BaseNavbarMenu from "./Base/BaseNavbarMenu.vue"
 import BaseUserMenu from "./Base/BaseUserMenu.vue"
 import IconBase from "./Icons/IconBase.vue"
 import IconAttention from "./Icons/IconAttention.vue"
@@ -137,6 +118,7 @@ const open = ref<boolean>(false)
 
 const toggleMenu = (value: boolean) => {
   open.value = value
+  value ? document.body.classList.add("no-scroll") : document.body.classList.remove("no-scroll")
 }
 </script>
 
@@ -275,7 +257,7 @@ const toggleMenu = (value: boolean) => {
       display: flex;
     }
     @media (max-width: 575px) {
-      // display: none;
+      display: none;
     }
   }
 

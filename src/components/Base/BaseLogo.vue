@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     class="logo"
-    :to="Translation.i18nRoute({ name: home })"
+    :to="Translation.i18nRoute({ name: 'home' })"
     :title="$t('nav.middle.logo')"
     :aria-label="$t('nav.middle.logo')"
   >
@@ -23,7 +23,6 @@ import Translation from "../../i18n/translation"
 
 import IconBase from "../../components/Icons/IconBase.vue"
 import IconLogo from "../Icons/IconLogo.vue"
-const home = "home"
 </script>
 
 <style scoped lang="scss">
@@ -38,8 +37,10 @@ const home = "home"
     box-shadow: 0 0 0 0.2rem var(--color-accent);
   }
   &__icon {
-    margin-right: 0.8rem;
     color: var(--color-accent);
+    @media (min-width: 376px) {
+      margin-right: 0.8rem;
+    }
   }
   &__text {
     @media (min-width: 576px) {

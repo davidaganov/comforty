@@ -3,7 +3,7 @@ import { collection, getDocs, query, where, limit, startAfter, orderBy } from "f
 import { db } from "./index"
 
 export const getCollection = async ({ name }: { name: string }) => {
-  console.log(name)
+  // console.log(name)
   const response = await getDocs(query(collection(db, name)))
   const array: any[] = []
 

@@ -62,6 +62,10 @@
       "products": "Products",
       "cart": "Cart",
       "favorites": "Favorites"
+    },
+    "menu": {
+      "category": "Categories",
+      "ariaClose": "Close the navigation menu"
     }
   },
   "product": {
