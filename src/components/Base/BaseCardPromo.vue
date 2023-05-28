@@ -28,7 +28,7 @@
           class="card__image"
           width="475"
           height="649"
-          :src="getImageUrl({ fileName: img, folder: 'images/promo' })"
+          :src="getImageUrl({ fileName: `${slug}.png`, folder: 'images/promo' })"
           :alt="title[Translation.currentLocale]"
         />
       </div>
