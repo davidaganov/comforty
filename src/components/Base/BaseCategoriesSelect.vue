@@ -43,6 +43,7 @@
           </BaseTitle>
 
           <BaseButtonClose
+            class="categories__close"
             :aria-label="$t('pages.products.filter.ariaClose')"
             @click="toggleModal(false)"
             @keydown.shift="(e: KeyboardEvent) => e.key === 'Tab' ? toggleModal(false) : null"
@@ -307,6 +308,12 @@ onUnmounted(() => {
     }
     @media (max-width: 1020px) {
       font: 600 2.5rem/110% var(--main-font);
+    }
+  }
+
+  &__close {
+    @media (max-width: 375px) {
+      margin-right: 0.7rem;
     }
   }
 }

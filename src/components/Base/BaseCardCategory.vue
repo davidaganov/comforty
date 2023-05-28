@@ -29,7 +29,10 @@ import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
 
 const props = defineProps<Category>()
-const bgImage = `url(${getImageUrl({ fileName: props.cover, folder: "images/categories" })})`
+const bgImage = `url(${getImageUrl({
+  fileName: props.slug !== "all" ? `${props.slug}-cover.jpg` : "all-category-cover.jpg",
+  folder: props.slug !== "all" ? `images/products/${props.slug}` : "images/products"
+})})`
 
 const store = useStore()
 </script>
