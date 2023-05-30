@@ -106,6 +106,7 @@ defineProps<Product>()
       height: 100%;
       object-fit: cover;
       object-position: center;
+      border: 0.1rem solid var(--color-gray-400);
       border-radius: 0.6rem;
     }
   }

@@ -18,10 +18,13 @@
           v-for="img in gallery"
         >
           <div class="gallery__big-slide">
-            <img
-              class="gallery__picture"
-              width="290"
-              height="290"
+            <VueMagnifier
+              className="gallery__picture"
+              height="35rem"
+              :zoomFactor="0.7"
+              :mgShape="'square'"
+              :mgWidth="250"
+              :mgHeight="250"
               :src="getImageUrl({ fileName: `${img}.jpg`, folder: `images/products/${category}` })"
               :alt="title[Translation.currentLocale]"
             />
@@ -36,6 +39,7 @@
         :slides-per-view="gallery.length > 3 ? 3.5 : 3"
         :freeMode="true"
         :watch-slides-progress="true"
+        :spaceBetween="8"
         @swiper="onSwiperThumbnails"
         @slideChange="changeCurrentSlide"
         :modules="modules"
@@ -68,7 +72,7 @@
     <img
       class="gallery__image"
       width="290"
-      height="290"
+      height="350"
       :src="
         getImageUrl({
           fileName: gallery.length > 0 ? `${gallery[0]}.jpg` : 'nopic.jpg',
@@ -84,8 +88,10 @@
 import { ref } from "vue"
 import { Swiper, SwiperSlide } from "swiper/vue"
 import { EffectFade, Thumbs, FreeMode } from "swiper"
+import VueMagnifier from "@websitebeaver/vue-magnifier"
 import { getImageUrl } from "../../utils/getImageUrl"
 import Translation from "../../i18n/translation"
+import "@websitebeaver/vue-magnifier/styles.css"
 
 defineProps<{ gallery: string[]; title: Record<string, string>; category: string }>()
 
@@ -115,17 +121,47 @@ const modules = [EffectFade, Thumbs, FreeMode]
   display: flex;
   flex-direction: column;
 
-  &__small {
-    max-width: 46rem;
-    margin: 0 -0.5rem;
-    &-slide {
-      margin: 0.5rem;
-    }
+  &__inner {
+    display: flex;
   }
 
   &__big {
-    max-width: 45rem;
     margin-bottom: 0.8rem;
+    @media (min-width: 1021px) {
+      max-width: 45rem;
+    }
+    @media (max-width: 1020px) and (min-width: 769px) {
+      max-width: 35rem;
+    }
+    @media (max-width: 1020px) {
+      width: 100%;
+    }
+    &-slide {
+      @media (min-width: 1021px) {
+        width: 45rem;
+      }
+      @media (max-width: 1020px) and (min-width: 769px) {
+        width: 35rem;
+      }
+      @media (max-width: 1020px) {
+        width: 100%;
+      }
+    }
+  }
+
+  &__small {
+    @media (min-width: 1021px) {
+      max-width: 45rem;
+    }
+    @media (max-width: 1020px) and (min-width: 769px) {
+      max-width: 35rem;
+    }
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+    &-slide {
+      margin: 0.1rem;
+    }
   }
 
   &__thumbnail {
@@ -134,24 +170,36 @@ const modules = [EffectFade, Thumbs, FreeMode]
     object-fit: cover;
     object-position: center;
     border-radius: 0.5rem;
+    border: 0.1rem solid var(--color-gray-400);
     cursor: pointer;
     &--active {
-      box-shadow: 0 0 0 0.2rem var(--color-accent);
+      border-color: var(--color-accent);
     }
   }
 
   &__picture {
-    width: 100%;
-    height: 29rem;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 1rem;
+    :deep(img) {
+      border: 0.1rem solid var(--color-gray-400);
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1rem;
+    }
+    :deep(div) {
+      box-shadow: none;
+      border-color: var(--color-accent);
+      border-radius: 0.8rem;
+    }
+    @media (max-width: 768px) and (min-width: 576px) {
+      height: 45rem !important;
+    }
+    @media (max-width: 575px) {
+      height: 30rem !important;
+    }
   }
 
   &__image {
-    width: 100%;
-    max-width: 29rem;
-    height: 100%;
+    width: 45rem;
+    max-height: 35rem;
     object-fit: cover;
     object-position: center;
     border-radius: 1rem;

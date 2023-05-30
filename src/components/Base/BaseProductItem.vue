@@ -1,13 +1,23 @@
 <template>
   <li class="product">
-    <div class="product__picture">
+    <RouterLink
+      class="product__picture"
+      tabindex="-1"
+      :to="Translation.i18nRoute({ name: 'product', params: { slug: slug } })"
+      :title="title[Translation.currentLocale]"
+    >
       <img
         width="100"
         height="100"
-        :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
+        :src="
+          getImageUrl({
+            fileName: cover.length > 0 ? `${cover}.jpg` : 'nopic.jpg',
+            folder: cover.length > 0 ? `images/products/${category}` : 'images/products'
+          })
+        "
         :alt="title[Translation.currentLocale]"
       />
-    </div>
+    </RouterLink>
     <div class="product__text">
       <RouterLink
         class="product__title"

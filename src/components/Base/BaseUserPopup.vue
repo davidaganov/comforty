@@ -30,14 +30,19 @@
     >
       <li
         class="popup__item"
-        :key="id"
-        v-for="{ id, title, cover, price, slug } in getCart.slice(0, 3)"
+        :key="slug"
+        v-for="{ title, category, cover, price, slug } in getCart.slice(0, 3)"
       >
         <div class="popup__picture">
           <img
             width="50"
             height="50"
-            :src="getImageUrl({ fileName: cover, folder: 'images/products' })"
+            :src="
+              getImageUrl({
+                fileName: cover.length > 0 ? `${cover}.jpg` : 'nopic.jpg',
+                folder: cover.length > 0 ? `images/products/${category}` : 'images/products'
+              })
+            "
             :alt="title[Translation.currentLocale]"
           />
           <BaseButton
@@ -215,6 +220,7 @@ const togglePopup = () => {
 
   &__picture {
     position: relative;
+    max-width: 5.5rem;
     min-width: 5.5rem;
     height: 5.5rem;
     img {

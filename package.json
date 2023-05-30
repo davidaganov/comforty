@@ -27,6 +27,7 @@
   "dependencies": {
     "@intlify/unplugin-vue-i18n": "^0.8.2",
     "@unhead/vue": "^1.1.27",
+    "@websitebeaver/vue-magnifier": "^1.1.0",
     "firebase": "^9.22.0",
     "pinia": "^2.0.32",
     "swiper": "8.4.7",

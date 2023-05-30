@@ -27,20 +27,6 @@
         <div class="product__info">
           <h2 class="product__title">{{ title[Translation.currentLocale] }}</h2>
 
-          <div class="product__description">
-            <p class="product__description-title product__block-title">
-              {{ $t("pages.product.description") }}:
-            </p>
-            <div
-              class="product__block-container"
-              v-if="description"
-            >
-              <p class="product__description-text product__block-text">
-                {{ description[Translation.currentLocale] }}
-              </p>
-            </div>
-          </div>
-
           <div class="product__category">
             <p class="product__category-title product__block-title">
               {{ $t("pages.product.category") }}:
@@ -70,20 +56,34 @@
               </span>
             </div>
           </div>
+        </div>
 
-          <div class="product__buttons">
-            <BaseButtonCart
-              class="product__cart"
-              appearance="ghost"
-              :slug="slug"
-            >
-              {{ $t("pages.product.cart") }}
-            </BaseButtonCart>
-            <BaseButtonFavorite
-              class="product__favorite"
-              appearance="ghost"
-              :slug="slug"
-            />
+        <div class="product__buttons">
+          <BaseButtonCart
+            class="product__cart"
+            appearance="ghost"
+            :slug="slug"
+          >
+            {{ $t("pages.product.cart") }}
+          </BaseButtonCart>
+          <BaseButtonFavorite
+            class="product__favorite"
+            appearance="ghost"
+            :slug="slug"
+          />
+        </div>
+
+        <div class="product__description">
+          <p class="product__description-title product__block-title">
+            {{ $t("pages.product.description") }}:
+          </p>
+          <div
+            class="product__block-container"
+            v-if="description"
+          >
+            <p class="product__description-text product__block-text">
+              {{ description[Translation.currentLocale] }}
+            </p>
           </div>
         </div>
       </div>
@@ -126,10 +126,21 @@ onMounted(() => {
   margin-top: 4rem;
 
   &__content {
-    display: flex;
-    gap: 2rem;
+    display: grid;
+    @media (min-width: 769px) {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 0 2rem;
+    }
     @media (max-width: 768px) {
-      flex-direction: column;
+      grid-template-columns: 100%;
+      gap: 3rem;
+    }
+  }
+
+  &__gallery {
+    @media (min-width: 769px) {
+      grid-area: 1 / 1 / 3 / 2;
     }
   }
 
@@ -138,6 +149,40 @@ onMounted(() => {
     flex-direction: column;
     gap: 3rem;
     width: 100%;
+    @media (min-width: 769px) {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    @media (max-width: 768px) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    @media (min-width: 769px) {
+      grid-area: 2 / 2 / 3 / 3;
+      align-self: flex-start;
+      margin-top: 4rem;
+    }
+    @media (max-width: 768px) {
+      grid-area: 4 / 1 / 5 / 2;
+    }
+  }
+
+  &__description {
+    margin-top: 2rem;
+    @media (min-width: 769px) {
+      grid-area: 3 / 1 / 4 / 3;
+    }
+    @media (max-width: 768px) {
+      grid-area: 3 / 1 / 4 / 2;
+    }
+
+    &-text {
+      max-width: 90%;
+    }
   }
 
   &__title {
@@ -166,20 +211,13 @@ onMounted(() => {
     }
   }
 
-  &__description {
-    &-text {
-      @media (min-width: 1201px) {
-        max-width: 40rem;
-      }
-      @media (max-width: 1200px) and (min-width: 576px) {
-        max-width: 90%;
-      }
-    }
-  }
-
   &__category {
     &-text {
       transition: all 0.2s;
+      &:focus-visible {
+        background-color: var(--color-accent);
+        color: var(--color-white);
+      }
       @media (min-width: 769px) {
         &:hover {
           color: var(--color-accent);
@@ -199,12 +237,6 @@ onMounted(() => {
       color: var(--color-gray-200);
       text-decoration-line: line-through;
     }
-  }
-
-  &__buttons {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
   }
 }
 </style>

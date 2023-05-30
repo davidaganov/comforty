@@ -10,19 +10,20 @@
         </RouterLink>
       </li>
 
-      <li
-        class="breadcrumb__item"
-        v-if="path"
-      >
-        <RouterLink
-          class="breadcrumb__link"
-          :to="Translation.i18nRoute(params)"
+      <template v-if="path">
+        <li
+          class="breadcrumb__item"
           :key="name"
           v-for="{ name, params } in path"
         >
-          <span>{{ name }}</span>
-        </RouterLink>
-      </li>
+          <RouterLink
+            class="breadcrumb__link"
+            :to="Translation.i18nRoute(params)"
+          >
+            <span>{{ name }}</span>
+          </RouterLink>
+        </li>
+      </template>
 
       <li class="breadcrumb__item">
         <span
@@ -59,6 +60,7 @@ defineProps<Breadcrumb>()
 .breadcrumb {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 6rem;
 
   &__item {
@@ -82,14 +84,13 @@ defineProps<Breadcrumb>()
     }
     @media (min-width: 769px) {
       &:hover span {
-        color: var(--color-accent);
+        color: var(--color-accent-hover);
       }
     }
   }
 
   &__current {
-    margin-left: 0.5rem;
-    font: inherit;
+    color: var(--color-accent);
   }
 }
 </style>
