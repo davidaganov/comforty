@@ -18,6 +18,7 @@
   <Transition name="categories">
     <div
       class="categories__wrapper"
+      ref="categoryList"
       v-show="open"
     >
       <BaseInner
@@ -54,6 +55,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue"
+import { onClickOutside } from "@vueuse/core"
 import { useStore } from "../../stores"
 
 import BaseInner from "./BaseInner.vue"
@@ -65,11 +67,14 @@ import IconBase from "../Icons/IconBase.vue"
 import IconMenu from "../Icons/IconMenu.vue"
 
 const open = ref(false)
+const categoryList = ref(null)
 const store = useStore()
 
 const toggleModal = (value: boolean) => {
   open.value = value
 }
+
+onClickOutside(categoryList, () => (open.value = false))
 </script>
 
 <style scoped lang="scss">
