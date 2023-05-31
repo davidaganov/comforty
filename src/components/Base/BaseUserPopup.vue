@@ -101,7 +101,7 @@
       class="popup__empty"
       v-if="getCart.length === 0"
     >
-      {{ $t("pages.cart.empty") }}
+      {{ $t("pages.cart.notFoundSubtitle") }}
       <BaseButton
         :to="Translation.i18nRoute({ name: 'products' })"
         @click="togglePopup"

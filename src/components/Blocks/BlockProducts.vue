@@ -63,9 +63,11 @@
           class="products__empty"
           v-if="products && products.length === 0"
         >
-          <span class="products__empty-title">404</span>
+          <span class="products__empty-title">
+            {{ $t("pages.products.notFoundTitle") }}
+          </span>
           <p class="products__empty-description">
-            {{ $t("pages.products.notFound") }}
+            {{ $t("pages.products.notFoundSubtitle") }}
           </p>
         </div>
 

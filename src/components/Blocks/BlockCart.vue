@@ -52,8 +52,12 @@
         class="cart__empty"
         v-if="cart.length === 0"
       >
-        <span class="cart__empty-title">404</span>
-        <p class="cart__empty-description">{{ $t("pages.cart.empty") }}</p>
+        <span class="cart__empty-title">
+          {{ $t("pages.cart.notFoundTitle") }}
+        </span>
+        <p class="cart__empty-description">
+          {{ $t("pages.cart.notFoundSubtitle") }}
+        </p>
       </div>
 
       <BaseButton
@@ -158,22 +162,23 @@ const closeDialog = () => {
   }
 
   &__empty {
-    margin-top: 2.4rem;
+    margin-top: 5rem;
     text-align: center;
     &-title {
       display: block;
       margin-bottom: 1rem;
-      font: 600 4rem/110% var(--main-font);
+      font: 600 2.4rem/110% var(--main-font);
       color: var(--color-black);
     }
     &-description {
-      font: 600 2rem/110% var(--main-font);
+      margin-top: 3rem;
+      font: 400 2rem/110% var(--main-font);
       color: var(--color-black);
     }
   }
 
   &__link {
-    margin: 4rem auto 0;
+    margin: 4rem auto 5rem;
     @media (max-width: 575px) {
       width: 100%;
     }

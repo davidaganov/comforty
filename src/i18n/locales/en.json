@@ -180,7 +180,8 @@
         "prev": "Prev",
         "next": "Next"
       },
-      "notFound": "Nothing was found on the specified filters :("
+      "notFoundTitle": "Oops :(",
+      "notFoundSubtitle": "Nothing was found on the specified filters"
     },
     "product": {
       "category": "Category",
@@ -192,7 +193,8 @@
       "title": "Cart",
       "products": "Go to the products",
       "count": "No products | 1 product | {count} products",
-      "empty": "Your cart is empty :(",
+      "notFoundTitle": "Your shopping cart is empty",
+      "notFoundSubtitle": "Go to the product catalog",
       "clear": "Clear cart",
       "ariaDelete": "Click to remove a product from the cart",
       "modal": {
@@ -207,7 +209,8 @@
       "title": "Favorite products",
       "products": "Go to products",
       "count": "No products | 1 product | {count} products",
-      "empty": "No favorite products",
+      "notFoundTitle": "Add what you like",
+      "notFoundSubtitle": "Go to the product catalog and click on ♡ in the product",
       "clear": "Clear favorites",
       "ariaDelete": "Click to remove item from favorites",
       "modal": {

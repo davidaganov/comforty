@@ -211,6 +211,7 @@ onMounted(() => {
       top: 6rem;
       border-radius: 1rem;
       border: 0.1rem solid var(--color-gray-400);
+      background-color: var(--color-white);
       z-index: 3;
       @media (max-width: 575px) {
         width: 20rem;
