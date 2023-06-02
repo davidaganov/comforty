@@ -34,7 +34,7 @@ const changeTitle = () => {
     title: t("meta.home.title"),
     meta: [
       { name: "description", content: t("meta.home.description") },
-      { property: "og:url", content: "https://aganov.dev/landing-comforty" },
+      { property: "og:url", content: "https://aganov.dev/comforty" },
       { property: "og:title", content: t("meta.home.title") },
       { property: "og:description", content: t("meta.home.description") }
     ]

@@ -20,5 +20,5 @@ export default defineConfig({
   build: {
     outDir: "dist"
   },
-  base: "/landing-comforty/"
+  base: "/comforty/"
 })
