@@ -1,5 +1,5 @@
 {
-  "name": "Landing Comforty",
+  "name": "Comforty",
   "short_name": "Comforty",
   "lang": "en",
   "description": "Comforty site",
@@ -18,5 +18,5 @@
   "theme_color": "#029FAE",
   "background_color": "#272343",
   "display": "standalone",
-  "start_url": "https://aganov.dev/landing-comforty"
+  "start_url": "https://aganov.dev/comforty"
 }
